@@ -1,0 +1,6 @@
+- As the client and product owner, I want to experience the website prototype so that I can expect the quality of the product to be delivered.
+- As the product owner, I want all the necessary features implemented so that I can receive the desired requirements.
+- As an authenticated user, I want to be able to upload my original photographs so that they can be added to the trustable photograph gallery.
+- As an authenticated user, I want to be able to view all the collections so that I can access various forms of photographs.
+- As an administrator, I want to be able to delete unauthenticated user accounts so that only registered users can access the content.
+- As a tutor, examiner, I want to be able to experience the delivered web-based application so that I can assess the quality of work.
