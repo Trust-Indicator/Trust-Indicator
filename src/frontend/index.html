@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Trust Indicator</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="top-title">
+        <p onclick="top_register()">Apply for becoming a membership </p>
+    </div>
+
+    <div class="navigation-bar-container">
+        <div class="navigation-bar-top">
+            <!--search box-->
+            <div class="search-container">
+                <div class="info-panels">
+                    <div class="input-color-group-one">
+                        <input class="search-input" autocomplete="on" name="text" type="text" required="" placeholder="Rapunga / Search">
+                        <label class="search-label">Search</label>
+                        <button class="search-button">
+                            <svg fill="white" width="15px" height="15px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--search box-->
+
+            <!--log in-->
+            <div class="login-container" onclick="sign_in(event)">
+                <div class="sign-icon">
+                    <i class="fa fa-user-circle-o" style="font-size:30px"></i>
+                </div>
+                <div class="sign-text">Sign In</div>
+            </div>
+            <!--log in-->
+
+            <!--log in content-->
+            <div class="sign-in-content">
+                <div class="content-section" id="show-name">Hi Song Han</div>
+                <hr class="divider">
+                <div class="content-section" id="change-password">Change Password<i class="fa fa-chevron-right fa-right" ></i></div>
+                <hr class="divider">
+                <div class="content-section" id="edit-profile">Edit Profile<i class="fa fa-chevron-right fa-right"></i></div>
+                <hr class="divider">
+                <div class="content-section" style="height: 50px;justify-content: center;align-content: center">
+                    <button type="button" title="Sign out"  class="sign-out-button  sign-out-button-color sign-out-button-background-color" onclick="sign_out(event)">
+                        <span>Sign Out &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></span>
+                    </button>
+                </div>
+                <div class="content-triangle"></div>
+            </div>
+            <!--log in content-->
+            <div class="language-change" onclick="toggleDropdown(event)">
+                <span id="selected-language">EN</span>
+                <span class="dropdown-arrow"><i class="fa fa-caret-down" style="font-size:20px;padding-left: 5px"></i></span>
+                <ul id="language-options" class="hidden">
+                    <li onclick="updateLanguage('EN', event)">English</li>
+                    <li onclick="updateLanguage('CN', event)">Chinese</li>
+                    <li onclick="updateLanguage('ES', event)">Spanish</li>
+                    <li onclick="updateLanguage('FR', event)">French</li>
+                    <li onclick="updateLanguage('DE', event)">German</li>
+                </ul>
+            </div>
+            <!--log in content-->
+        </div>
+        <div class="navigation-bar-bottom">
+            <div class="menu-icon-wrapper">
+                <div class="three-line">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <!-- 主菜单 -->
+                <div class="main-menu">
+                    <a href="#" class="color-home" data-target="home-submenu">Home</a>
+                    <a href="#" class="color-gallery" data-target="gallery-submenu">Gallery  <i class="fa fa-angle-right" style="font-size:30px;margin-left: 280px"></i></a>
+                    <a href="#" class="color-watchlist" data-target="watchlist-submenu">Watch List</a>
+                    <a href="#" class="color-help" data-target="help-submenu">Help <i class="fa fa-angle-right" style="font-size:30px;margin-left: 300px"></i></a>
+                    <a href="#" class="color-whatwedo" data-target="what We Do-submenu">What We Do</a>
+                    <a href="#" class="color-community" data-target="community-submenu">Community <i class="fa fa-angle-right" style="font-size:30px;margin-left: 240px"></i></a>
+                </div>
+
+                <!-- 子菜单 -->
+                <div class="submenu" id="gallery-submenu">
+                    <div class="submenu-div1 back-from-gallery">
+                        <i class="fa fa-angle-left" style="font-size: 30px"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>GALLERY</span>
+                    </div>
+                    <div class="submenu-div2">
+                        <h3><i class="fa fa-photo" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;All Images</h3>
+                        <a href="#">Default</a>
+                        <a href="#">Sort By Credibility</a>
+                        <a href="#">Sort By Publish Time</a>
+                    </div>
+                    <div class="submenu-div3">
+                        <h3><i class="fa fa-star" style="font-size:24px;color: #FFCD29"></i>&nbsp;&nbsp;&nbsp;Truth Images</h3>
+                        <a href="#">Show All</a>
+                        <a href="#">Top 10</a>
+                        <h3 style="margin-top: 15px"><i class="fa fa-star-half-empty" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Fake Image</h3>
+                        <a href="#">Show All</a>
+                        <a href="#">Sort By Credibility</a>
+                        <a href="#">Sort By Publish Time</a>
+                    </div>
+                    <div class="submenu-div4">
+                        <div style="width: 80%; height: 80%; display: flex;position: relative; left: 10%; top: 10%;background: #00467F">
+                            <a href="#"><img src="background_gallery.jpeg" style="width: 330px;height: 100%"/></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submenu1" id="help-submenu">
+                    <div class="submenu1-div1 back-from-help">
+                        <i class="fa fa-angle-left" style="font-size: 30px"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>HELP</span>
+                    </div>
+                    <div class="submenu1-div5">
+                        <h3>About The Trust Indicator</h3>
+                        <a href="#">Operating guide</a>
+                        <a href="#">Our faculties and institutes</a>
+                        <a href="#">Business and employers</a>
+                        <a href="#">Community services</a>
+                    </div>
+                    <div class="submenu1-div6">
+                        <h3>Connect with us</h3>
+                        <a href="#">Contact us All</a>
+                        <a href="#">Our people</a>
+                        <a href="#">Cooperation partner</a>
+
+                    </div>
+                    <div class="submenu1-div7">
+                        <h3>Work with us</h3>
+                        <a href="#">Staff benefits</a>
+                        <a href="#">Career development</a>
+                    </div>
+                </div>
+
+                <div class="submenu2" id="community-submenu">
+                    <div class="submenu2-div1 back-from-community">
+                        <i class="fa fa-angle-left" style="font-size: 30px"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>Community</span>
+                    </div>
+                    <div class="submenu2-div8">
+                        Help Center
+                    </div>
+                    <div class="submenu2-div8">
+                        Contributor Zone
+                    </div>
+                    <div class="submenu2-div8">
+                        Feedback
+                    </div>
+                    <div class="submenu2-div8">
+                        Change Password
+                    </div>
+                    <div class="submenu2-div8">
+                        Edit Profile
+                    </div>
+                    <div class="submenu2-div8">
+                        Report Debug
+                    </div>
+                </div>
+            </div>
+
+            <div id="mcmenu">
+                <ul>
+                    <li  id="menu-home"><a href="index.html">Home</a></li>
+                    <li class="full-width" id="menu-gallery">
+                        <span>Gallery &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
+                        <div class="dropdown">
+                            <div class="clm">
+                                <h3><i class="fa fa-photo" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;All Images</h3>
+                                <a href="#">Default</a>
+                                <a href="#">Sort By Credibility</a>
+                                <a href="#">Sort By Publish Time</a>
+                            </div>
+                            <div class="clm">
+                                <h3><i class="fa fa-star" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Truth Images</h3>
+                                <a href="#">Show All</a>
+                                <a href="#">Top 10</a>
+                                <h3><i class="fa fa-star-half-empty" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Fake Image</h3>
+                                <a href="#">Show All</a>
+                                <a href="#">Sort By Credibility</a>
+                                <a href="#">Sort By Publish Time</a>
+                            </div>
+                            <div class="clm background-gallery">
+                                <a href="#" ><img src="background_gallery.jpeg" style="width:280px"/></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="menu-watchlist"><a href="#">Watch List</a></li>
+                    <li id="menu-help" class="full-width">
+                        <span>Help &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
+                        <div class="dropdown">
+                            <div class="clm">
+                                <h3>About the Trust Indicator</h3>
+                                <a href="#">Operating guide</a>
+                                <a href="#">Our faculties and institutes</a>
+                                <a href="#">Business and employers</a>
+                                <a href="#">Community services</a>
+                                <hr class="line">
+                            </div>
+                            <div class="clm">
+                                <h3>Connect with us</h3>
+                                <a href="#">Contact us</a>
+                                <a href="#">Our people</a>
+                                <a href="#">Cooperation partner</a>
+                                <hr class="line">
+                            </div>
+                            <div class="clm">
+                                <h3>Work with us</h3>
+                                <a href="#">Staff benefits</a>
+                                <a href="#">Career development</a>
+                                <hr class="line">
+                            </div>
+                        </div>
+                    </li>
+                    <li id="menu-wwhatwedo"><a href="#">What We Do</a></li>
+                    <li id="menu-community">
+                        <span>Community &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
+                        <ul class="right0">
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Contributor Zone</a></li>
+                            <li><a href="#">Feedback</a></li>
+                            <li>
+                                <a>
+                                    <i class="fa fa-angle-left" style="font-size:30px"></i>
+                                    &nbsp;&nbsp;
+                                    User Center&nbsp;&nbsp;&nbsp;
+                                    <i class="fa fa-android" style="font-size:24px"></i>
+                                </a>
+                                <ul class="right1">
+                                    <li><a href="#">Change Password</a></li>
+                                    <li><a href="#">Edit Profile</a></li>
+                                    <li><a href="#">Report Debug</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="logo"></div>
+    </div>
+
+
+    <div style="width: 100%; height: 400px; background-color: #00467F; background-image: url('background.jpg'); background-size: cover; background-repeat: no-repeat; position: relative; z-index: 1">
+        <div class="top-trust-indicate-container">
+            <div style="height: 250px;width: 350px;display: flex;margin-left: 5px;margin-top: 15px;flex-direction: column; ">
+                <h1 style="padding-left: 20px;color: white;font-weight: bolder;margin: 10px 0 0 0">The Trust Indicate</h1>
+                <p style="padding-left: 20px;color: white;margin: 20px 0 0 0;line-height: 25px">This is student projectThis is student projectThis is student projectThis is student projectThis is student project</p>
+                <div style="flex-grow: 1; display: flex; flex-direction: column-reverse; align-items: center;">
+                    <button type="button" title="register" class="register-button  register-button-color register-button-background-color" onclick="background_register(event)">
+                        <span>Register Now ! &nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="picture-upload-recognition-container">
+        <div class="picture-upload-recognition">
+            <div class="picture-hub-picture">
+                <div class="picture-hub-title">| Image Knowledge</div>
+                <div class="picture-hub-content">
+                    <h2 style="margin-bottom: -3px;padding-left: 20px;color: #FFFFFF">Image Hubs</h2>
+                    <p style="padding-left: 20px;padding-right: 20px;color: #FFFFFF; font-size: 0.9rem">Explore Formats & Beyond. Discover Image Format Secrets, Master Photography. </p>
+                    <button type="button" class="find-out-more-button  find-out-more-button-color find-out-more-button-background-color">
+                        <span>Find out more</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="picture-upload-recognition sub-div-1" onclick="upload()" >
+            <div class="card">
+                <div class="card__img"><svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 128 128"><rect y="24.7" x="13.1" width="101.2" transform="matrix(0.9761 0.2175 -0.2175 0.9761 15.4391 -12.3278)" height="78.6" class="st1"></rect><rect y="24.7" x="13.1" width="101.2" transform="matrix(0.9761 0.2175 -0.2175 0.9761 15.4391 -12.3278)" height="78.6" class="st53"></rect><polygon points="116,62 116,35.4 38.1,18 22.1,18 5.8,91.3 76.2,107 106,107" class="st16"></polygon><polygon points="97.2,23 10,23 10,102 111,102 111,36.8" class="st1"></polygon><polygon points="97.2,23 10,23 10,102 111,102 111,36.8" class="st53"></polygon><g><rect y="34" x="20" width="80" height="58" class="st7"></rect><g><polygon points="100.2,92 73.1,44.2 51.2,75.5 40,58.7 20.2,92 39.7,92" class="st9"></polygon><circle r="11" cy="52" cx="57" class="st18"></circle><polygon points="40,58.5 31.6,72.6 34.6,78.2 37.9,75.2 43.5,79.9 47,78.2 51,75.2" class="st1"></polygon><path d="M57.7,66c0,0,4.1,7.2,4.3,6.6c0.2-0.6,6.1-5.6,6.1-5.6l6.9,3.6l1.5-10.3L88.9,72L73.1,44.1L57.7,66z" class="st1"></path><polygon points="73.1,44.2 83.6,92 100.2,92" class="st15"></polygon><polyline points="100.2,91.9 73.1,44.1 39.7,91.9" class="st2"></polyline><polyline points="51.2,75.4 40,58.5 20.2,91.9" class="st2"></polyline><polygon points="51.2,75.4 40,58.5 47,81.3" class="st15"></polygon><polyline points="51.5,91.9 67.1,70.5 80.4,91.9" class="st2"></polyline><polygon points="72.3,92 67.1,70.7 80.4,92" class="st15"></polygon></g><rect y="34" x="20" width="80" height="58" class="st53"></rect></g><polygon points="111,37 97,37 97,23" class="st18"></polygon><polygon points="111,37 97,37 97,23" class="st53"></polygon></svg></div>
+                <div class="card__subtitle">The Trust Indicator</div>
+                <div class="card__wrapper">
+                    <div class="card__title">Upload Image</div>
+                    <div class="card__icon"><svg color="rgb(224, 223, 220)" style="user-select: none; width: 100%; height: 100%; display: inline-block; fill: rgb(224, 223, 220); flex-shrink: 0; cursor: auto;" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><g color="rgb(224, 223, 220)"><circle opacity="0.2" r="96" cy="128" cx="128"></circle><circle stroke-width="16" stroke-miterlimit="10" stroke="rgb(224, 223, 220)" fill="none" r="96" cy="128" cx="128"></circle><polyline stroke-width="16" stroke-linejoin="round" stroke-linecap="round" stroke="rgb(224, 223, 220)" fill="none" points="134.1 161.9 168 128 134.1 94.1"></polyline><line stroke-width="16" stroke-linejoin="round" stroke-linecap="round" stroke="rgb(224, 223, 220)" fill="none" y2="128" x2="168" y1="128" x1="88"></line></g></svg></div>
+                </div>
+            </div>
+        </div>
+        <div class="picture-upload-recognition">
+            <div class="recognition-picture">
+                <div class="recognition-title">| Recognition Method</div>
+                <div class="recognition-content">
+                    <h2 style="margin-bottom: -3px;padding-left: 20px;color: #FFFFFF">Recognition Method</h2>
+                    <p style="padding-left: 20px;padding-right: 20px;color: #FFFFFF; font-size: 0.9rem">PhotoTrust: Metadata-Based Image Credibility Assessment. </p>
+                    <button type="button" class="find-out-more-button  find-out-more-button-color find-out-more-button-background-color">
+                        <span>Find out more</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="top-10-container">
+        <div>Top 10 on Trust Indicator this week</div>
+        <div class="control-left-wrapper">
+            <button class="control-show-picture" onclick="slide('left')"><i class="fa fa-angle-double-left"></i></button>
+        </div>
+        <div class="gallery-wrapper">
+            <div class="gallery" id="gallery">
+                <div class="gallery-container">
+                    <div class="photo-div">
+                        <img src="background_gallery.jpeg" alt="Description of the image">
+                    </div>
+                    <div class="info-div">
+                        <div class="rating">
+                            <i class="fa fa-star">&nbsp</i><i class="fa fa-star"></i>&nbsp<i class="fa fa-star"></i> &nbsp;&nbsp;<span>5</span>
+                        </div>
+                        <div class="message">
+
+                        </div>
+                        <div class="watch-list">
+                            <i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;&nbsp;Watch List
+                        </div>
+                        <div class="analysis">
+                            <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;&nbsp;&nbsp; Analysis
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-container">
+                    <div class="photo-div">
+                        <img src="background_gallery.jpeg" alt="Description of the image">
+                    </div>
+                    <div class="info-div">
+                        <div class="rating">
+                            <i class="fa fa-star">&nbsp</i><i class="fa fa-star"></i>&nbsp<i class="fa fa-star"></i> &nbsp;&nbsp;<span>5</span>
+                        </div>
+                        <div class="message">
+
+                        </div>
+                        <div class="watch-list">
+                            <i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;&nbsp;Watch List
+                        </div>
+                        <div class="analysis">
+                            <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;&nbsp;&nbsp; Analysis
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-container">
+                    <div class="photo-div">
+                        <img src="background_gallery.jpeg" alt="Description of the image">
+                    </div>
+                    <div class="info-div">
+                        <div class="rating">
+                            <i class="fa fa-star">&nbsp</i><i class="fa fa-star"></i>&nbsp<i class="fa fa-star"></i> &nbsp;&nbsp;<span>5</span>
+                        </div>
+                        <div class="message">
+
+                        </div>
+                        <div class="watch-list">
+                            <i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;&nbsp;Watch List
+                        </div>
+                        <div class="analysis">
+                            <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;&nbsp;&nbsp; Analysis
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-container">
+                    <div class="photo-div">
+                        <img src="background_gallery.jpeg" alt="Description of the image">
+                    </div>
+                    <div class="info-div">
+                        <div class="rating">
+                            <i class="fa fa-star">&nbsp</i><i class="fa fa-star"></i>&nbsp<i class="fa fa-star"></i> &nbsp;&nbsp;<span>5</span>
+                        </div>
+                        <div class="message">
+                        </div>
+                        <div class="watch-list">
+                            <i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;&nbsp;Watch List
+                        </div>
+                        <div class="analysis">
+                            <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;&nbsp;&nbsp; Analysis
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-container">
+                    <div class="photo-div">
+                        <img src="background_gallery.jpeg" alt="Description of the image">
+                    </div>
+                    <div class="info-div">
+                        <div class="rating">
+                            <i class="fa fa-star">&nbsp</i><i class="fa fa-star"></i>&nbsp<i class="fa fa-star"></i> &nbsp;&nbsp;<span>5</span>
+                        </div>
+                        <div class="message">
+                        </div>
+                        <div class="watch-list">
+                            <i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;&nbsp;Watch List
+                        </div>
+                        <div class="analysis">
+                            <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;&nbsp;&nbsp; Analysis
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-container">
+                    <div class="photo-div">
+                        <img src="background_gallery.jpeg" alt="Description of the image">
+                    </div>
+                    <div class="info-div">
+                        <div class="rating">
+                            <i class="fa fa-star">&nbsp</i><i class="fa fa-star"></i>&nbsp<i class="fa fa-star"></i> &nbsp;&nbsp;<span>5</span>
+                        </div>
+                        <div class="message">
+                        </div>
+                        <div class="watch-list">
+                            <i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;&nbsp;Watch List
+                        </div>
+                        <div class="analysis">
+                            <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;&nbsp;&nbsp; Analysis
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-container">
+                    <div class="photo-div">
+                        <img src="background_gallery.jpeg" alt="Description of the image">
+                    </div>
+                    <div class="info-div">
+                        <div class="rating">
+                            <i class="fa fa-star">&nbsp</i><i class="fa fa-star"></i>&nbsp<i class="fa fa-star"></i> &nbsp;&nbsp;<span>5</span>
+                        </div>
+                        <div class="message">
+                        </div>
+                        <div class="watch-list">
+                            <i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;&nbsp;Watch List
+                        </div>
+                        <div class="analysis">
+                            <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;&nbsp;&nbsp; Analysis
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-container">
+                    <div class="photo-div">
+                        <img src="background_gallery.jpeg" alt="Description of the image">
+                    </div>
+                    <div class="info-div">
+                        <div class="rating">
+                            <i class="fa fa-star">&nbsp</i><i class="fa fa-star"></i>&nbsp<i class="fa fa-star"></i> &nbsp;&nbsp;<span>5</span>
+                        </div>
+                        <div class="message">
+                        </div>
+                        <div class="watch-list">
+                            <i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;&nbsp;Watch List
+                        </div>
+                        <div class="analysis">
+                            <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;&nbsp;&nbsp; Analysis
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-container">
+                    <div class="photo-div">
+                        <img src="background_gallery.jpeg" alt="Description of the image">
+                    </div>
+                    <div class="info-div">
+                        <div class="rating">
+                            <i class="fa fa-star">&nbsp</i><i class="fa fa-star"></i>&nbsp<i class="fa fa-star"></i> &nbsp;&nbsp;<span>5</span>
+                        </div>
+                        <div class="message">
+                        </div>
+                        <div class="watch-list">
+                            <i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;&nbsp;Watch List
+                        </div>
+                        <div class="analysis">
+                            <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;&nbsp;&nbsp; Analysis
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-container">
+                    <div class="photo-div">
+                        <img src="background_gallery.jpeg" alt="Description of the image">
+                    </div>
+                    <div class="info-div">
+                        <div class="rating">
+                            <i class="fa fa-star">&nbsp</i><i class="fa fa-star"></i>&nbsp<i class="fa fa-star"></i> &nbsp;&nbsp;<span>5</span>
+                        </div>
+                        <div class="message">
+                        </div>
+                        <div class="watch-list">
+                            <i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;&nbsp;Watch List
+                        </div>
+                        <div class="analysis">
+                            <i class="fa fa-chevron-right"></i>&nbsp;&nbsp;&nbsp;&nbsp; Analysis
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="control-right-wrapper">
+            <button class="control-show-picture" onclick="slide('right')"><i class="fa fa-angle-double-right"></i></button>
+        </div>
+    </div>
+
+    <div class="question-jpeg-container">
+        <div class="question-container">
+            <div class="div1"> AskIndicator</div>
+            <div class="div2">Your online help and support centre. Search our
+                frequently asked questions.</div>
+            <div class="div3">
+                <div>
+                    <input class="question-input">
+                    <button class="question-button">Go</button>
+                </div>
+                <div class="top-question">
+                    <br>
+                    <p class="top-question-text1">Top questions</p>
+                    <p class="top-question-text2">How is carbon dioxide made</p>
+                    <p class="top-question-text2">What damage does carbon dioxide</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="jpeg-metadata-container">
+            <div class="company-photo">
+                <div class="household">
+                    <div class="household-image">
+                        <img src="picture-hub-picture.jpeg" style="width: 100%;height: 100%" alt="This is a household image">
+                    </div>
+                    <div class="image-title">What is JPEG</div>
+                    <div class="household-text">JPEG (Joint Photographic Experts Group) is a widely used image compression format. It reduces file size by removing some image details, making it ideal for photos on the internet.</div>
+                    <div class="household-button">Find out more &nbsp;<i class="fa fa-chevron-right" style="font-size:1.5vw"></i></div>
+
+                </div>
+                <div class="household">
+                    <div class="household-image">
+                        <img src="recognition-picture.jpeg" style="width: 100%;height: 100%" alt="This is a transportation image">
+                    </div>
+                    <div class="image-title">Learn meta-data</div>
+                    <div class="household-text">
+                        Image metadata (EXIF, IPTC, XMP) essential for organization, copyright, content, vital for photographers and asset managers.</div>
+                    <div class="household-button">Find out more &nbsp;<i class="fa fa-chevron-right" style="font-size:1.5vw"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="exhibition-container">
+        <div class="exhibition-card">
+            <div class="exhibition-top-section">
+                <div class="exhibition-border"></div>
+                <div class="exhibition-icons">
+                    <div class="exhibition-logo">
+                       Go Gallery
+                    </div>
+                    <div class="exhibition-social-media">
+                        <i class="fa fa-camera" style="font-size:24px"></i>
+                        <i class="fa fa-file-image-o" style="font-size:24px"></i>
+                        <i class="fa fa-image" style="font-size:24px"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="exhibition-bottom-section">
+                <span class="title">Click to explore more</span>
+                <div class="row row1">
+                    <div class="item">
+                        <span class="big-text">Real</span>
+                        <span class="regular-text">Image</span>
+                    </div>
+                    <div class="item">
+                        <span class="big-text">Fake</span>
+                        <span class="regular-text">Image</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-register-example-container">
+        <div class="bottom-register">
+            <div class="bottom-register-picture">
+                <div class="bottom-register-title">| Become membership</div>
+                <div class="bottom-register-content">
+                    <h2 style="margin-bottom: -3px;padding-left: 20px;color: #FFFFFF">Membership Hubs</h2>
+                    <p style="padding-left: 20px;padding-right: 20px;color: #FFFFFF; font-size: 0.9rem">Become a member to access premium content. Don't miss out on the privileges; join us today!. </p>
+                    <button type="button" class="find-out-more-button  find-out-more-button-color find-out-more-button-background-color">
+                        <span>Join us now !</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-example-container">
+            <div class="bottom-example">
+                <div class="example" style="height: 350px;margin-top: 20px">
+                    <div class="example-image" style="height: 130px">
+                        <img src="picture-hub-picture.jpeg" style="width: 100%;height: 100%" alt="This is a household image">
+                    </div>
+                    <div class="example-title">| Example 1</div>
+                    <div class="example-text" style="height: 150px">Image from Song Han<p style="margin-top: 20%;font-size: 15px;font-weight: normal"> The credibility of this photo is 80% </p></div>
+                    <div class="example-button">Find out more &nbsp;<i class="fa fa-chevron-right" style="font-size:1.5vw"></i></div>
+
+                </div>
+                <div class="example">
+                    <div class="example-image">
+                        <img src="recognition-picture.jpeg" style="width: 100%;height: 100%" alt="This is a transportation image">
+                    </div>
+                    <div class="example-title">| Example 2</div>
+                    <div class="example-text">Image from Zhao Yun<p style="margin-top: 30%;font-size: 15px;font-weight: normal"> The credibility of this photo is 80% </p></div>
+                    <div class="example-button">Find out more &nbsp;<i class="fa fa-chevron-right" style="font-size:1.5vw"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fake-gallery">
+
+        <div id='ninja-slider'>
+            <div class="fake-title">
+                Top 10 fake image this week
+            </div>
+            <div>
+                <div class="slider-inner">
+                    <ul>
+                        <li><a class="ns-img" href="background_gallery.jpeg"></a></li>
+                        <li><a class="ns-img" href="picture-hub-picture.jpeg"></a></li>
+                        <li><a class="ns-img" href="background_gallery.jpeg"></a></li>
+                        <li><a class="ns-img" href="recognition-picture.jpeg"></a></li>
+                        <li><a class="ns-img" href="picture-hub-picture.jpeg"></a></li>
+                        <li><a class="ns-img" href="background_gallery.jpeg"></a></li>
+                        <li><a class="ns-img" href="picture-hub-picture.jpeg"></a></li>
+                        <li><a class="ns-img" href="background_gallery.jpeg"></a></li>
+                        <li><a class="ns-img" href="picture-hub-picture.jpeg"></a></li>
+                        <li><a class="ns-img" href="gallery-background.png"></a></li>
+                    </ul>
+
+                </div>
+                <div id="thumbnail-slider">
+                    <div class="inner">
+                        <ul>
+                            <li>
+                                <a class="thumb" href="background_gallery.jpeg"></a>
+                                <span>1</span>
+                            </li>
+                            <li>
+                                <a class="thumb" href="picture-hub-picture.jpeg"></a>
+                                <span>2</span>
+                            </li>
+                            <li>
+                                <a class="thumb" href="background_gallery.jpeg"></a>
+                                <span>3</span>
+                            </li>
+                            <li>
+                                <a class="thumb" href="recognition-picture.jpeg"></a>
+                                <span>4</span>
+                            </li>
+                            <li>
+                                <a class="thumb" href="picture-hub-picture.jpeg"></a>
+                                <span>5</span>
+                            </li>
+                            <li>
+                                <a class="thumb"  href="background_gallery.jpeg"></a>
+                                <span>6</span>
+                            </li>
+                            <li>
+                                <a class="thumb" href="picture-hub-picture.jpeg"></a>
+                                <span>7</span>
+                            </li>
+                            <li>
+                                <a class="thumb" href="background_gallery.jpeg"></a>
+                                <span>8</span>
+                            </li>
+                            <li>
+                                <a class="thumb" href="picture-hub-picture.jpeg"></a>
+                                <span>9</span>
+                            </li>
+                            <li>
+                                <a class="thumb" href="gallery-background.png"></a>
+                                <span>10</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="bottom-navigation-bar">
+        <div class="connect-container">
+            <table class="connect-table">
+                <tr>
+                    <th><p style="font-size:10px;color:#ffffff;opacity: 0.6;margin-right: 20px" >Connect with us</p></th>
+                    <th><i class="fa fa-instagram" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-facebook" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-envelope" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-linkedin" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accessibility-container">
+            <div class="accessibility">
+                <div style="width: 80%; height: 100%;margin-left: 10%; display: flex; align-items: center;">
+                    <p class="site-link1">Accessibility</p>
+                    <p class="site-link">|</p>
+                    <p class="site-link1">Copyright</p>
+                    <p class="site-link">|</p>
+                    <p class="site-link1">Privacy</p>
+                    <p class="site-link">|</p>
+                    <p class="disclaimer-text">Disclaimer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+</html>

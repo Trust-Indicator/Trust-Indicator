@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Trust-Indicator",
+    "\\Trust-Indicator\\Controllers",
+    "\\Trust-Indicator\\Data",
+    "\\Trust-Indicator\\Handler",
+    "\\Trust-Indicator\\Migrations",
+    "\\Trust-Indicator\\Model"
+  ],
+  "SelectedNode": "\\Trust-Indicator\\Trust-Indicator.csproj",
+  "PreviewInSolutionExplorer": false
+}
