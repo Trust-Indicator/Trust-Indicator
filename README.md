@@ -3,7 +3,7 @@
 1. [Project Description](#project-description)
 2. [Team Members and Roles](#team-members-and-roles)
 3. [Statement of Work](#statement-of-work)
-4. [Getting Start](#getting-start)
+4. [Getting Started](#getting-started)
 5. [Project Management](#project-management)
 6. [Team Charter](#team-charter)
 7. [Meeting Minutes](#meeting-minutes)
@@ -77,7 +77,7 @@ In managing our web API development project, we faced challenges such as increas
 - Chose GitHub Projects for [task management](https://github.com/Clxiu/Trust-Indicator/issues), the GitHub [Kanban workflow](https://github.com/users/Clxiu/projects/4/views/2), and the GitHub [timeline](https://github.com/users/Clxiu/projects/4/views/4) for our development process, aiming for seamless integration, simplicity, cost-effectiveness, and enhanced collaboration within the team.
 - Organize weekly catch-up meetings for code review before merging into the main branch to maintain code quality, ensuring that the code is readable, maintainable, efficient, and error-free.
 
-By focusing on integration, simplicity, and collaboration, we've positioned our team to work with greater agility and transparency, aligning our tooling and workflows with the specific needs and goals of our project. The full decision log can be accessed [here](docs/Decision%20Logs/Tools%20for%20Project%20Management.md).
+By focusing on integration, simplicity, and collaboration, we've positioned our team to work with greater agility and transparency, aligning our tooling and workflows with the specific needs and goals of our project. The full decision log can be accessed [here](doc/Decision%20Logs/Tools%20for%20Project%20Management.md).
 
 
 ## Team Charter
