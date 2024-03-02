@@ -8,7 +8,7 @@
 6. [Team Charter](#team-charter)
 7. [Meeting Minutes](#meeting-minutes)
 8. [Decision Logs](#decision-logs)
-9. [Reflection Log](https://github.com/Clxiu/Trust-Indicator/blob/b27b282cb43956ff3917b57e455a8b2bdd3f6ca6/docs/Reflective/README.md)
+9. [Reflection Log](https://github.com/Clxiu/Trust-Indicator/blob/main/docs/Reflection%20Log/README.md)
 10. [Conflict Resolution Protocol](#conflict-resolution-protocol)
 11. [Testing Summary](#testing-summary)
 12. [User Manual](#user-manual)
@@ -26,7 +26,7 @@
 - **Objective:** The project aims to develop a photo repository website with Australia as its theme, aiding consumers in better understanding and evaluating the credibility of images by displaying uploaded image metadata and providing visual cues. The website will be an open-source project, allowing users to upload their own images while adhering to knowledge-sharing (CC) license requirements. By collecting image metadata and displaying credibility signals, the website will assist users in identifying and discerning authentic images. Additionally, website members can contribute contextual information, such as photographer statements, to provide more background details.
 The project's objective is to offer consumers a reliable resource to improve their ability to judge image authenticity. It also provides photographers and creators with a platform to showcase their works and offer additional information, enhancing public understanding and awareness of images. By being an open-source project, the website encourages other developers to contribute and improve, facilitating ongoing project development and enhancement.
 
-- **Tech Stack:** [Tech Stack Documentation](docs/Tech%20Stack/README.md)
+- **Tech Stack:** [Tech Stack Documentation](pre_work/Tech%20Stack/README.md)
   
 - **Stakeholders:** [Stakerholders analysis](docs/Stakeholders%20List%20and%20Impact/README.md)
 
