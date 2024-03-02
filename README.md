@@ -17,7 +17,7 @@
 15. [Risk Management](#risk-management)
 16. [Acknowledgements](#acknowledgements)
 ## Project Description
-- **Version:** 1.1.0, February, 2023
+- **Version:** 2.1.0, February, 2024
   
 - **Developers:** COMP8715 Computing Project, Australian National University, Australia
   
@@ -42,7 +42,7 @@ The project's objective is to offer consumers a reliable resource to improve the
 ## Statement of Work
 [Statement of Work](docs/Statement%20of%20Work/(updated)%20Trust%20Indicators%20-%20Statement%20of%20Work.pdf)
 
-## Getting Start
+## Getting Started
 See the [online documentation](docs/Reference/) for references we referenced in the project.
 
 We use [GitHub Discussions](https://github.com/Clxiu/Trust-Indicator/discussions) as our forum, and Microsoft Teams for chat. These are great places to ask questions and advice from the community or to discuss projects.
