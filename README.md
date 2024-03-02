@@ -8,7 +8,7 @@
 6. [Team Charter](#team-charter)
 7. [Meeting Minutes](#meeting-minutes)
 8. [Decision Logs](#decision-logs)
-9. [Reflection Log](https://github.com/tonypioneer/Trust-Indicator/blob/b27b282cb43956ff3917b57e455a8b2bdd3f6ca6/docs/Reflective/README.md)
+9. [Reflection Log](https://github.com/Clxiu/Trust-Indicator/blob/b27b282cb43956ff3917b57e455a8b2bdd3f6ca6/docs/Reflective/README.md)
 10. [Conflict Resolution Protocol](#conflict-resolution-protocol)
 11. [Testing Summary](#testing-summary)
 12. [User Manual](#user-manual)
@@ -45,9 +45,9 @@ The project's objective is to offer consumers a reliable resource to improve the
 ## Getting Start
 See the [online documentation](docs/Reference/) for references we referenced in the project.
 
-We use [GitHub Discussions](https://github.com/YifangMeng/Trust-Indicator/discussions) as our forum, and Microsoft Teams for chat. These are great places to ask questions and advice from the community or to discuss projects.
+We use [GitHub Discussions](https://github.com/Clxiu/Trust-Indicator/discussions) as our forum, and Microsoft Teams for chat. These are great places to ask questions and advice from the community or to discuss projects.
 
-For bugs and feature requests, please [raise an issue](https://github.com/YifangMeng/Trust-Indicator/issues/new/choose) and follow the templates there.
+For bugs and feature requests, please [raise an issue](https://github.com/Clxiu/Trust-Indicator/discussions/new/choose) and follow the templates there.
 
 #### Installation
 
@@ -74,7 +74,7 @@ In managing our web API development project, we faced challenges such as increas
 - Use Git as our version control system to facilitate collaboration and prevent conflicts.
 - Utilize development environments like Visual Studio and WebStorm to ensure uniformity across the team and prevent inconsistencies.
 - Use Postman for testing to ensure the code's reliability and effectiveness.
-- Chose GitHub Projects for [task management](https://github.com/tonypioneer/Trust-Indicator/issues), the GitHub [Kanban workflow](https://github.com/users/tonypioneer/projects/1/views/1), and the GitHub [timeline](https://github.com/users/tonypioneer/projects/1/views/9) for our development process, aiming for seamless integration, simplicity, cost-effectiveness, and enhanced collaboration within the team.
+- Chose GitHub Projects for [task management](https://github.com/Clxiu/Trust-Indicator/issues), the GitHub [Kanban workflow](https://github.com/users/Clxiu/projects/4/views/2), and the GitHub [timeline](https://github.com/users/Clxiu/projects/4/views/4) for our development process, aiming for seamless integration, simplicity, cost-effectiveness, and enhanced collaboration within the team.
 - Organize weekly catch-up meetings for code review before merging into the main branch to maintain code quality, ensuring that the code is readable, maintainable, efficient, and error-free.
 
 By focusing on integration, simplicity, and collaboration, we've positioned our team to work with greater agility and transparency, aligning our tooling and workflows with the specific needs and goals of our project. The full decision log can be accessed [here](docs/Decision%20Logs/Tools%20for%20Project%20Management.md).
@@ -139,7 +139,7 @@ During the implementation of these features, we will also prioritize team cohesi
 ## Acknowledgements
 We would like to express our gratitude to all those who helped us during the completion of this project.
 
-My deepest gratitude goes first and foremost to the teaching team (Elena Williams & Charles Gretton) and client (Sabrina Caldwell). The teacher team provides a platform for us to communicate with customers in a timely manner and provide feedback and help with our requirements. Meanwhile, clients who play a vital role in the design of the project put forward a lot of instructive advice and useful suggestions for us.
+My deepest gratitude goes first and foremost to the teaching team (Brenton Smith) and client (Sabrina Caldwell). The teacher team provides a platform for us to communicate with customers in a timely manner and provide feedback and help with our requirements. Meanwhile, clients who play a vital role in the design of the project put forward a lot of instructive advice and useful suggestions for us.
 
 We are also deeply indebted to those who use our web app and fill out the questionnaire. It was because of the bugs they found and the constructive comments they provided that the project came to a successful end.
 
