@@ -1,9 +1,9 @@
 # Overall relationships
-![show](https://github.com/Clxiu/Trust-Indicator/assets/141119645/7c41c064-54dd-4628-b62d-808fc57ba25f)
+![show](https://github.com/Clxiu/Trust-Indicator/blob/main/docs/Stakeholders%20List%20and%20Impact/Stakeholders.png)
 
 # Stakeholders and analysis
 
-![show](https://github.com/Clxiu/Trust-Indicator/blob/41cc7872c2dd769f620f50357154e3aff219abf3/docs/Stakeholders%20List%20and%20Impact/StakeholderAnalysis.png)
+![show](https://github.com/Clxiu/Trust-Indicator/blob/main/docs/Stakeholders%20List%20and%20Impact/StakeholderAnalysis.png)
 
 - ## **General User:**
   The general user is at the heart of the project's objective. With the rise of misleading images on social media and digital media,
