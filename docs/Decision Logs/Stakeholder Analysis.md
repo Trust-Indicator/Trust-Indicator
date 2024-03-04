@@ -21,4 +21,4 @@ The stakeholder analysis conducted in the previous semester will remain unchange
 
 ## Action Items
 1. Continue to engage with stakeholders according to the established plans and strategies.
-2. Monitor the stakeholder environment and project landscape for any significant changes that may necessitate a future review of the stakeholder analysis.。。
+2. Monitor the stakeholder environment and project landscape for any significant changes that may necessitate a future review of the stakeholder analysis.
