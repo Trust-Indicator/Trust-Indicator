@@ -1,6 +1,6 @@
 # DECISION LOG 
 ## Decision Details 
-- Date: Mar 3rd, 2024
+- Date: March 3rd, 2024
 - Decision Maker: All members
 
 ## Background
