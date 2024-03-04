@@ -7,7 +7,7 @@
 The stakeholder analysis conducted last semester identified key groups relevant to the project's success, including General Users, Photographers and Creators, Developers, Clients, Tutors, Shadow Teams, JPEG and Image-related Organizations, Educational and Training Organizations, and Creative Commons Organizations. This comprehensive analysis provided a clear understanding of the interests, influences, and interactions of each stakeholder group for the project.
 
 ## Continued Decision Options
-The stakeholder analysis conducted in the previous semester will remain unchanged for the current semester.
+The stakeholder analysis conducted in the previous semester will remain unchanged for the current semester, focusing on the key and closely - related stakeholders for the project.
 
 ## Rationale
 - Consistency and Continuity: Maintaining the same stakeholder analysis ensures consistency and allows for a continued strategic approach in engaging and managing stakeholders based on established insights and strategies.
