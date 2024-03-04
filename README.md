@@ -119,7 +119,19 @@ The project mainly has the following deliverables.
 
 ### Top Priorities
 
-PlaceHolder .....
+1. Credibility Signal Design Research Report: Recommendations on credibility signal design based on image metadata.
+2. leverages advanced image analysis technology to accurately identify the authenticity of photos, providing a credibility score for each image. This assists users in distinguishing between original content and AI-generated images. 
+3. EXIF Information Viewing Feature: A feature allowing users to view EXIF details of uploaded images. View Manual
+4. Image Collection Feature: Allows users to create collections and save their favorite images.
+5. Image Tag and Keyword Management Feature: Users can add and manage tags and keywords for images.
+6. Data Backup Mechanism: Ensures the safety and integrity of images and metadata.
+7. Comment and Rating Feature: Allows users to leave comments and ratings on image pages.
+8. Knowledge Sharing License Embedding Feature: Displays copyright information for uploaded images and content on the website.
+9. Image Credibility Signals/Visual Cues Feature: Helps users assess the credibility of images.
+10. Accuracy and Credibility Verification Mechanism for Added Contextual Information: Ensures the accuracy and credibility of added contextual details.
+11. Image Search Feature: Allows users to search based on keywords, date ranges, geographical locations, and other metadata.
+12. User Feedback System: Enables users to provide feedback, suggestions, or report issues to website administrators.
+
 
 ## Future Improvements
 Considering future improvements and continuous optimization is crucial when developing a project. While our goal is to deliver a high-quality product at the current stage, we recognize that technology and market conditions are constantly changing. Therefore, we are willing to invest time and effort in thinking and planning for future enhancements.
