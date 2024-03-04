@@ -1,4 +1,4 @@
- # **Team Charter 1.0**
+ # **Team Charter **
 
 ## **Mission and Objective:** 
 
@@ -32,7 +32,7 @@ Vice-Spokesperson: Vidhu Chaudhary
 
 Lingxiu Cai - Frontend & Backend Developer
 
-Vidhu Chaudhary- Documentation Manager & Frontend Developer
+Vidhu Chaudhary - Documentation Manager & Frontend Developer
 
 Tony Chen - Project Manager & CTO
 
@@ -97,13 +97,3 @@ Zhaoyun Zhang - Backend & Machine Learning Instructor
 ## **Team Signatures:**
 
 Vidhu Chaudhary - u7531066
-
-Lingxiu Cai - u7588748
-
-Tony Chen - u7504537
-
-Song Han - u7529732
-
-Yifang Meng - u7342064
-
-Zhaoyun Zhang - u7545864
