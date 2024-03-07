@@ -1,15 +1,24 @@
+import os
+
 from flask import Flask, render_template, jsonify, request
-from database import db, create_database, User
+from werkzeug.utils import secure_filename
+from flask_sqlalchemy import SQLAlchemy
+
+from database import db, create_database, User, Image
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
 
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user, current_user, login_required
 
 app = Flask(__name__)
 # Creat SQLite Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MyDatabase.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['UPLOAD_FOLDER'] = 'uploads'  # 保存图片的目录
+app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
 db.init_app(app)
 create_database(app)
 
@@ -90,6 +99,36 @@ def login_function():
         return jsonify({'message': 'Logged in successfully'}), 200
     else:
         return jsonify({'message': 'Invalid username or password'}), 401
+
+
+@app.route('/uploadImage', methods=['POST'])
+@login_required  # Ensure that the user must be logged in to access this route
+def upload_file():
+    if 'file' not in request.files:
+        return jsonify(error="No file part"), 400
+
+    file = request.files['file']
+
+    if file.filename == '':
+        return jsonify(error="No selected file"), 400
+
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        # Here we use current_user.email to get the email of the logged-in user
+        new_image = Image(filename=filename, user_email=current_user.Email)
+        db.session.add(new_image)
+        db.session.commit()
+
+        return jsonify(message="Image successfully uploaded", filename=filename), 200
+    else:
+        return jsonify(error="Allowed file types are: png, jpg, jpeg, gif"), 400
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+
 
 if __name__ == '__main__':
     app.run()

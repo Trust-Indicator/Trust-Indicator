@@ -362,6 +362,83 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    var dropBox = document.querySelector('.drop-box'); // Selecting using class
+    var fileInput = document.querySelector('#file-input'); // Assuming file-input is still an ID
 
+    // Prevent default drag behaviors
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropBox.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    // Highlight drop area when item is dragged over it
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropBox.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropBox.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight(e) {
+        dropBox.classList.add('highlight');
+    }
+
+    function unhighlight(e) {
+        dropBox.classList.remove('highlight');
+    }
+
+    // Handle dropped files
+    dropBox.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+        var dt = e.dataTransfer;
+        var files = dt.files;
+        handleFiles(files);
+    }
+
+    // Handle files from the input file or dropped
+    function handleFiles(files) {
+        ([...files]).forEach(uploadFile);
+        ([...files]).forEach(previewFile);
+    }
+
+    function uploadFile(file) {
+        var url = '/uploadImage'; // The route in your Flask app
+        var formData = new FormData();
+        formData.append('file', file);
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log('Success:', result);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function previewFile(file) {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function() {
+            let img = document.querySelector('#image-preview'); // Assuming image-preview is an ID
+            img.src = reader.result;
+        }
+    }
+
+    fileInput.addEventListener('change', function(e) {
+        var files = e.target.files;
+        handleFiles(files);
+    });
+});
 
 

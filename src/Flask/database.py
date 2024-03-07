@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'Users'
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     UserName = db.Column(db.String(80),  nullable=False)
     Email = db.Column(db.String(120), unique=True, nullable=False)
@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     LegalName = db.Column(db.String(100))
     ProfilePhotoNO = db.Column(db.String(100))
     Is_Admin = db.Column(db.Boolean, default=False)
+    images = db.relationship('Image', backref='user', lazy=True)
 
 
 class Metadata(db.Model):
@@ -53,12 +54,13 @@ class Favorites(db.Model):
     Comment = db.Column(db.Text)
     Create_Date = db.Column(db.Text)
 
-class Images(db.Model):
-    __tablename__ = 'Images'
-    ImageID = db.Column(db.Integer, primary_key=True)
-    UserID = db.Column(db.Integer)
+class Image(db.Model):
+    __tablename__ = 'images'
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.String(150))
+    data = db.Column(db.LargeBinary)  # 用于存储图片的二进制数据
+    user_email = db.Column(db.String(120), db.ForeignKey('user.Email'), nullable=False)
     ImageTitle = db.Column(db.Text)
-    ImageUrl = db.Column(db.Text)
     ImageDescription = db.Column(db.Text)
     UploadDate = db.Column(db.Text)
     Tag = db.Column(db.Text)
