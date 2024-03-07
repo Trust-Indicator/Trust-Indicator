@@ -1,7 +1,20 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+import os
+
+from werkzeug.security import generate_password_hash
+
+from database import db, create_database, User
+from flask import request, jsonify
+from email_validator import validate_email, EmailNotValidError
+
 
 app = Flask(__name__)
+# Creat SQLite Database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MyDatabase.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
+# create_database(app)
 
 @app.route('/')
 def index():
