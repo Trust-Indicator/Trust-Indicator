@@ -1,14 +1,10 @@
 from flask import Flask, render_template, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
-import os
-
 from database import db, create_database, User
 from sqlalchemy.exc import IntegrityError
-from werkzeug.security import generate_password_hash
-
+from werkzeug.security import generate_password_hash, check_password_hash
 import re
 
-
+from flask_login import LoginManager, login_user
 
 app = Flask(__name__)
 # Creat SQLite Database
@@ -16,6 +12,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MyDatabase.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 create_database(app)
+
+# Flask-Login配置
+app.secret_key = 'COMP8715'
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 @app.route('/')
 def index():
@@ -40,7 +41,7 @@ def changepassword():
 
 
 
-
+# signup function
 @app.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
@@ -69,6 +70,26 @@ def register():
         return jsonify({'message': 'Email already exists.'}), 400
 
 
+# log in function
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+@app.route('/login_function', methods=['POST'])
+def login_function():
+    # 从请求中获取数据
+    data = request.get_json()
+    username_or_email = data.get('username')
+    password = data.get('password')
+
+    # 查询数据库中的用户
+    user = User.query.filter((User.UserName == username_or_email) | (User.Email == username_or_email)).first()
+
+    # 验证密码并登录用户
+    if user and check_password_hash(user.Password, password):
+        login_user(user)
+        return jsonify({'message': 'Logged in successfully'}), 200
+    else:
+        return jsonify({'message': 'Invalid username or password'}), 401
 
 if __name__ == '__main__':
     app.run()

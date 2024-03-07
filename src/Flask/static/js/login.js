@@ -30,27 +30,31 @@ function sign_in(event){
             email_prompt.style.display = 'none';
         }, 2000);
     }
-    fetch(`http://tecko.org:5001/user/login?email=${email}&password=${password}`, {
+    fetch(`/login_function`, {
         method: "POST",
         headers: {
-            'accept': 'text/plain'
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: email, password: password })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Login failed');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.message === 'Logged in successfully') {
+            sessionStorage.setItem('userEmail', email);
+            window.location.href = '/';
+        } else {
+            wrong_prompt.textContent = data.message;
+            wrong_prompt.style.display = 'block';
         }
     })
-        .then(response => {
-            if (response.status === 200) {
-                sessionStorage.setItem('userEmail', email);
-
-                // window.location.href = "index.html";
-                window.location.href = "/";
-            } else {
-                throw new Error(`Server responded with status: ${response.status}`);
-            }
-        })
-        .catch(error => {
-            console.error("There was an error:", error);
-            wrong_prompt.style.display = "block";
-        });
-
+    .catch(error => {
+        wrong_prompt.style.display = 'block';
+    });
 }
 function sign_up(){
     window.location.href="/signup"
