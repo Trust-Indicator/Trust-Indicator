@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Trust-Indicator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a91dcb133479ed2be592f2e2d9ccccedab4f7f0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Trust-Indicator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Trust-Indicator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

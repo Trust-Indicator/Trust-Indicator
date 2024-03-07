@@ -6,12 +6,12 @@ db = SQLAlchemy()
 class User(db.Model):
     __tablename__ = 'Users'
     UserID = db.Column(db.Integer, primary_key=True)
-    UserName = db.Column(db.String(80), unique=True, nullable=False)
+    UserName = db.Column(db.String(80),  nullable=False)
     Email = db.Column(db.String(120), unique=True, nullable=False)
     Password = db.Column(db.String(100))
     LegalName = db.Column(db.String(100))
     ProfilePhotoNO = db.Column(db.String(100))
-    Is_Admin = db.Column(db.Integer)
+    Is_Admin = db.Column(db.Boolean, default=False)
 
 
 class Metadata(db.Model):

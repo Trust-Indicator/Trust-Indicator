@@ -37,11 +37,10 @@ function sign_up() {
         return;
     }
 
-    const signup = fetch("http://tecko.org:5001/user/NewUser",{
+    const signup = fetch('/register',{
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "text/plain",
         },
         body: JSON.stringify({
             UserName: username,
@@ -50,17 +49,22 @@ function sign_up() {
             LegalName: legalName
         })
     })
-    .then(res => {
-    if (!res.ok) {
-        return res.text().then(text => Promise.reject(text));
-    }else{
-        window.location.href="/login"
+    .then(response => response.json())
+    .then(data => {
+    if (data.message === "User registered successfully.") {
+
+        window.location.href = "/login";
+    } else {
+        messageElement.textContent = data.message;
+        messageElement.style.fontSize = "18px";
+        messageElement.style.color = "#C4362E";
     }
     })
     .catch(error => {
-        messageElement.style.fontSize = "18px";
-        messageElement.style.color = "#C4362E";
-        messageElement.textContent=error;
+    console.error('Error:', error);
+    messageElement.textContent = 'An error occurred while processing your request.';
+    messageElement.style.fontSize = "18px";
+    messageElement.style.color = "#C4362E";
     });
 }
 
