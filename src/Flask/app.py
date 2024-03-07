@@ -2,11 +2,8 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-from werkzeug.security import generate_password_hash
-
 from database import db, create_database, User
-from flask import request, jsonify
-from email_validator import validate_email, EmailNotValidError
+
 
 
 app = Flask(__name__)
