@@ -156,3 +156,5 @@ My deepest gratitude goes first and foremost to the teaching team (Brenton Smith
 We are also deeply indebted to those who use our web app and fill out the questionnaire. It was because of the bugs they found and the constructive comments they provided that the project came to a successful end.
 
 Contact us EMAIL:  Please feel free to contact us (u7342064@anu.edu.au) if you have any questions.
+
+![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FClxiu%2FTrust-Indicator&label=This%20Project%20Has%20Been%20Trusted%20By&countColor=%23263759)
