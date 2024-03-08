@@ -114,10 +114,12 @@ def upload_file():
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
+        file_data = file.read()
+
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         # Here we use current_user.email to get the email of the logged-in user
-        new_image = Image(filename=filename, user_email=current_user.Email)
+        new_image = Image(filename=filename, data=file_data, user_email=current_user.Email)
         db.session.add(new_image)
         db.session.commit()
 
