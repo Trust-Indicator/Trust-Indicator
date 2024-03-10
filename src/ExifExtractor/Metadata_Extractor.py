@@ -1,7 +1,14 @@
+# Setup Instruction:
+# Enter the following in terminal, then manually import PIL package
+# python3 -m pip install --upgrade pip
+# python3 -m pip install --upgrade Pillow
+# pip install Pillow moviepy
+# pip install eyed3
 
 import os
 import sys
 from PIL import Image, ExifTags
+
 
 # Create a Google Maps URL from GPS coordinates
 # This function takes GPS coordinates (lat, lon) and their respective references (lat_ref, lon_ref)
@@ -12,9 +19,11 @@ def create_google_maps_url(lat, lon, lat_ref, lon_ref):
     lon_decimal = convert_to_decimal_degrees(lon, lon_ref)
     return f"https://maps.google.com/?q={lat_decimal},{lon_decimal}"
 
+
 # Converts GPS coordinates from Degrees, Minutes, and Seconds (DMS) format to decimal degrees.
 # It takes a tuple of coordinates (coords) and a direction (direction) as arguments.
-# The direction is used to determine if the decimal degree should be negative, which is the case for South and West directions.
+# The direction is used to determine if the decimal degree should be negative,
+# which is the case for South and West directions.
 def convert_to_decimal_degrees(coords, direction):
     """Converts DMS (degree, minute, second) to decimal degrees."""
     degree, minutes, seconds = coords
@@ -22,6 +31,7 @@ def convert_to_decimal_degrees(coords, direction):
     if direction in ['S', 'W']:
         decimal_degrees = -decimal_degrees
     return decimal_degrees
+
 
 # Prompts the user to choose the output method for the extracted EXIF data:
 # either write it to a file ("1") or print it to the terminal ("2").
