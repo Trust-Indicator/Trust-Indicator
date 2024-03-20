@@ -1,7 +1,7 @@
 # **Client Meeting 1**
 
 ## **Date/Time:** 
-20 March, 4:00 - 4:45 pm, N335 CSIT Building
+20 March, 4:00 - 5:00 pm, N335 CSIT Building
 
 
 ## **Location:** 
