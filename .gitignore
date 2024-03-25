@@ -1,2 +1,3 @@
 
 src/PS_Detector/weights/local.pth
+src/Flask/instance/MyDatabase.db
