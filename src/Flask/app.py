@@ -104,42 +104,95 @@ def login_function():
         return jsonify({'message': 'Invalid username or password'}), 401
 
 
-@app.route('/uploadImage', methods=['POST'])
+@app.route('/uploadImage',methods=['POST'])
 @login_required  # Ensure that the user must be logged in to access this route
 def upload_file():
-    if 'file' not in request.files:
-        return jsonify(error="No file part"), 400
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return jsonify(error="No file part"), 400
 
-    file = request.files['file']
+        file = request.files['file']
 
-    if file.filename == '':
-        return jsonify(error="No selected file"), 400
+        if file.filename == '':
+            return jsonify(error="No selected file"), 400
 
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file_data = file.read()
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file_data = file.read()
 
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        # Here we use current_user.email to get the email of the logged-in user
-        new_image = Image(filename=filename, data=file_data, user_email=current_user.Email)
-        db.session.add(new_image)
-        db.session.commit()
+            # Here we use current_user.email to get the email of the logged-in user
+            new_image = Image(filename=filename, data=file_data, user_email=current_user.Email)
+            db.session.add(new_image)
+            db.session.commit()
 
-        image_data_io = BytesIO(file_data)
+            image_data_io = BytesIO(file_data)
 
-        exif_data = extract_exif_data_as_dict(image_data_io)
-        if exif_data:
-            with open("exif_data.txt", "w") as file:
-                for key, value in exif_data.items():
-                    file.write(f"{key}: {value}\n")
-            print("EXIF data has been written to exif_data.txt file.")
+            exif_data = extract_exif_data_as_dict(image_data_io)
+            if exif_data:
+
+                with open("exif_data.txt", "w") as file:
+                    for key, value in exif_data.items():
+                        file.write(f"{key}: {value}\n")
+
+                colorSpace = exif_data.get('ColorSpace')
+                datetime_original = exif_data.get('DateTimeOriginal')
+                make = exif_data.get('Make')
+                model = exif_data.get('Model')
+                focal_length = exif_data.get('FocalLength')
+                if focal_length:
+                    if hasattr(focal_length, 'numerator') and hasattr(focal_length, 'denominator'):
+                        focal_length_value = float(focal_length.numerator) / float(focal_length.denominator)
+                    else:
+                        focal_length_value = float(focal_length)
+                else:
+                    focal_length_value = 'None'
+                # aperture = exif_data.get('ApertureValue')
+                # exposure = exif_data.get('ExposureProgram')
+                # iso = exif_data.get('ISOSpeedRatings')
+                # flash = exif_data.get('Flash')
+                metadata = {
+                    'ColorSpace': colorSpace if colorSpace else 'None',
+                    'Created': datetime_original if datetime_original else 'None',
+                    'Make': make if make else 'None',
+                    'Model': model if model else 'None',
+                    'FocalLength': focal_length_value
+                    # 'Aperture': aperture if aperture else 'None',
+                    # 'Exposure': exposure if exposure else 'None',
+                    # 'ISO': iso if iso else 'None',
+                    # 'Flash': flash if flash else 'None',
+
+                }
+
+                return jsonify({
+                    'message': 'Image successfully uploaded',
+                    'filename': filename,
+                    'metadata': metadata
+                })
+
+            # metadata = {
+            #     'Created': None,
+            # }
+            # key_mapping = {
+            #     'DateTimeOriginal': 'Created',  # 小写，移除冒号
+            # }
+            #
+            # with open('exif_data.txt', 'r', encoding='utf-8') as f:
+            #     for line in f:
+            #         # 不要将 line 转换为小写
+            #         for key in key_mapping:
+            #             # 这里我们检查原始 line，它应该包含正确的大小写和冒号
+            #             if line.startswith(key):
+            #                 # 提取冒号后面的值
+            #                 metadata[key_mapping[key]] = line.split(':', 1)[1].strip()
+            #                 print(metadata)
+            #                 break
+
+            return jsonify(message="Image successfully uploaded", filename=filename), 200
+
         else:
-            print("No EXIF data found in the image.")
-
-        return jsonify(message="Image successfully uploaded", filename=filename), 200
-    else:
-        return jsonify(error="Allowed file types are: png, jpg, jpeg, gif"), 400
+            return jsonify(error="Allowed file types are: png, jpg, jpeg, gif"), 400
 
 def allowed_file(filename):
     return '.' in filename and \
