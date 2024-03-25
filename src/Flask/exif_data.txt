@@ -1,0 +1,17 @@
+ImageWidth: 2730
+ImageLength: 4095
+BitsPerSample: (8, 8, 8)
+PhotometricInterpretation: 2
+ResolutionUnit: 2
+ExifOffset: 232
+Software: Adobe Photoshop 21.2 (Windows)
+Orientation: 1
+DateTime: 2024:02:03 10:18:41
+SamplesPerPixel: 3
+XResolution: 300.0
+YResolution: 300.0
+ExifVersion: b'0231'
+OffsetTime: +08:00
+ColorSpace: 1
+ExifImageWidth: 4480
+ExifImageHeight: 6720

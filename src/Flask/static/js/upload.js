@@ -445,18 +445,18 @@ document.addEventListener("DOMContentLoaded", function() {
     if(metadata['FocalLength']) {
         document.getElementById('metadata-FocalLength').textContent = metadata['FocalLength'];
     }
-    // if(metadata['Aperture']) {
-    //     document.getElementById('metadata-Aperture').textContent = metadata['Aperture'];
-    // }
-    // if(metadata['Exposure']) {
-    //     document.getElementById('metadata-Exposure').textContent = metadata['Exposure'];
-    // }
-    // if(metadata['ISO']) {
-    //     document.getElementById('metadata-ISO').textContent = metadata['ISO'];
-    // }
-    // if(metadata['Flash']) {
-    //     document.getElementById('metadata-Flash').textContent = metadata['Flash'];
-    // }
+    if(metadata['Aperture']) {
+        document.getElementById('metadata-Aperture').textContent = metadata['Aperture'];
+    }
+    if(metadata['Exposure']) {
+        document.getElementById('metadata-Exposure').textContent = metadata['Exposure'];
+    }
+    if(metadata['ISO']) {
+        document.getElementById('metadata-ISO').textContent = metadata['ISO'];
+    }
+    if(metadata['Flash']) {
+        document.getElementById('metadata-Flash').textContent = metadata['Flash'];
+    }
     // if(metadata['Altitude']) {
     //     document.getElementById('metadata-Altitude').textContent = metadata['Altitude'];
     // }

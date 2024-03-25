@@ -131,11 +131,9 @@ def upload_file():
 
             exif_data = extract_exif_data_as_dict(image_data_io)
             if exif_data:
-
                 with open("exif_data.txt", "w") as file:
                     for key, value in exif_data.items():
                         file.write(f"{key}: {value}\n")
-
                 colorSpace = exif_data.get('ColorSpace')
                 datetime_original = exif_data.get('DateTimeOriginal')
                 make = exif_data.get('Make')
@@ -148,21 +146,49 @@ def upload_file():
                         focal_length_value = float(focal_length)
                 else:
                     focal_length_value = 'None'
-                # aperture = exif_data.get('ApertureValue')
-                # exposure = exif_data.get('ExposureProgram')
-                # iso = exif_data.get('ISOSpeedRatings')
-                # flash = exif_data.get('Flash')
+                aperture = exif_data.get('ApertureValue')
+                if aperture:
+                    if hasattr(aperture, 'numerator') and hasattr(aperture, 'denominator'):
+                        aperture_length_value = float(aperture.numerator) / float(aperture.denominator)
+                    else:
+                        aperture_length_value = float(aperture)
+                else:
+                    aperture_length_value = 'None'
+                exposure = exif_data.get('ExposureProgram')
+                if exposure:
+                    if hasattr(exposure, 'numerator') and hasattr(exposure, 'denominator'):
+                        exposure_length_value = float(exposure.numerator) / float(exposure.denominator)
+                    else:
+                        exposure_length_value = float(exposure)
+                else:
+                    exposure_length_value = 'None'
+                iso = exif_data.get('ISOSpeedRatings')
+                if iso:
+                    if hasattr(iso, 'numerator') and hasattr(iso, 'denominator'):
+                        iso_length_value = float(iso.numerator) / float(iso.denominator)
+                    else:
+                        iso_length_value = float(iso)
+                else:
+                    iso_length_value = 'None'
+
+                flash = exif_data.get('Flash')
+                if flash:
+                    if hasattr(flash, 'numerator') and hasattr(flash, 'denominator'):
+                        flash_length_value = float(flash.numerator) / float(flash.denominator)
+                    else:
+                        flash_length_value = float(flash)
+                else:
+                    flash_length_value = 'None'
                 metadata = {
                     'ColorSpace': colorSpace if colorSpace else 'None',
                     'Created': datetime_original if datetime_original else 'None',
                     'Make': make if make else 'None',
                     'Model': model if model else 'None',
-                    'FocalLength': focal_length_value
-                    # 'Aperture': aperture if aperture else 'None',
-                    # 'Exposure': exposure if exposure else 'None',
-                    # 'ISO': iso if iso else 'None',
-                    # 'Flash': flash if flash else 'None',
-
+                    'FocalLength': focal_length_value,
+                    'Aperture': aperture_length_value,
+                    'Exposure': exposure_length_value,
+                    'ISO': iso_length_value,
+                    'Flash': flash_length_value,
                 }
 
                 return jsonify({
