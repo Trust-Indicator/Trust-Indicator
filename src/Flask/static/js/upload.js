@@ -420,6 +420,9 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(result => {
             console.log('Success:', result);
+            if(result.file_size) {document.getElementById('metadata-FileSize').textContent = formatBytes(result.file_size);}
+            if(result.file_type) {document.getElementById('metadata-FileType').textContent = result.file_type;}
+            if(result.filename) {document.getElementById('metadata-FileName').textContent = result.filename;}
             updateMetadataOnPage(result.metadata);
         })
         .catch(error => {
@@ -469,11 +472,20 @@ document.addEventListener("DOMContentLoaded", function() {
     // if(metadata['ModifyDate']) {
     //     document.getElementById('metadata-ModifyDate').textContent = metadata['ModifyDate'];
     // }
+       // 辅助函数，将字节格式化为可读的文件大小
 
 
     // 对其他的元数据项重复这个过程，确保使用正确的 ID
 
 }
+    function formatBytes(bytes, decimals = 2) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
 
     function previewFile(file) {
         let reader = new FileReader();

@@ -120,6 +120,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             file_data = file.read()
 
+
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             # Here we use current_user.email to get the email of the logged-in user
@@ -128,6 +129,9 @@ def upload_file():
             db.session.commit()
 
             image_data_io = BytesIO(file_data)
+            file_size = len(file_data)
+            file_type = file.content_type
+            original_filename = file.filename
 
             exif_data = extract_exif_data_as_dict(image_data_io)
             if exif_data:
@@ -193,27 +197,11 @@ def upload_file():
 
                 return jsonify({
                     'message': 'Image successfully uploaded',
-                    'filename': filename,
-                    'metadata': metadata
+                    'filename': original_filename,
+                    'file_size': file_size,
+                    'file_type': file_type,
+                    'metadata': metadata,
                 })
-
-            # metadata = {
-            #     'Created': None,
-            # }
-            # key_mapping = {
-            #     'DateTimeOriginal': 'Created',  # 小写，移除冒号
-            # }
-            #
-            # with open('exif_data.txt', 'r', encoding='utf-8') as f:
-            #     for line in f:
-            #         # 不要将 line 转换为小写
-            #         for key in key_mapping:
-            #             # 这里我们检查原始 line，它应该包含正确的大小写和冒号
-            #             if line.startswith(key):
-            #                 # 提取冒号后面的值
-            #                 metadata[key_mapping[key]] = line.split(':', 1)[1].strip()
-            #                 print(metadata)
-            #                 break
 
             return jsonify(message="Image successfully uploaded", filename=filename), 200
 
