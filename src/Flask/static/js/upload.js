@@ -420,10 +420,71 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(result => {
             console.log('Success:', result);
+            if(result.file_size) {document.getElementById('metadata-FileSize').textContent = formatBytes(result.file_size);}
+            if(result.file_type) {document.getElementById('metadata-FileType').textContent = result.file_type;}
+            if(result.filename) {document.getElementById('metadata-FileName').textContent = result.filename;}
+            updateMetadataOnPage(result.metadata);
         })
         .catch(error => {
             console.error('Error:', error);
         });
+    }
+   function updateMetadataOnPage(metadata) {
+    if(metadata['ColorSpace']) {
+            document.getElementById('metadata-ColorSpace').textContent = metadata['ColorSpace'];
+    }
+    if(metadata['Created']) {
+        document.getElementById('metadata-created').textContent = metadata['Created'];
+    }
+    // if(metadata['ImageSize']) {
+    //     document.getElementById('metadata-ImageSize').textContent = metadata['ImageSize'];
+    // }
+    if(metadata['Make']) {
+        document.getElementById('metadata-Make').textContent = metadata['Make'];
+    }
+    if(metadata['Model']) {
+        document.getElementById('metadata-Model').textContent = metadata['Model'];
+    }
+    if(metadata['FocalLength']) {
+        document.getElementById('metadata-FocalLength').textContent = metadata['FocalLength'];
+    }
+    if(metadata['Aperture']) {
+        document.getElementById('metadata-Aperture').textContent = metadata['Aperture'];
+    }
+    if(metadata['Exposure']) {
+        document.getElementById('metadata-Exposure').textContent = metadata['Exposure'];
+    }
+    if(metadata['ISO']) {
+        document.getElementById('metadata-ISO').textContent = metadata['ISO'];
+    }
+    if(metadata['Flash']) {
+        document.getElementById('metadata-Flash').textContent = metadata['Flash'];
+    }
+    // if(metadata['Altitude']) {
+    //     document.getElementById('metadata-Altitude').textContent = metadata['Altitude'];
+    // }
+    // if(metadata['Latitude']) {
+    //     document.getElementById('metadata-Latitude').textContent = metadata['Latitude'];
+    // }
+    // if(metadata['Longitude']) {
+    //     document.getElementById('metadata-Longitude').textContent = metadata['Longitude'];
+    // }
+    // if(metadata['ModifyDate']) {
+    //     document.getElementById('metadata-ModifyDate').textContent = metadata['ModifyDate'];
+    // }
+       // 辅助函数，将字节格式化为可读的文件大小
+
+
+    // 对其他的元数据项重复这个过程，确保使用正确的 ID
+
+}
+    function formatBytes(bytes, decimals = 2) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
 
     function previewFile(file) {

@@ -1,8 +1,10 @@
 import os
+from io import BytesIO
 
 from flask import Flask, render_template, jsonify, request
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
+from src.ExifExtractor.InterfaceTester import extract_exif_data_as_dict
 
 from database import db, create_database, User, Image
 from sqlalchemy.exc import IntegrityError
@@ -21,6 +23,7 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 db.init_app(app)
 create_database(app)
+
 
 # Flask-Login配置
 app.secret_key = 'COMP8715'
@@ -101,31 +104,109 @@ def login_function():
         return jsonify({'message': 'Invalid username or password'}), 401
 
 
-@app.route('/uploadImage', methods=['POST'])
+@app.route('/uploadImage',methods=['POST'])
 @login_required  # Ensure that the user must be logged in to access this route
 def upload_file():
-    if 'file' not in request.files:
-        return jsonify(error="No file part"), 400
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return jsonify(error="No file part"), 400
 
-    file = request.files['file']
+        file = request.files['file']
 
-    if file.filename == '':
-        return jsonify(error="No selected file"), 400
+        if file.filename == '':
+            return jsonify(error="No selected file"), 400
 
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file_data = file.read()
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file_data = file.read()
 
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        # Here we use current_user.email to get the email of the logged-in user
-        new_image = Image(filename=filename, data=file_data, user_email=current_user.Email)
-        db.session.add(new_image)
-        db.session.commit()
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        return jsonify(message="Image successfully uploaded", filename=filename), 200
-    else:
-        return jsonify(error="Allowed file types are: png, jpg, jpeg, gif"), 400
+            # Here we use current_user.email to get the email of the logged-in user
+            new_image = Image(filename=filename, data=file_data, user_email=current_user.Email)
+            db.session.add(new_image)
+            db.session.commit()
+
+            image_data_io = BytesIO(file_data)
+            file_size = len(file_data)
+            file_type = file.content_type
+            original_filename = file.filename
+
+            exif_data = extract_exif_data_as_dict(image_data_io)
+            if exif_data:
+                with open("exif_data.txt", "w") as file:
+                    for key, value in exif_data.items():
+                        file.write(f"{key}: {value}\n")
+                colorSpace = exif_data.get('ColorSpace')
+                datetime_original = exif_data.get('DateTimeOriginal')
+                make = exif_data.get('Make')
+                model = exif_data.get('Model')
+                focal_length = exif_data.get('FocalLength')
+                if focal_length:
+                    if hasattr(focal_length, 'numerator') and hasattr(focal_length, 'denominator'):
+                        focal_length_value = float(focal_length.numerator) / float(focal_length.denominator)
+                    else:
+                        focal_length_value = float(focal_length)
+                else:
+                    focal_length_value = 'None'
+                aperture = exif_data.get('ApertureValue')
+                if aperture:
+                    if hasattr(aperture, 'numerator') and hasattr(aperture, 'denominator'):
+                        aperture_length_value = float(aperture.numerator) / float(aperture.denominator)
+                    else:
+                        aperture_length_value = float(aperture)
+                else:
+                    aperture_length_value = 'None'
+                exposure = exif_data.get('ExposureProgram')
+                if exposure:
+                    if hasattr(exposure, 'numerator') and hasattr(exposure, 'denominator'):
+                        exposure_length_value = float(exposure.numerator) / float(exposure.denominator)
+                    else:
+                        exposure_length_value = float(exposure)
+                else:
+                    exposure_length_value = 'None'
+                iso = exif_data.get('ISOSpeedRatings')
+                if iso:
+                    if hasattr(iso, 'numerator') and hasattr(iso, 'denominator'):
+                        iso_length_value = float(iso.numerator) / float(iso.denominator)
+                    else:
+                        iso_length_value = float(iso)
+                else:
+                    iso_length_value = 'None'
+
+                flash = exif_data.get('Flash')
+                if flash:
+                    if hasattr(flash, 'numerator') and hasattr(flash, 'denominator'):
+                        flash_length_value = float(flash.numerator) / float(flash.denominator)
+                    else:
+                        flash_length_value = float(flash)
+                else:
+                    flash_length_value = 'None'
+                metadata = {
+                    'ColorSpace': colorSpace if colorSpace else 'None',
+                    'Created': datetime_original if datetime_original else 'None',
+                    'Make': make if make else 'None',
+                    'Model': model if model else 'None',
+                    'FocalLength': focal_length_value,
+                    'Aperture': aperture_length_value,
+                    'Exposure': exposure_length_value,
+                    'ISO': iso_length_value,
+                    'Flash': flash_length_value,
+                }
+
+                return jsonify({
+                    'message': 'Image successfully uploaded',
+                    'filename': original_filename,
+                    'file_size': file_size,
+                    'file_type': file_type,
+                    'metadata': metadata,
+                })
+
+            return jsonify(message="Image successfully uploaded", filename=filename), 200
+
+        else:
+            return jsonify(error="Allowed file types are: png, jpg, jpeg, gif"), 400
 
 def allowed_file(filename):
     return '.' in filename and \
