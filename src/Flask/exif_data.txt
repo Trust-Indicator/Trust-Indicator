@@ -1,46 +1,17 @@
-ImageWidth: 4480
-ImageLength: 5600
-BitsPerSample: 8
+ImageWidth: 4095
+ImageLength: 2730
+BitsPerSample: (8, 8, 8)
 PhotometricInterpretation: 2
+ResolutionUnit: 2
+ExifOffset: 232
+Software: Adobe Photoshop 21.2 (Windows)
 Orientation: 1
+DateTime: 2024:02:29 16:14:54
 SamplesPerPixel: 3
 XResolution: 300.0
 YResolution: 300.0
-GPSInfo: {0: b'\x02\x03\x00\x00'}
-ResolutionUnit: 2
-SensitivityType: 2
-Software: Adobe Photoshop CC 2019 (Windows)
-DateTime: 2024:02:01 13:28:26
-RecommendedExposureIndex: 125
-BodySerialNumber: 622039001344
-LensSpecification: (24.0, 70.0, nan, nan)
-LensModel: Canon EF 24-70mm f/2.8L II USM
-LensSerialNumber: 5965007468
-Rating: 0
-ExifOffset: 412
-ExifVersion: b'0230'
-ShutterSpeedValue: 6.965784
-ApertureValue: 6.0
+ExifVersion: b'0231'
+OffsetTime: +08:00
 ColorSpace: 1
-ExposureBiasValue: 0.0
-ExifImageWidth: 4480
-SubjectDistance: 0.0
-MeteringMode: 2
-ExifImageHeight: 5600
-Flash: 9
-FocalLength: 50.0
-ExposureMode: 1
-WhiteBalance: 1
-SceneCaptureType: 0
-FocalPlaneXResolution: 5719.14892578125
-FocalPlaneYResolution: 5728.900390625
-FocalPlaneResolutionUnit: 2
-SubsecTimeOriginal: 00
-SubsecTimeDigitized: 00
-FileSource: b'\x03'
-ExposureTime: 0.008
-FNumber: 8.0
-SceneType: b'\x01'
-ExposureProgram: 1
-CustomRendered: 0
-ISOSpeedRatings: 125
+ExifImageWidth: 6720
+ExifImageHeight: 4480

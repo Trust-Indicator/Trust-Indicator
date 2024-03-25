@@ -437,8 +437,8 @@ document.addEventListener("DOMContentLoaded", function() {
    function updateMetadataOnPage(metadata) {
     const imageSizeElement = document.getElementById('metadata-ImageSize');
     // 检查宽度和高度是否不是 'None'
-    const imageWidth = metadata['ImageWidth'] !== 'None' ? metadata['ImageWidth'] : 'Unknown';
-    const imageLength = metadata['ImageLength'] !== 'None' ? metadata['ImageLength'] : 'Unknown';
+    const imageWidth = metadata['ImageWidth'] !== 'None' ? metadata['ImageWidth'] : 'None';
+    const imageLength = metadata['ImageLength'] !== 'None' ? metadata['ImageLength'] : 'None';
     imageSizeElement.textContent = `${imageWidth} x ${imageLength}`;
 
     if(metadata['ColorSpace']) {
@@ -469,23 +469,36 @@ document.addEventListener("DOMContentLoaded", function() {
     if(metadata['Flash']) {
         document.getElementById('metadata-Flash').textContent = metadata['Flash'];
     }
-    // if(metadata['Altitude']) {
-    //     document.getElementById('metadata-Altitude').textContent = metadata['Altitude'];
-    // }
-    // if(metadata['Latitude']) {
-    //     document.getElementById('metadata-Latitude').textContent = metadata['Latitude'];
-    // }
-    // if(metadata['Longitude']) {
-    //     document.getElementById('metadata-Longitude').textContent = metadata['Longitude'];
-    // }
-    // if(metadata['ModifyDate']) {
-    //     document.getElementById('metadata-ModifyDate').textContent = metadata['ModifyDate'];
-    // }
+    if(metadata['Altitude']) {
+        document.getElementById('metadata-Altitude').textContent = metadata['Altitude'];
+    }
+    const LatitudeElement = document.getElementById('metadata-Latitude');
+    const LatitudeRef = metadata['LatitudeRef'] !== 'None' ? metadata['LatitudeRef'] : 'No Ref';
+    const Latitude = metadata['Latitude'] !== 'None' ? metadata['Latitude'] : 'No Latitude';
 
+    if (metadata['LatitudeRef'] !== 'None' && metadata['Latitude'] !== 'None') {
+        LatitudeElement.textContent = `${LatitudeRef}: ${Latitude}`;
+    } else if (metadata['LatitudeRef'] !== 'None' && metadata['Latitude'] === 'None') {
+        LatitudeElement.textContent = `${LatitudeRef}: No Latitude`;
+    } else if (metadata['LatitudeRef'] === 'None' && metadata['Latitude'] !== 'None') {
+        LatitudeElement.textContent = `No Ref: ${Latitude}`;
+    } else {
+        LatitudeElement.textContent = 'None';
+    }
 
+    const LongitudeElement = document.getElementById('metadata-Longitude');
+    const LongitudeRef = metadata['LongitudeRef'] !== 'None' ? metadata['LongitudeRef'] : 'No Ref';
+    const Longitude = metadata['Longitude'] !== 'None' ? metadata['Longitude'] : 'No Longitude';
 
-    // 对其他的元数据项重复这个过程，确保使用正确的 ID
-
+    if (metadata['LongitudeRef'] !== 'None' && metadata['Longitude'] !== 'None') {
+        LongitudeElement.textContent = `${LongitudeRef}: ${Longitude}`;
+    } else if (metadata['LongitudeRef'] !== 'None' && metadata['Longitude'] === 'None') {
+        LongitudeElement.textContent = `${LongitudeRef}: No Longitude`;
+    } else if (metadata['LongitudeRef'] === 'None' && metadata['Longitude'] !== 'None') {
+        LongitudeElement.textContent = `No Ref: ${Longitude}`;
+    } else {
+        LongitudeElement.textContent = 'None';
+    }
 }
     function formatBytes(bytes, decimals = 2) {
         if (bytes === 0) return '0 Bytes';

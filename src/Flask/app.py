@@ -4,7 +4,7 @@ from io import BytesIO
 from flask import Flask, render_template, jsonify, request
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
-from src.ExifExtractor.InterfaceTester import extract_exif_data_as_dict
+from src.ExifExtractor.InterfaceTester import extract_exif_data
 
 from database import db, create_database, User, Image
 from sqlalchemy.exc import IntegrityError
@@ -128,13 +128,13 @@ def upload_file():
             file_size = len(file_data)
             file_type = file.content_type
             original_filename = file.filename
-            exif_data = extract_exif_data_as_dict(image_data_io)
+            exif_data = extract_exif_data(image_data_io)
             if exif_data:
                 with open("exif_data.txt", "w") as file:
                     for key, value in exif_data.items():
                         file.write(f"{key}: {value}\n")
                 colorSpace = exif_data.get('ColorSpace')
-                datetime_original = exif_data.get('DateTimeOriginal')
+                datetime_original = exif_data.get('DateTime')
                 make = exif_data.get('Make')
                 model = exif_data.get('Model')
                 focal_length = exif_data.get('FocalLength')
@@ -196,6 +196,30 @@ def upload_file():
                         image_length = float(image_length)
                 else:
                     image_length = 'None'
+
+                altitude = exif_data.get('GPSAltitude')
+                if altitude:
+                    if hasattr(altitude, 'numerator') and hasattr(altitude, 'denominator'):
+                        altitude = float(altitude.numerator) / float(altitude.denominator)
+                    else:
+                        altitude = float(altitude)
+                else:
+                    altitude = 'None'
+
+                latitudeRef = exif_data.get('GPSLatitudeRef')
+                latitude = exif_data.get('GPSLatitude')
+                if isinstance(latitude, tuple) and len(latitude) == 3:
+                    latitude = format_latitude(latitude)
+                else:
+                    latitude = "None"
+
+                longitudeRef = exif_data.get('GPSLongitudeRef')
+                longitude = exif_data.get('GPSLongitude')
+                if isinstance(longitude, tuple) and len(longitude) == 3:
+                    longitude = format_latitude(longitude)
+                else:
+                    longitude = "None"
+
                 metadata = {
                     'ColorSpace': colorSpace if colorSpace else 'None',
                     'Created': datetime_original if datetime_original else 'None',
@@ -208,8 +232,39 @@ def upload_file():
                     'Flash': flash_length_value,
                     'ImageWidth': image_width,
                     'ImageLength': image_length,
+                    'Altitude': altitude,
+                    'LatitudeRef': latitudeRef if latitudeRef else 'None',
+                    'Latitude': latitude,
+                    'LongitudeRef': longitudeRef if longitudeRef else 'None',
+                    'Longitude': longitude,
                 }
 
+                return jsonify({
+                    'message': 'Image successfully uploaded',
+                    'filename': original_filename,
+                    'file_size': file_size,
+                    'file_type': file_type,
+                    'metadata': metadata,
+                })
+            else:
+                metadata = {
+                    'ColorSpace': 'unidentifiable',
+                    'Created':  'unidentifiable',
+                    'Make': 'unidentifiable',
+                    'Model': 'unidentifiable',
+                    'FocalLength': 'unidentifiable',
+                    'Aperture': 'unidentifiable',
+                    'Exposure': 'unidentifiable',
+                    'ISO': 'unidentifiable',
+                    'Flash':'unidentifiable',
+                    'ImageWidth': 'unidentifiable',
+                    'ImageLength': 'unidentifiable',
+                    'Altitude': 'unidentifiable',
+                    'LatitudeRef': 'None',
+                    'Latitude': 'None',
+                    'LongitudeRef': 'None',
+                    'Longitude': 'None',
+                }
                 return jsonify({
                     'message': 'Image successfully uploaded',
                     'filename': original_filename,
@@ -221,10 +276,14 @@ def upload_file():
         else:
             return jsonify(error="Allowed file types are: png, jpg, jpeg, gif"), 400
 
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
-
+def format_latitude(latitude):
+    degrees, minutes, seconds = latitude
+    return f"{degrees}° {minutes}' {seconds}\""
 
 if __name__ == '__main__':
     app.run()

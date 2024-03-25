@@ -52,31 +52,31 @@ def extract_exif_data(image_path):
 
 # Determines the current working directory and constructs the path
 # to the images directory where the image files are supposed to be located.
-cwd = os.getcwd()
-image_dir = os.path.join(cwd, "images")
+# cwd = os.getcwd()
+# image_dir = os.path.join(cwd, "images")
 
-if not os.path.exists(image_dir) or not os.listdir(image_dir):
-    print("The ./images folder is empty or does not exist.")
-    sys.exit()
+# if not os.path.exists(image_dir) or not os.listdir(image_dir):
+#     print("The ./images folder is empty or does not exist.")
+#     sys.exit()
 
-os.chdir(image_dir)
-files = os.listdir()
+# os.chdir(image_dir)
+# files = os.listdir()
 
-for file in files:
-    exif_data = extract_exif_data(file)
-    if exif_data:
-        print(f"{'_' * 20}{file}{'_' * 20}")
-        for tag_name, value in exif_data.items():
-            print(f"{tag_name} - {value}")
-        if 'GPSLatitude' in exif_data and 'GPSLongitude' in exif_data:
-            url = create_google_maps_url(
-                exif_data['GPSLatitude'],
-                exif_data['GPSLongitude'],
-                exif_data.get('GPSLatitudeRef', 'N'),
-                exif_data.get('GPSLongitudeRef', 'E')
-            )
-            print(url)
-    else:
-        print(f"{file} contains no EXIF data.")
-
-os.chdir(cwd)
+# for file in files:
+#     exif_data = extract_exif_data(file)
+#     if exif_data:
+#         print(f"{'_' * 20}{file}{'_' * 20}")
+#         for tag_name, value in exif_data.items():
+#             print(f"{tag_name} - {value}")
+#         if 'GPSLatitude' in exif_data and 'GPSLongitude' in exif_data:
+#             url = create_google_maps_url(
+#                 exif_data['GPSLatitude'],
+#                 exif_data['GPSLongitude'],
+#                 exif_data.get('GPSLatitudeRef', 'N'),
+#                 exif_data.get('GPSLongitudeRef', 'E')
+#             )
+#             print(url)
+#     else:
+#         print(f"{file} contains no EXIF data.")
+#
+# os.chdir(cwd)
