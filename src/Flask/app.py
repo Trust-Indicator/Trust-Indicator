@@ -18,7 +18,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MyDatabase.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads'  # 保存图片的目录
-app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
+app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg'}
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 db.init_app(app)
@@ -119,20 +119,15 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file_data = file.read()
-
-
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
             # Here we use current_user.email to get the email of the logged-in user
             new_image = Image(filename=filename, data=file_data, user_email=current_user.Email)
             db.session.add(new_image)
             db.session.commit()
-
             image_data_io = BytesIO(file_data)
             file_size = len(file_data)
             file_type = file.content_type
             original_filename = file.filename
-
             exif_data = extract_exif_data_as_dict(image_data_io)
             if exif_data:
                 with open("exif_data.txt", "w") as file:
@@ -183,6 +178,24 @@ def upload_file():
                         flash_length_value = float(flash)
                 else:
                     flash_length_value = 'None'
+
+                image_width = exif_data.get('ExifImageWidth')
+                if image_width:
+                    if hasattr(image_width, 'numerator') and hasattr(image_width, 'denominator'):
+                        image_width = float(image_width.numerator) / float(image_width.denominator)
+                    else:
+                        image_width = float(image_width)
+                else:
+                    image_width = 'None'
+
+                image_length = exif_data.get('ExifImageHeight')
+                if image_length:
+                    if hasattr(image_length, 'numerator') and hasattr(image_length, 'denominator'):
+                        image_length = float(image_length.numerator) / float(image_length.denominator)
+                    else:
+                        image_length = float(image_length)
+                else:
+                    image_length = 'None'
                 metadata = {
                     'ColorSpace': colorSpace if colorSpace else 'None',
                     'Created': datetime_original if datetime_original else 'None',
@@ -193,6 +206,8 @@ def upload_file():
                     'Exposure': exposure_length_value,
                     'ISO': iso_length_value,
                     'Flash': flash_length_value,
+                    'ImageWidth': image_width,
+                    'ImageLength': image_length,
                 }
 
                 return jsonify({
@@ -202,8 +217,6 @@ def upload_file():
                     'file_type': file_type,
                     'metadata': metadata,
                 })
-
-            return jsonify(message="Image successfully uploaded", filename=filename), 200
 
         else:
             return jsonify(error="Allowed file types are: png, jpg, jpeg, gif"), 400

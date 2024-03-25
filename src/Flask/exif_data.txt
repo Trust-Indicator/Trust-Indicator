@@ -1,33 +1,36 @@
 ImageWidth: 4480
-ImageLength: 6720
+ImageLength: 5600
 BitsPerSample: 8
-GPSInfo: {0: b'\x02\x03\x00\x00'}
 PhotometricInterpretation: 2
-Rating: 0
-ResolutionUnit: 2
-ExifOffset: 324
-ImageDescription: PixCake
-Make: Canon
-Model: Canon EOS 5D Mark IV
-Software: Adobe Photoshop CC 2019 (Windows)
 Orientation: 1
-DateTime: 2024:01:24 19:21:22
 SamplesPerPixel: 3
 XResolution: 300.0
 YResolution: 300.0
+GPSInfo: {0: b'\x02\x03\x00\x00'}
+ResolutionUnit: 2
+SensitivityType: 2
+Software: Adobe Photoshop CC 2019 (Windows)
+DateTime: 2024:02:01 13:28:26
+RecommendedExposureIndex: 125
+BodySerialNumber: 622039001344
+LensSpecification: (24.0, 70.0, nan, nan)
+LensModel: Canon EF 24-70mm f/2.8L II USM
+LensSerialNumber: 5965007468
+Rating: 0
+ExifOffset: 412
 ExifVersion: b'0230'
 ShutterSpeedValue: 6.965784
-ApertureValue: 4.970854
-DateTimeOriginal: 2024:01:13 18:06:50
-DateTimeDigitized: 2024:01:13 18:06:50
+ApertureValue: 6.0
+ColorSpace: 1
 ExposureBiasValue: 0.0
+ExifImageWidth: 4480
 SubjectDistance: 0.0
 MeteringMode: 2
-ColorSpace: 1
+ExifImageHeight: 5600
 Flash: 9
-FocalLength: 70.0
-ExifImageWidth: 4480
-ExifImageHeight: 6720
+FocalLength: 50.0
+ExposureMode: 1
+WhiteBalance: 1
 SceneCaptureType: 0
 FocalPlaneXResolution: 5719.14892578125
 FocalPlaneYResolution: 5728.900390625
@@ -36,16 +39,8 @@ SubsecTimeOriginal: 00
 SubsecTimeDigitized: 00
 FileSource: b'\x03'
 ExposureTime: 0.008
-FNumber: 5.6
+FNumber: 8.0
 SceneType: b'\x01'
 ExposureProgram: 1
 CustomRendered: 0
-ISOSpeedRatings: 160
-ExposureMode: 1
-SensitivityType: 2
-WhiteBalance: 1
-RecommendedExposureIndex: 160
-BodySerialNumber: 622039001344
-LensSpecification: (24.0, 70.0, nan, nan)
-LensModel: Canon EF 24-70mm f/2.8L II USM
-LensSerialNumber: 5965007468
+ISOSpeedRatings: 125

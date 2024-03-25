@@ -404,15 +404,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Handle files from the input file or dropped
     function handleFiles(files) {
-        ([...files]).forEach(uploadFile);
-        ([...files]).forEach(previewFile);
-    }
+    ([...files]).forEach(file => {
+        if (["image/jpeg", "image/jpg"].includes(file.type)) {
+            uploadFile(file);
+            previewFile(file);
+        } else {
+            alert("Only JPEG files are allowed.");
+        }
+    });
+}
 
     function uploadFile(file) {
         var url = '/uploadImage'; // The route in your Flask app
         var formData = new FormData();
         formData.append('file', file);
-
         fetch(url, {
             method: 'POST',
             body: formData
@@ -430,15 +435,19 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
    function updateMetadataOnPage(metadata) {
+    const imageSizeElement = document.getElementById('metadata-ImageSize');
+    // 检查宽度和高度是否不是 'None'
+    const imageWidth = metadata['ImageWidth'] !== 'None' ? metadata['ImageWidth'] : 'Unknown';
+    const imageLength = metadata['ImageLength'] !== 'None' ? metadata['ImageLength'] : 'Unknown';
+    imageSizeElement.textContent = `${imageWidth} x ${imageLength}`;
+
     if(metadata['ColorSpace']) {
             document.getElementById('metadata-ColorSpace').textContent = metadata['ColorSpace'];
     }
     if(metadata['Created']) {
         document.getElementById('metadata-created').textContent = metadata['Created'];
     }
-    // if(metadata['ImageSize']) {
-    //     document.getElementById('metadata-ImageSize').textContent = metadata['ImageSize'];
-    // }
+
     if(metadata['Make']) {
         document.getElementById('metadata-Make').textContent = metadata['Make'];
     }
@@ -472,7 +481,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // if(metadata['ModifyDate']) {
     //     document.getElementById('metadata-ModifyDate').textContent = metadata['ModifyDate'];
     // }
-       // 辅助函数，将字节格式化为可读的文件大小
+
 
 
     // 对其他的元数据项重复这个过程，确保使用正确的 ID
