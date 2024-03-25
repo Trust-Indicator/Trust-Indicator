@@ -1,8 +1,10 @@
 import os
+from io import BytesIO
 
 from flask import Flask, render_template, jsonify, request
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
+from src.ExifExtractor.InterfaceTester import extract_exif_data_as_dict
 
 from database import db, create_database, User, Image
 from sqlalchemy.exc import IntegrityError
@@ -21,6 +23,7 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 db.init_app(app)
 create_database(app)
+
 
 # Flask-Login配置
 app.secret_key = 'COMP8715'
@@ -122,6 +125,16 @@ def upload_file():
         new_image = Image(filename=filename, data=file_data, user_email=current_user.Email)
         db.session.add(new_image)
         db.session.commit()
+
+        image_data_io = BytesIO(file_data)
+        exif_data = extract_exif_data_as_dict(image_data_io)
+        if exif_data:
+            with open("exif_data.txt", "w") as file:
+                for key, value in exif_data.items():
+                    file.write(f"{key}: {value}\n")
+            print("EXIF data has been written to exif_data.txt file.")
+        else:
+            print("No EXIF data found in the image.")
 
         return jsonify(message="Image successfully uploaded", filename=filename), 200
     else:
