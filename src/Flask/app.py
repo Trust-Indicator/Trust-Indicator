@@ -127,6 +127,7 @@ def upload_file():
         db.session.commit()
 
         image_data_io = BytesIO(file_data)
+
         exif_data = extract_exif_data_as_dict(image_data_io)
         if exif_data:
             with open("exif_data.txt", "w") as file:
