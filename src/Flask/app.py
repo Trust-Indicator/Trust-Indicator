@@ -24,33 +24,35 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 db.init_app(app)
 create_database(app)
 
-
 # Flask-Login配置
 app.secret_key = 'COMP8715'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
 @app.route('/')
 def index():
-
     return render_template('html/index.html')
+
 
 @app.route('/signup')
 def signup():
     return render_template('html/signup.html')
 
+
 @app.route('/upload')
 def upload():
     return render_template('html/upload.html')
+
 
 @app.route('/login')
 def login():
     return render_template('html/login.html')
 
+
 @app.route('/changepassword')
 def changepassword():
     return render_template('html/changepassword.html')
-
 
 
 # signup function
@@ -71,7 +73,7 @@ def register():
 
     hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
     # add to database
-    new_user = User(UserName=username, Email=email, LegalName=legal_name, Password=hashed_password,)
+    new_user = User(UserName=username, Email=email, LegalName=legal_name, Password=hashed_password, )
     db.session.add(new_user)
     print('username:', username, 'email:', email)
     try:
@@ -80,6 +82,7 @@ def register():
     except IntegrityError:
         db.session.rollback()
         return jsonify({'message': 'Email already exists.'}), 400
+
 
 # change password
 @app.route('/change-password', methods=['GET', 'POST'])
@@ -97,18 +100,37 @@ def change_password():
             if new_password == confirm_new_password:
                 user.Password = generate_password_hash(new_password)
                 db.session.commit()
-                return jsonify({'status': 'success', 'message': 'Password updated successfully.'})
+                return redirect(url_for('index'))
             else:
                 return jsonify({'status': 'error', 'message': 'New passwords do not match.'}), 400
         else:
             return jsonify({'status': 'error', 'message': 'Invalid old password or email.'}), 400
-    return redirect(url_for('index'))
+    return redirect(url_for('change_password'))
+
+
+@app.route('/reset-password', methods=['POST'])
+def reset_password():
+    email = request.json.get('email')
+    new_password = request.json.get('newPassword')
+
+    user = User.query.filter_by(Email=email).first()
+    if user:
+        if user.Password != generate_password_hash(new_password):
+            user.password_hash = generate_password_hash(new_password)
+            db.session.commit()
+            return jsonify({'status': 'success', 'message': 'Password has been updated successfully.'})
+        else:
+            return jsonify({'status': 'error', 'message': 'Need a new password.'}), 500
+    else:
+        return jsonify({'status': 'error', 'message': 'User not found.'}), 404
 
 
 # log in function
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
 @app.route('/login_function', methods=['POST'])
 def login_function():
     # 从请求中获取数据
@@ -127,7 +149,7 @@ def login_function():
         return jsonify({'message': 'Invalid username or password'}), 401
 
 
-@app.route('/uploadImage',methods=['POST'])
+@app.route('/uploadImage', methods=['POST'])
 @login_required  # Ensure that the user must be logged in to access this route
 def upload_file():
     if request.method == 'POST':
@@ -272,14 +294,14 @@ def upload_file():
             else:
                 metadata = {
                     'ColorSpace': 'unidentifiable',
-                    'Created':  'unidentifiable',
+                    'Created': 'unidentifiable',
                     'Make': 'unidentifiable',
                     'Model': 'unidentifiable',
                     'FocalLength': 'unidentifiable',
                     'Aperture': 'unidentifiable',
                     'Exposure': 'unidentifiable',
                     'ISO': 'unidentifiable',
-                    'Flash':'unidentifiable',
+                    'Flash': 'unidentifiable',
                     'ImageWidth': 'unidentifiable',
                     'ImageLength': 'unidentifiable',
                     'Altitude': 'unidentifiable',
@@ -300,14 +322,15 @@ def upload_file():
             return jsonify(error="Allowed file types are: png, jpg, jpeg, gif"), 400
 
 
-
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+        filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+
+
 def format_latitude(latitude):
     degrees, minutes, seconds = latitude
     return f"{degrees}° {minutes}' {seconds}\""
 
+
 if __name__ == '__main__':
     app.run()
-

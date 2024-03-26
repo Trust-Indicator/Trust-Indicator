@@ -61,15 +61,53 @@ function change_password() {
     }
 }
 
+function updateEmailAddress() {
+    var emailInput = document.getElementById('reset-email-input').value;
+    var emailDisplay = document.querySelector('.reset-page2-email');
+    var emailDisplay2 = document.querySelector('.reset-page3-email');
+    emailDisplay.textContent = emailInput;
+    emailDisplay2.textContent = emailInput;
+}
+
 let currentDivIndex = 1;
 let maxDivIndex = 4;
+
 function next_button() {
+    switch(currentDivIndex) {
+        case 1:
+            const email = document.getElementById('reset-email-input').value;
+            if (email.length === 0 || !email.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            console.log("Sending email for reset code.");
+            break;
+        case 2:
+            console.log("Verifying code.");
+            break;
+        case 3:
+            const inputs = document.querySelectorAll('#reset-page3 input[type="tel"]');
+            let allFilled = true;
+            for (let input of inputs) {
+                if (input.value.length === 0) {
+                    allFilled = false;
+                    break;
+                }
+            }
+            if (!allFilled) {
+                alert("Please fill in all the fields.");
+                return;
+            }
+            console.log("Preparing to set new password."); // 在实际应用中，这里可能会处理密码重置逻辑
+            break;
+    }
+
     if (currentDivIndex < maxDivIndex) {
+        updateEmailAddress();
         document.getElementById(`reset-page${currentDivIndex}`).classList.add('hidden');
         currentDivIndex++;
 
         document.getElementById(`reset-page${currentDivIndex}`).classList.remove('hidden');
-
         const progressBar = document.getElementById(`progress-bar${currentDivIndex}`);
         if (progressBar) {
             progressBar.classList.add("active");
@@ -77,11 +115,52 @@ function next_button() {
 
         if (currentDivIndex === maxDivIndex) {
             document.querySelector(".next-button .button-text").innerText = "Submit";
+            document.querySelector(".next-button").setAttribute("onclick", "submitNewPassword();");
         }
     } else {
-        console.log("Form submitted");
+        document.querySelector(".next-button").setAttribute("onclick", "next_button();");
+        const newPassword = document.getElementById('reset-page4-password').value;
+        if (newPassword.length < 8) {
+            alert('Your password must be at least 8 characters.');
+            return;
+        }
+        submitNewPassword();
     }
 }
+
+function submitNewPassword() {
+    const email = document.getElementById('reset-email-input').value; // 获取用户邮箱
+    const newPassword = document.getElementById('reset-page4-password').value; // 获取新密码
+
+    if (newPassword.length >= 8) {
+        // 发送请求到后端
+        fetch('/reset-password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                newPassword: newPassword
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('Password has been updated successfully.');
+                window.location.href = '/login';
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    } else {
+        alert('Your password must be at least 8 characters.');
+    }
+}
+
 
 
 function resetChangePasswordForm() {
