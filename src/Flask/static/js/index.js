@@ -68,7 +68,12 @@ function sign_out(event){
     signInContent.style.display = 'none';
 }
 
-
+document.addEventListener("DOMContentLoaded", function() {
+    const changePasswordSection = document.getElementById('change-password');
+    changePasswordSection.addEventListener('click', function() {
+        window.location.href = 'changepassword';
+    });
+});
 
 
 let wasContentShown = false;

@@ -1,7 +1,7 @@
 import os
 from io import BytesIO
 
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from src.ExifExtractor.InterfaceTester import extract_exif_data
@@ -80,6 +80,29 @@ def register():
     except IntegrityError:
         db.session.rollback()
         return jsonify({'message': 'Email already exists.'}), 400
+
+# change password
+@app.route('/change-password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    if request.method == 'POST':
+        email = request.form['email']
+        old_password = request.form['old-password']
+        new_password = request.form['new-password']
+        confirm_new_password = request.form['confirm-new-password']
+
+        user = User.query.filter_by(Email=email).first()
+
+        if user and check_password_hash(user.Password, old_password):
+            if new_password == confirm_new_password:
+                user.Password = generate_password_hash(new_password)
+                db.session.commit()
+                return jsonify({'status': 'success', 'message': 'Password updated successfully.'})
+            else:
+                return jsonify({'status': 'error', 'message': 'New passwords do not match.'}), 400
+        else:
+            return jsonify({'status': 'error', 'message': 'Invalid old password or email.'}), 400
+    return redirect(url_for('index'))
 
 
 # log in function
@@ -287,5 +310,4 @@ def format_latitude(latitude):
 
 if __name__ == '__main__':
     app.run()
-
 

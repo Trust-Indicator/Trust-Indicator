@@ -43,14 +43,21 @@ function togglePasswordVisibility() {
     }
 }
 
-function change_password(){
-    const new_password=document.getElementById('new-password').value;
-    const confirm_password=document.getElementById('confirm-new-password').value
-    const prompt_text= document.querySelector('.wrong-prompt p');
-    const prompt_box= document.querySelector('.wrong-prompt');
-    if (new_password!==confirm_password){
-        prompt_box.style.display='block'
-        prompt_text.textContent='Please re-check the password you entered. The new password does not match the Re-enter password.'
+function change_password() {
+    const new_password = document.getElementById('new-password').value;
+    const confirm_password = document.getElementById('confirm-new-password').value;
+    const prompt_text = document.querySelector('.wrong-prompt p');
+    const prompt_box = document.querySelector('.wrong-prompt');
+
+    // 检查新密码和确认密码是否匹配
+    if (new_password !== confirm_password) {
+        // 如果不匹配，显示错误提示并阻止表单提交
+        prompt_box.style.display = 'block';
+        prompt_text.textContent = 'Please re-check the password you entered. The new password does not match the re-entered password.';
+        return false; // 阻止表单提交
+    } else {
+        // 如果匹配，隐藏错误提示（如果之前显示了的话）
+        prompt_box.style.display = 'none';
     }
 }
 
