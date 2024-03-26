@@ -74,7 +74,9 @@ function GotoImageHubs(event){
 function WhatIsJpeg(event){
     window.location.href="https://en.wikipedia.org/wiki/JPEG";
 }
-
+function BecomeMembership(event){
+    window.location.href = "/signup";
+}
 function LearnMetaData(event){
      window.location.href="https://en.wikipedia.org/wiki/Metadata#:~:text=Metadata%20is%20defined%20as%20the,Time%20and%20date%20of%20creation";
 }
