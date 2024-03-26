@@ -68,9 +68,16 @@ function sign_out(event){
     signInContent.style.display = 'none';
 }
 
+function GotoImageHubs(event){
+    window.location.href="https://en.wikipedia.org/wiki/Image_file_format";
+}
+function WhatIsJpeg(event){
+    window.location.href="https://en.wikipedia.org/wiki/JPEG";
+}
 
-
-
+function LearnMetaData(event){
+     window.location.href="https://en.wikipedia.org/wiki/Metadata#:~:text=Metadata%20is%20defined%20as%20the,Time%20and%20date%20of%20creation";
+}
 let wasContentShown = false;
 window.addEventListener('scroll', function() {
     let content = document.querySelector('.sign-in-content');
