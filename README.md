@@ -57,16 +57,16 @@ In addition, Trust-Indicator is open to personal adaptions or updates. Below are
 
 **Step 1:** Installing the necessary dependencies.
 
-Visual Studio, C# .NET 6 and Microsoft Entity Framework.
+Python and Flask Framework.
+[How to install Flask](https://phoenixnap.com/kb/install-flask)
 
-[Visual Studio 2022 download](https://visualstudio.microsoft.com/downloads/)
-During this process, you can click on the .NET core to install .NET
+During this process, you can check if the installation was successful
 
 **Step 2:** Clone the repository to your machine.
 
-**Step 3:** Find the sln file in the directory `Trust-Indicator/src/backend/Trust-Indicator/Trust-Indicator.sln`, open it and it will automatically set up the project with Visual Studio. 
+**Step 3:** Find the python file in the directory `Trust-Indicator/src/Flask/app.py`, open it. 
 
-**Step 4:** Press `run` in Visual Studio and run `index.html` in the directory `Trust-Indicator/src/frontend/index.html`.
+**Step 4:** Double check if all packages is installed, then press `run` in app.py and click the development server link like "http://127.0.0.1:5000", which shows in the terminal if you are successfully run app.py
 
 ## Project Management
 In managing our web API development project, we faced challenges such as increasing complexity, the need for consistency in development environments, version control requirements, and time and resource constraints. To address these, we made the following decisions:
