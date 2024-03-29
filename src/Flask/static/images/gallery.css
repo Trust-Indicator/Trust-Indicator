@@ -1,0 +1,285 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.container {
+    display: flex;
+
+}
+
+.sidebar {
+    background-color: #00467F; /* Dark blue background */
+    max-width: 200px;
+    min-width: 200px;
+    position: fixed; /* Fixed position to make it stay in place while scrolling */
+    bottom: 0; /* Align the bottom of the sidebar with the bottom of the viewport */
+    left: 0; /* Align the left side of the sidebar with the left side of the viewport */
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    justify-content: center; /* This will vertically center the contents */
+    overflow: auto;
+}
+
+.profile {
+    text-align: center; /* Center profile contents */
+    height: 15%;
+    background: #00467F;
+    color: #00467F;
+    display: flex; /* Use flexbox to align children */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center; /* Center children horizontally */
+    width: 100%;
+
+}
+#project-name{
+    font-weight: bolder;
+    text-align: center;
+    display: flex; /* Use flexbox here too */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 100%; /* Take up the full width of the sidebar */
+    font-size: 15px;
+}
+#profile-container{
+    text-align: center;
+    justify-content: center;
+}
+
+.profile-name {
+    font-size: 20px; /* Larger font size for the name */
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-title {
+    font-size: 1em;
+    color: #ABB2B9; /* Light grey for title text */
+}
+.navigation{
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: white;
+
+}
+
+.navigation ul {
+    padding: 0; /* Remove default padding */
+    list-style-type: none; /* Remove list item bullets */
+
+}
+
+.navigation li {
+    margin-top: 5%;
+    border-radius: 4px; /* Rounded corners for the items */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.navigation li:hover {
+    background-color: white; /* Slightly lighter blue on hover */
+    color: #00467F;
+}
+
+.navigation li.active {
+    background-color: #1ABC9C; /* Different color for the active/current item */
+}
+
+/* Icon styles (assuming you're using Font Awesome or similar) */
+.navigation i {
+    margin-right: 10px; /* Space between icon and text */
+    width: 20px; /* Fixed width for alignment */
+}
+
+
+.main-content {
+    flex-grow: 1;
+    float: left;
+    margin-left: 200px;
+}
+
+.top-bar {
+    width: 100%;
+    height: auto;
+    margin-top: 1.2%;
+}
+.search-container{
+
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    display: flex;
+    margin-left: 20%;
+}
+
+.info-panels {
+    --color-icon: #fff;
+    --color-input: #ccc;
+    --color-border: #9e9e9e;
+    --color-border-hover: #1a73e8;
+    --all-transition: all .2s ease-out;
+    --input-focus-opacity: .3;
+    width: 100%;
+}
+.input-color-group-one {
+    position: relative;
+}
+.search-input {
+    width: 60%;
+    border: 1.5px solid #00467F;
+    border-radius: 30px;
+    background: white;
+    margin-left: 20%;
+    font-size: 1rem;
+    transition: var(--all-transition);
+    height: 30px;
+    min-width: 120px;
+    padding: 4px;
+}
+.search-input::placeholder {
+    font-size: 13px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #2e2e2e;
+}
+.search-input:focus {
+    color: var(--color-input);
+    outline: none;
+    border: 1.5px solid var(--color-border-hover);
+}
+.search-input:valid {
+    color: #00467F;;
+    outline: none;
+}
+.search-input::-webkit-input-placeholder {
+    color: var(--color-input);
+}
+.search-input::-moz-input-placeholder {
+    color: var(--color-input);
+}
+.search-input::-ms-input-placeholder {
+    color: var(--color-input);
+}
+.search-input:focus::-webkit-input-placeholder, .search-input:valid::-webkit-input-placeholder {
+    opacity: var(--input-focus-opacity);
+}
+.search-input:focus::-moz-input-placeholder, .search-input:valid::-moz-input-placeholder {
+    opacity: var(--input-focus-opacity);
+}
+.search-input:focus::-ms-input-placeholder, .search-input:valid::-ms-input-placeholder {
+    opacity: var(--input-focus-opacity);
+}
+.search-label {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    padding: 0 5px;
+    border: 1.5px solid #00467F;
+    border-radius: 20px;
+    top: -9px;
+    left: 25%;
+    background-color: #00467F;
+    cursor: default;
+    backdrop-filter: blur(10px);
+    transition: var(--all-transition);
+    font-size: 12px;
+}
+
+.search-input:focus ~ .color-label, .search-input:valid ~ .search-label {
+    color: var(--color-border-hover);
+    border: 1.5px solid var(--color-border-hover);
+}
+.search-button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border: 1.5px solid #ffffff;
+    border-radius: 50%;
+    top: -13px;
+    right: 25%;
+    left: 70%;
+    background-color: transparent;
+    background: #00467F;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: var(--all-transition);
+}
+.search-button:hover {
+    background-color: #C4362E;
+    transform: scale(1.2);
+}
+.search-button:active {
+    transform: scale(1.1);
+}
+.search-input:focus ~ .search-button {
+    border: 1.5px solid #C4362E;
+}
+.search-input:valid .search-input:focus ~ .search-button  {
+    border: 1.5px solid #C4362E;
+}
+.search-input:focus ~ .search-button:hover {
+    background-color: #C4362E;
+}
+.search-button:hover {
+    fill: var(--color-icon);
+}
+.search-input:focus ~ .search-button {
+    fill: var(--color-border-hover);
+}
+.search-input:focus ~ .search-button:hover #icon-btn-copy, .search-input:valid ~ .search-button:hover{
+    fill: var(--color-icon);
+}
+
+.photo-gallery {
+    margin-top: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 20px;
+    padding: 20px;
+    height: auto;
+    justify-content: flex-start;
+}
+
+.photo {
+    width: calc((100% - 2* 20px - 40px) / 4);
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #00467F;
+    position: relative;
+}
+
+.photo img {
+    width: 95%;
+    height: 95%;
+    object-fit: cover;
+}
+.photo-indicators {
+    position: absolute;
+    bottom: 2vh;
+    right: 1vw;
+    display: flex;
+}
+
+.indicator {
+    width: 2.5vw;
+    height: 2.5vw;
+    margin-left: 0.5vw;
+    border-radius: 50%;
+    object-fit: cover;
+}
+

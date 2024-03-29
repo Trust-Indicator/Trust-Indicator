@@ -1,7 +1,8 @@
 import os
 from io import BytesIO
 
-from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
+
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify, send_file
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from src.ExifExtractor.InterfaceTester import extract_exif_data
@@ -53,6 +54,11 @@ def login():
 @app.route('/changepassword')
 def changepassword():
     return render_template('html/changepassword.html')
+
+@app.route('/gallery')
+def GotoGallery():
+    return render_template('html/gallery.html')
+
 
 
 # signup function
@@ -331,6 +337,26 @@ def format_latitude(latitude):
     degrees, minutes, seconds = latitude
     return f"{degrees}° {minutes}' {seconds}\""
 
+
+@app.route('/image/<int:image_id>')
+def get_image(image_id):
+    image = Image.query.get(image_id)
+    if image and image.data:
+        return send_file(
+            BytesIO(image.data),
+            mimetype='image/jpeg',  # or 'image/png' etc depending on your image type
+            as_attachment=True,
+            download_name = image.filename
+        )
+    else:
+        os.abort(404)
+
+@app.route('/getimages')
+def get_images():
+    images = Image.query.all()
+    image_info = [{'id': image.id, 'filename': image.filename} for image in images]
+    print(image_info)
+    return jsonify(image_info)
 
 if __name__ == '__main__':
     app.run()

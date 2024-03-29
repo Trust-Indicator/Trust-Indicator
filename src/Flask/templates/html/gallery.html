@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+<!--</div>-->
+    <div class="container">
+        <div class="sidebar">
+            <!-- Sidebar content here -->
+            <!-- Example content like navigation items -->
+            <div class="profile">
+                <div style="background: white;height: 80%;width: 80%;margin-top: 10%;justify-content: center;text-align: center;align-content: center">
+                    <div id="project-name">
+                        <i class="fas fa-user-circle fa-3x"></i>
+                    </div>
+                    <div id="profile-container">
+                        <div class="profile-name">Aman</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <nav class="navigation">
+                <ul>
+                    <li style="text-align: center;pointer-events: none;">Show Options</li>
+                    <li><i class="fas fa-tachometer-alt"></i> All Images</li>
+                    <li><i class="fas fa-users"></i> True Images</li>
+                    <li><i class="fas fa-credit-card"></i> Fake Images</li>
+                    <li><i class="fas fa-credit-card"></i> Random</li>
+
+                </ul>
+                <ul>
+                    <li style="text-align: center;pointer-events: none;"> Sort Options</li>
+                    <li><i class="fas fa-tachometer-alt"></i> Default</li>
+                    <li><i class="fas fa-tachometer-alt"></i> Credibility</li>
+                    <li><i class="fas fa-users"></i> Publish Time</li>
+                    <li><i class="fas fa-credit-card"></i> Random</li>
+
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <div class="top-bar">
+                <div class="search-container">
+                    <div class="info-panels">
+                        <div class="input-color-group-one">
+                            <input class="search-input" autocomplete="on" name="text" type="text" required="" placeholder="Rapunga / Search">
+                            <label class="search-label">Search</label>
+                            <button class="search-button">
+                                <svg fill="white" width="15px" height="15px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photo-gallery">
+                <div class="photo" style="display: none">
+                    <div class="photo-indicators">
+                        <div class="indicator"></div>
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="{{ url_for('static', filename='js/gallery.js') }}"></script>
+</html>
