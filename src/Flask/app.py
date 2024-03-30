@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from io import BytesIO
 
 
@@ -172,9 +173,11 @@ def upload_file():
             file_data = file.read()
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # Here we use current_user.email to get the email of the logged-in user
-            new_image = Image(filename=filename, data=file_data, user_email=current_user.Email)
-            db.session.add(new_image)
-            db.session.commit()
+            # new_image = Image(filename=filename, data=file_data, user_email=current_user.Email)
+            # upload_time = datetime.utcnow()
+            #
+            # db.session.add(new_image)
+            # db.session.commit()
             image_data_io = BytesIO(file_data)
             file_size = len(file_data)
             file_type = file.content_type
@@ -195,7 +198,7 @@ def upload_file():
                     else:
                         focal_length_value = float(focal_length)
                 else:
-                    focal_length_value = 'None'
+                    focal_length_value = None
                 aperture = exif_data.get('ApertureValue')
                 if aperture:
                     if hasattr(aperture, 'numerator') and hasattr(aperture, 'denominator'):
@@ -203,7 +206,7 @@ def upload_file():
                     else:
                         aperture_length_value = float(aperture)
                 else:
-                    aperture_length_value = 'None'
+                    aperture_length_value = None
                 exposure = exif_data.get('ExposureProgram')
                 if exposure:
                     if hasattr(exposure, 'numerator') and hasattr(exposure, 'denominator'):
@@ -211,7 +214,7 @@ def upload_file():
                     else:
                         exposure_length_value = float(exposure)
                 else:
-                    exposure_length_value = 'None'
+                    exposure_length_value = None
                 iso = exif_data.get('ISOSpeedRatings')
                 if iso:
                     if hasattr(iso, 'numerator') and hasattr(iso, 'denominator'):
@@ -219,7 +222,7 @@ def upload_file():
                     else:
                         iso_length_value = float(iso)
                 else:
-                    iso_length_value = 'None'
+                    iso_length_value = None
 
                 flash = exif_data.get('Flash')
                 if flash:
@@ -228,7 +231,7 @@ def upload_file():
                     else:
                         flash_length_value = float(flash)
                 else:
-                    flash_length_value = 'None'
+                    flash_length_value = None
 
                 image_width = exif_data.get('ExifImageWidth')
                 if image_width:
@@ -237,7 +240,7 @@ def upload_file():
                     else:
                         image_width = float(image_width)
                 else:
-                    image_width = 'None'
+                    image_width = None
 
                 image_length = exif_data.get('ExifImageHeight')
                 if image_length:
@@ -246,7 +249,7 @@ def upload_file():
                     else:
                         image_length = float(image_length)
                 else:
-                    image_length = 'None'
+                    image_length = None
 
                 altitude = exif_data.get('GPSAltitude')
                 if altitude:
@@ -255,40 +258,68 @@ def upload_file():
                     else:
                         altitude = float(altitude)
                 else:
-                    altitude = 'None'
+                    altitude = None
 
                 latitudeRef = exif_data.get('GPSLatitudeRef')
                 latitude = exif_data.get('GPSLatitude')
                 if isinstance(latitude, tuple) and len(latitude) == 3:
                     latitude = format_latitude(latitude)
                 else:
-                    latitude = "None"
+                    latitude = None
 
                 longitudeRef = exif_data.get('GPSLongitudeRef')
                 longitude = exif_data.get('GPSLongitude')
                 if isinstance(longitude, tuple) and len(longitude) == 3:
                     longitude = format_latitude(longitude)
                 else:
-                    longitude = "None"
+                    longitude = None
 
                 metadata = {
                     'ColorSpace': colorSpace if colorSpace else 'None',
                     'Created': datetime_original if datetime_original else 'None',
                     'Make': make if make else 'None',
                     'Model': model if model else 'None',
-                    'FocalLength': focal_length_value,
-                    'Aperture': aperture_length_value,
-                    'Exposure': exposure_length_value,
-                    'ISO': iso_length_value,
-                    'Flash': flash_length_value,
-                    'ImageWidth': image_width,
-                    'ImageLength': image_length,
-                    'Altitude': altitude,
-                    'LatitudeRef': latitudeRef if latitudeRef else 'None',
-                    'Latitude': latitude,
-                    'LongitudeRef': longitudeRef if longitudeRef else 'None',
-                    'Longitude': longitude,
+                    'FocalLength': focal_length_value if focal_length_value is not None else 'None',
+                    'Aperture': aperture_length_value if aperture_length_value is not None else 'None',
+                    'Exposure': exposure_length_value if exposure_length_value is not None else 'None',
+                    'ISO': iso_length_value if iso_length_value is not None else 'None',
+                    'Flash': flash_length_value if flash_length_value is not None else 'None',
+                    'ImageWidth': image_width if image_width is not None else 'None',
+                    'ImageLength': image_length if image_length is not None else 'None',
+                    'Altitude': altitude if altitude is not None else 'None',
+                    'LatitudeRef': latitudeRef if latitudeRef is not None else 'None',
+                    'Latitude': latitude if latitude is not None else 'None',
+                    'LongitudeRef': longitudeRef if longitudeRef is not None else 'None',
+                    'Longitude': longitude if longitude is not None else 'None',
                 }
+                upload_time = datetime.utcnow()
+                new_image = Image(
+                    filename=filename,
+                    data=file_data,
+                    user_email=current_user.Email,
+                    UploadDate=upload_time,  # Save the upload time
+                    ColorSpace=colorSpace if colorSpace else 'None',
+                    Created=datetime_original if datetime_original else 'None',
+                    Make=make if make else 'None',
+                    Model=model if model else 'None',
+                    FocalLength=focal_length_value,
+                    Aperture=aperture_length_value,
+                    Exposure=exposure_length_value,
+                    ISO=iso_length_value,
+                    Flash=flash_length_value,
+                    ImageWidth=image_width,
+                    ImageLength=image_length,
+                    Altitude=altitude,
+                    LatitudeRef=latitudeRef if latitudeRef else 'None',
+                    Latitude=latitude,
+                    LongitudeRef=longitudeRef if longitudeRef else 'None',
+                    Longitude=longitude,
+                    # Add other metadata fields as necessary
+                )
+
+
+                db.session.add(new_image)
+                db.session.commit()
 
                 return jsonify({
                     'message': 'Image successfully uploaded',
@@ -316,6 +347,34 @@ def upload_file():
                     'LongitudeRef': 'None',
                     'Longitude': 'None',
                 }
+
+                upload_time = datetime.utcnow()
+                new_image = Image(
+                    filename=filename,
+                    data=file_data,
+                    user_email=current_user.Email,
+                    UploadDate=upload_time,  # Save the upload time
+                    ColorSpace=None,
+                    Created=None,
+                    Make=None,
+                    Model=None,
+                    FocalLength=None,
+                    Aperture=None,
+                    Exposure=None,
+                    ISO=None,
+                    Flash=None,
+                    ImageWidth=None,
+                    ImageLength=None,
+                    Altitude=None,
+                    LatitudeRef=None,
+                    Latitude=None,
+                    LongitudeRef=None,
+                    Longitude=None,
+                    # Add other metadata fields as necessary
+                )
+
+                db.session.add(new_image)
+                db.session.commit()
                 return jsonify({
                     'message': 'Image successfully uploaded',
                     'filename': original_filename,

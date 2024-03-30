@@ -1,0 +1,49 @@
+ImageWidth: 6720
+ImageLength: 4480
+BitsPerSample: (8, 8, 8)
+PhotometricInterpretation: 2
+ResolutionUnit: 2
+ExifOffset: 308
+ImageDescription: PixCake
+Make: Canon
+Model: Canon EOS 5D Mark IV
+Software: Adobe Photoshop CC 2019 (Windows)
+Orientation: 1
+DateTime: 2024:02:29 16:52:15
+SamplesPerPixel: 3
+XResolution: 300.0
+YResolution: 300.0
+ExifVersion: b'0231'
+ShutterSpeedValue: 6.965784
+ApertureValue: 5.310704
+DateTimeOriginal: 2024:01:13 17:25:10
+DateTimeDigitized: 2024:01:13 17:25:10
+ExposureBiasValue: 0.0
+SubjectDistance: 0.0
+MeteringMode: 2
+ColorSpace: 1
+Flash: 9
+FocalLength: 45.0
+ExifImageWidth: 6720
+ExifImageHeight: 4480
+SceneCaptureType: 0
+FocalPlaneXResolution: 5719.14892578125
+FocalPlaneYResolution: 5728.900390625
+OffsetTime: +08:00
+SubsecTimeOriginal: 00
+FocalPlaneResolutionUnit: 2
+FileSource: b'\x03'
+ExposureTime: 0.008
+FNumber: 6.3
+SceneType: b'\x01'
+ExposureProgram: 1
+CustomRendered: 0
+ISOSpeedRatings: 100
+ExposureMode: 1
+SensitivityType: 2
+WhiteBalance: 1
+RecommendedExposureIndex: 100
+BodySerialNumber: 622039001344
+LensSpecification: (24.0, 70.0, nan, nan)
+LensModel: Canon EF 24-70mm f/2.8L II USM
+LensSerialNumber: 5965007468
