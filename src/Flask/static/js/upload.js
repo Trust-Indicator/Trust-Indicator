@@ -2,6 +2,10 @@ function top_register(){
     window.location.href="/signup"
 }
 
+function GotoGallery(event){
+    window.location.href = "/gallery";
+}
+
 document.addEventListener('click', function(event) {
     const signInDiv = document.querySelector('.login-container');
     const signInContent = document.querySelector('.sign-in-content');
