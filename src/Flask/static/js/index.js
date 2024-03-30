@@ -66,6 +66,7 @@ function sign_out(event){
     document.querySelector(".sign-text").textContent = "Sign In";
     const signInContent = document.querySelector('.sign-in-content');
     signInContent.style.display = 'none';
+    window.location.href = "/logout";
 }
 
 function GotoImageHubs(event){

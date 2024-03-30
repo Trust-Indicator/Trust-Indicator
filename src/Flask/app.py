@@ -3,7 +3,8 @@ from datetime import datetime
 from io import BytesIO
 
 
-from flask import Flask, render_template, request, flash, redirect, url_for, jsonify, send_file
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify, send_file, session
+from requests import Session
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from src.ExifExtractor.InterfaceTester import extract_exif_data
@@ -12,17 +13,22 @@ from database import db, create_database, User, Image
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
-
-from flask_login import LoginManager, login_user, current_user, login_required
-
+from flask_session import Session
+from flask_login import LoginManager, login_user, current_user, login_required, logout_user
+from datetime import timedelta
 app = Flask(__name__)
 # Creat SQLite Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MyDatabase.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['UPLOAD_FOLDER'] = 'uploads'  # 保存图片的目录
+app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg'}
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 
+
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=0)
 db.init_app(app)
 create_database(app)
 
@@ -31,6 +37,10 @@ app.secret_key = 'COMP8715'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
+@app.before_request
+def make_session_not_permanent():
+    session.permanent = False
 
 @app.route('/')
 def index():
@@ -51,14 +61,21 @@ def upload():
 def login():
     return render_template('html/login.html')
 
-
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 @app.route('/changepassword')
 def changepassword():
     return render_template('html/changepassword.html')
-
+@app.route('/logout')
+def logout():
+    session.clear()
+    logout_user()
+    return render_template('html/index.html') # 重定向到登录页面
 @app.route('/gallery')
 def GotoGallery():
-    return render_template('html/gallery.html')
+    user_email = current_user.UserName if current_user.is_authenticated else 'Welcome'
+    return render_template('html/gallery.html',user_email=user_email)
 
 
 
