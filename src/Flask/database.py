@@ -76,11 +76,11 @@ class Image(db.Model):
     Flash = db.Column(db.Float,nullable=True)
     ImageWidth = db.Column(db.Float,nullable=True)
     ImageLength = db.Column(db.Float,nullable=True)
-    Altitude = db.Column(db.Float,nullable=True)
+    Altitude = db.Column(db.Text,nullable=True)
     LatitudeRef = db.Column(db.Text)
-    Latitude = db.Column(db.Float,nullable=True)
+    Latitude = db.Column(db.Text,nullable=True)
     LongitudeRef = db.Column(db.Text)
-    Longitude = db.Column(db.Float,nullable=True)
+    Longitude = db.Column(db.Text,nullable=True)
 
 def create_database(app):
     """Create SQLite database if it doesn't exist."""

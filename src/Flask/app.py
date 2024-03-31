@@ -344,6 +344,7 @@ def upload_file():
                     'file_size': file_size,
                     'file_type': file_type,
                     'metadata': metadata,
+                    'id': new_image.id
                 })
             else:
                 metadata = {
@@ -398,6 +399,7 @@ def upload_file():
                     'file_size': file_size,
                     'file_type': file_type,
                     'metadata': metadata,
+                    'id': new_image.id
                 })
 
         else:
@@ -433,6 +435,21 @@ def get_images():
     image_info = [{'id': image.id, 'filename': image.filename} for image in images]
     print(image_info)
     return jsonify(image_info)
+
+
+@app.route('/updateImageType', methods=['POST'])
+@login_required
+def update_image_type():
+    image_id = request.form['imageId']
+    image_type = request.form['imageType']
+
+    image = Image.query.get(image_id)
+    if image:
+        image.Tag = image_type
+        db.session.commit()
+        return jsonify({'status': 'success'})
+    else:
+        return jsonify({'status': 'failed'})
 
 if __name__ == '__main__':
     app.run()

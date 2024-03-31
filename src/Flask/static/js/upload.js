@@ -453,6 +453,9 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(result => {
             console.log('Success:', result);
+            uploadedImageId = result.id;
+            console.log(uploadedImageId)
+            resetImageTypeSelection();
             if(result.file_size) {document.getElementById('metadata-FileSize').textContent = formatBytes(result.file_size);}
             if(result.file_type) {document.getElementById('metadata-FileType').textContent = result.file_type;}
             if(result.filename) {document.getElementById('metadata-FileName').textContent = result.filename;}
@@ -462,6 +465,17 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Error:', error);
         });
     }
+    function resetImageTypeSelection() {
+        var imageTypeInputs = document.querySelectorAll('input[name="image-type"]');
+        imageTypeInputs.forEach(function(input) {
+            input.checked = false;  // 重置所有单选按钮为未选中状态
+        });
+        var analysisButton = document.querySelector('.analysis-button');
+        var analysisButtonText = analysisButton.querySelector('span');
+        analysisButton.classList.remove('no-selection');
+        analysisButtonText.textContent = 'Analysis Now!';
+
+}
    function updateMetadataOnPage(metadata) {
     const imageSizeElement = document.getElementById('metadata-ImageSize');
     // 检查宽度和高度是否不是 'None'
@@ -550,6 +564,42 @@ document.addEventListener("DOMContentLoaded", function() {
         var files = e.target.files;
         handleFiles(files);
     });
-});
 
+
+});
+let uploadedImageId = null; // 全局变量来保存上传图片的ID
+
+function analysis(event) {
+    var selectedImageType = document.querySelector('input[name="image-type"]:checked');
+    console.log(selectedImageType.value)
+    if (selectedImageType && uploadedImageId) {
+        var formData = new FormData();
+        formData.append('imageId', uploadedImageId);
+        formData.append('imageType', selectedImageType.value);
+
+        fetch('/updateImageType', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    console.log('Image type updated successfully.');
+                } else {
+                    console.log('Failed to update image type.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    } else {
+        var analysisButton = document.querySelector('.analysis-button');
+
+        var analysisButtonText = analysisButton.querySelector('span');
+
+        analysisButton.classList.add('no-selection');
+        analysisButtonText.textContent = 'Please Upload Image!';
+
+    }
+};
 

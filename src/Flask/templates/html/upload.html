@@ -362,7 +362,7 @@
                         <div class="switch-container">
                             <label for="original-switch" style=" padding-left: 10px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;color: #333;font-size: 15px;font-weight: 600">  <i class='fas fa-camera-retro' style="padding-right: 5px;font-size: 18px"></i> Original Image</label>
                             <label class="switch">
-                                <input type="radio" name="image-type" id="original-switch">
+                                <input type="radio" name="image-type" id="original-switch" value="Original">
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -370,7 +370,7 @@
                         <div class="switch-container">
                             <label for="AIGC-switch" style=" padding-left: 10px;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;color: #333;font-size: 15px;font-weight: 600"><i class='fas fa-chalkboard' style="padding-right: 8px;font-size: 16px"></i>AIGC Image</label>
                             <label class="switch">
-                                <input type="radio" name="image-type" id="AIGC-switch">
+                                <input type="radio" name="image-type" id="AIGC-switch" value="AIGC">
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -378,14 +378,14 @@
                         <div class="switch-container">
                             <label for="Manipulation-switch" style=" padding-left: 10px;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;color: #333;font-size: 16px;font-weight: 600"><i class='far fa-file-image' style="padding-right: 12px;font-size: 20px"></i>Manipulation Image</label>
                             <label class="switch">
-                                <input type="radio" name="image-type" id="Manipulation-switch">
+                                <input type="radio" name="image-type" id="Manipulation-switch" value="Manipulation">
                                 <span class="slider round"></span>
                             </label>
                         </div>
                     </div>
                 </div>
 
-                <div class="analysis-button-container">
+                <div class="analysis-button-container" onclick="analysis(event)" >
                     <button type="button"  class="analysis-button  analysis-button-color analysis-button-background-color">
                         <span>Analysis Now !</span>
                     </button>
