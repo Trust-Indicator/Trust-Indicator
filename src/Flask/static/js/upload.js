@@ -5,7 +5,31 @@ function top_register(){
 function GotoGallery(event){
     window.location.href = "/gallery";
 }
+document.addEventListener('DOMContentLoaded', function () {
+    var analysisButton = document.querySelector('.analysis-button');
+    var imageTypeRadios = document.querySelectorAll('input[name="image-type"]');
+    var analysisButtonText = analysisButton.querySelector('span');
+    imageTypeRadios.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            if (this.checked) {
+                // 如果某个单选按钮被选中，恢复按钮的初始样式和文字
+                analysisButton.classList.remove('no-selection');
+                analysisButtonText.textContent = 'Analysis Now!';
+            }
+        });
+    });
+    analysisButton.addEventListener('click', function() {
+        var isSelected = Array.from(imageTypeRadios).some(radio => radio.checked);
+        if (!isSelected) {
 
+            analysisButton.classList.add('no-selection');
+            analysisButtonText.textContent = 'Please Select Type!';
+        } else {
+            // 如果选中了图片类型，执行相应操作
+            // ...
+        }
+    });
+});
 document.addEventListener('click', function(event) {
     const signInDiv = document.querySelector('.login-container');
     const signInContent = document.querySelector('.sign-in-content');
