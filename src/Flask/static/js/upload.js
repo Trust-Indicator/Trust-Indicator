@@ -585,6 +585,7 @@ function analysis(event) {
             .then(data => {
                 if (data.status === 'success') {
                     console.log('Image type updated successfully.');
+                    window.location.href="/analysis"
                 } else {
                     console.log('Failed to update image type.');
                 }
@@ -594,12 +595,9 @@ function analysis(event) {
             });
     } else {
         var analysisButton = document.querySelector('.analysis-button');
-
         var analysisButtonText = analysisButton.querySelector('span');
-
         analysisButton.classList.add('no-selection');
         analysisButtonText.textContent = 'Please Upload Image!';
-
     }
 };
 

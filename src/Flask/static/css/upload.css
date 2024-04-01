@@ -1315,7 +1315,7 @@ input:checked + .slider:before {
     margin: 0 10px;
     font-family: "Inter", sans-serif;
     color: #ffffff;
-    font-size: 3px;
+    font-size: 10px;
     opacity: 0.7;
 }
 

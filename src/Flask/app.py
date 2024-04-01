@@ -84,6 +84,9 @@ def load_user(user_id):
 def changepassword():
     return render_template('html/changepassword.html')
 
+@app.route('/analysis')
+def analysis():
+    return render_template('html/analysis.html')
 
 @app.route('/logout')
 def logout():
@@ -522,6 +525,7 @@ def get_images():
 def update_image_type():
     image_id = request.form['imageId']
     image_type = request.form['imageType']
+    session['image_id_for_analysis'] = image_id
 
     image = Image.query.get(image_id)
     if image:
@@ -530,6 +534,24 @@ def update_image_type():
         return jsonify({'status': 'success'})
     else:
         return jsonify({'status': 'failed'})
+
+
+
+@app.route('/getImage')
+def get_image_for_analysis():
+    # Get the image id from the user session
+    image_id = session.get('image_id_for_analysis')
+
+    if image_id:
+        image = Image.query.get(image_id)
+        if image and image.data:
+            return send_file(BytesIO(image.data),download_name=image.filename,
+                             mimetype='image/jpeg')  # Or the correct MIME type for the image
+        else:
+            return 'Image not found', 404
+    else:
+        return 'No image ID provided', 400
+
 
 
 if __name__ == '__main__':
