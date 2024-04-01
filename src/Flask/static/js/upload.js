@@ -585,6 +585,7 @@ function analysis(event) {
             .then(data => {
                 if (data.status === 'success') {
                     console.log('Image type updated successfully.');
+                    window.location.href="/analysis"
                 } else {
                     console.log('Failed to update image type.');
                 }

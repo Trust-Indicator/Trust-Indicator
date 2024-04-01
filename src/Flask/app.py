@@ -84,6 +84,9 @@ def load_user(user_id):
 def changepassword():
     return render_template('html/changepassword.html')
 
+@app.route('/analysis')
+def analysis():
+    return render_template('html/analysis.html')
 
 @app.route('/logout')
 def logout():
