@@ -18,6 +18,7 @@ from flask_session import Session
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
 from datetime import datetime, timedelta
 from flask_mail import Mail, Message
+from flask import render_template
 
 app = Flask(__name__)
 # Creat SQLite Database
@@ -112,9 +113,16 @@ def send_code():
     token = generate_token(email, code)
 
     msg = Message("Your Verification Code",
-                  sender="trustindicator@gmail.com",
+                  sender="Trust-Indicator",
                   recipients=[email])
-    msg.body = f"Your verification code is: {code}\n\nPlease enter this code on the website to proceed."
+
+    rendered_html = render_template(
+        'html/verification_email.html',
+        code=code,
+        year=datetime.now().year
+    )
+    msg.body = "Your email verification code is provided in the HTML part of this email."
+    msg.html = rendered_html
     mail.send(msg)
 
     return jsonify({"message": "Verification code sent.", "token": token})
