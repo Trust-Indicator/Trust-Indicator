@@ -1,7 +1,8 @@
 import os
 from datetime import datetime
 from io import BytesIO
-
+import random
+import jwt
 
 from flask import Flask, render_template, request, flash, redirect, url_for, jsonify, send_file, session
 from requests import Session
@@ -15,7 +16,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import re
 from flask_session import Session
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
-from datetime import timedelta
+from datetime import datetime, timedelta
+from flask_mail import Mail, Message
+
 app = Flask(__name__)
 # Creat SQLite Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MyDatabase.db'
@@ -25,8 +28,16 @@ app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg'}
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
+# Email Server
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = 'trustindicator@gmail.com'
+app.config['MAIL_PASSWORD'] = 'vfiz hsgw ctke tdeu'
 
+mail = Mail(app)
+Session(app)
 
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=0)
 db.init_app(app)
@@ -41,6 +52,7 @@ login_manager.init_app(app)
 @app.before_request
 def make_session_not_permanent():
     session.permanent = False
+
 
 @app.route('/')
 def index():
@@ -61,22 +73,75 @@ def upload():
 def login():
     return render_template('html/login.html')
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
 @app.route('/changepassword')
 def changepassword():
     return render_template('html/changepassword.html')
+
+
 @app.route('/logout')
 def logout():
     session.clear()
     logout_user()
-    return render_template('html/index.html') # 重定向到登录页面
+    return render_template('html/index.html')
+
+
+def generate_token(email, code):
+    payload = {
+        'email': email,
+        'code': code,
+        'exp': datetime.utcnow() + timedelta(minutes=10)
+    }
+    token = jwt.encode(payload, 'your_secret_key', algorithm='HS256')
+    return token
+
+
+@app.route('/send-code', methods=['POST'])
+def send_code():
+    data = request.get_json()
+    email = data.get('email')
+    if not email:
+        return jsonify({"message": "Email address is required."}), 400
+
+    code = ''.join([str(random.randint(0, 9)) for _ in range(4)])
+    token = generate_token(email, code)
+
+    msg = Message("Your Verification Code",
+                  sender="trustindicator@gmail.com",
+                  recipients=[email])
+    msg.body = f"Your verification code is: {code}\n\nPlease enter this code on the website to proceed."
+    mail.send(msg)
+
+    return jsonify({"message": "Verification code sent.", "token": token})
+
+
+@app.route('/verify-code', methods=['POST'])
+def verify_code():
+    data = request.get_json()
+    token = data.get('token')
+    user_code = data.get('code')
+
+    try:
+        decoded = jwt.decode(token, 'your_secret_key', algorithms=['HS256'])
+        if decoded.get('code') == user_code:
+            return jsonify({"message": "Verification successful.", "status": "success"}), 200
+        else:
+            return jsonify({"message": "Verification failed. The code does not match."}), 400
+    except jwt.ExpiredSignatureError:
+        return jsonify({"message": "Token expired"}), 400
+    except jwt.InvalidTokenError:
+        return jsonify({"message": "Invalid token"}), 400
+
+
 @app.route('/gallery')
 def GotoGallery():
     user_email = current_user.UserName if current_user.is_authenticated else 'Welcome'
-    return render_template('html/gallery.html',user_email=user_email)
-
+    return render_template('html/gallery.html', user_email=user_email)
 
 
 # signup function
@@ -140,9 +205,9 @@ def reset_password():
     user = User.query.filter_by(Email=email).first()
     if user:
         if user.Password != generate_password_hash(new_password):
-            user.password_hash = generate_password_hash(new_password)
+            user.Password = generate_password_hash(new_password)
             db.session.commit()
-            return jsonify({'status': 'success', 'message': 'Password has been updated successfully.'})
+            return jsonify({'status': 'success', 'message': 'Password has been updated successfully.'}), 200
         else:
             return jsonify({'status': 'error', 'message': 'Need a new password.'}), 500
     else:
@@ -334,7 +399,6 @@ def upload_file():
                     # Add other metadata fields as necessary
                 )
 
-
                 db.session.add(new_image)
                 db.session.commit()
 
@@ -424,10 +488,11 @@ def get_image(image_id):
             BytesIO(image.data),
             mimetype='image/jpeg',  # or 'image/png' etc depending on your image type
             as_attachment=True,
-            download_name = image.filename
+            download_name=image.filename
         )
     else:
         os.abort(404)
+
 
 @app.route('/getimages')
 def get_images():
@@ -450,6 +515,7 @@ def update_image_type():
         return jsonify({'status': 'success'})
     else:
         return jsonify({'status': 'failed'})
+
 
 if __name__ == '__main__':
     app.run()
