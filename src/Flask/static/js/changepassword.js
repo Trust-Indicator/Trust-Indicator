@@ -21,10 +21,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const inputs = document.querySelectorAll('input[type="tel"]');
     inputs.forEach((input, index) => {
         input.addEventListener('input', function(event) {
-            console.log("Input event triggered on index: ", index); // 用于调试
-            console.log("Current value: ", input.value);  // 用于调试
+            console.log("Input event triggered on index: ", index);
+            console.log("Current value: ", input.value);
             if (input.value.length === input.maxLength) {
-                console.log("Max length reached on index: ", index);  // 用于调试
+                console.log("Max length reached on index: ", index);
                 if (index + 1 < inputs.length) {
                     inputs[index + 1].focus();
                 }
@@ -42,21 +42,68 @@ function togglePasswordVisibility() {
         passwordField.type = "password";
     }
 }
-
-function change_password() {
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('change-password-form').addEventListener('submit', change_password);
+});
+function change_password(event) {
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    const old_pwd= document.getElementById('old-password').value;
     const new_password = document.getElementById('new-password').value;
     const confirm_password = document.getElementById('confirm-new-password').value;
+
+    if (!new_password || !confirm_password) {
+        showPromptChange('Password fields cannot be empty.');
+        return false;
+    }
+    if (new_password.length < 8) {
+        showPromptChange('Password must be at least 8 characters long.');
+        return false;
+    }
+    if (!/[A-Z]/.test(new_password) || !/[0-9]/.test(new_password) || !/[a-z]/.test(new_password)) {
+        showPromptChange('Password must contain at least one uppercase letter, one lowercase letter, and one number.');
+        return false;
+    }
+    if (new_password !== confirm_password) {
+        showPromptChange('The new password does not match the re-entered password.');
+        return false;
+    }
+    if (new_password === old_pwd) {
+        showPromptChange('The new password should be different with old password.');
+        return false;
+    }
+    fetch('/change-password', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            'email': email,
+            'old-password': old_pwd,
+            'new-password': new_password,
+            'confirm-new-password': confirm_password
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        showPromptChange(data.message);
+    })
+    .catch(error => {
+        showPromptChange("An error occurred while changing the password.");
+    });
+}
+
+function showPromptChange(message) {
     const prompt_text = document.querySelector('.wrong-prompt p');
     const prompt_box = document.querySelector('.wrong-prompt');
-
-    // 检查新密码和确认密码是否匹配
-    if (new_password !== confirm_password) {
-        prompt_box.style.display = 'block';
-        prompt_text.textContent = 'Please re-check the password you entered. The new password does not match the re-entered password.';
-        return false;
-    } else {
-        prompt_box.style.display = 'none';
-    }
+    prompt_box.style.display = 'block';
+    prompt_text.textContent = message;
+}
+function showPromptForget(message) {
+    const prompt_text = document.getElementById('error_forget').querySelector('p');
+    const prompt_box = document.getElementById('error_forget');
+    prompt_box.style.display = 'block';
+    prompt_text.textContent = message;
 }
 
 function updateEmailAddress() {
@@ -74,21 +121,24 @@ let globalToken = '';
 function next_button() {
     switch(currentDivIndex) {
         case 1:
+            showPromptForget("")
             const email = document.getElementById('reset-email-input').value;
             if (email.length === 0 || !email.includes('@')) {
-                alert('Please enter a valid email address.');
+                showPromptForget('Please enter a valid email address.');
                 return;
             }
             console.log("Sending email for reset code.");
             sendCode(email);
             break;
         case 2:
+            showPromptForget("")
             console.log("Verifying code.");
             break;
         case 3:
+            showPromptForget("")
             const code = collectCode();
             if (code.length < 4) {
-                alert("Please fill in all the fields.");
+                showPromptForget("Please fill in all the fields.");
                 return;
             }
             verifyCode(code);
@@ -96,6 +146,7 @@ function next_button() {
     }
 
     if (currentDivIndex < maxDivIndex) {
+        showPromptForget("");
         updateEmailAddress();
         document.getElementById(`reset-page${currentDivIndex}`).classList.add('hidden');
         currentDivIndex++;
@@ -111,10 +162,11 @@ function next_button() {
             document.querySelector(".next-button").setAttribute("onclick", "submitNewPassword();");
         }
     } else {
+        showPromptForget("");
         document.querySelector(".next-button").setAttribute("onclick", "next_button();");
         const newPassword = document.getElementById('reset-page4-password').value;
         if (newPassword.length < 8) {
-            alert('Your password must be at least 8 characters.');
+            showPromptForget('Your password must be at least 8 characters.');
             return;
         }
         submitNewPassword();
@@ -136,8 +188,7 @@ function sendCode(email) {
         }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert("An error occurred while sending the code.");
+        showPromptForget(error);
     });
 }
 function onCodeSent() {
@@ -154,10 +205,10 @@ function startCountdown(duration, display) {
         clearInterval(countdownInterval);
     }
 
-    var timer = duration;
+    let timer = duration;
     countdownInterval = setInterval(function () {
-        var minutes = parseInt(timer / 60, 10);
-        var seconds = parseInt(timer % 60, 10);
+        let minutes = parseInt(timer / 60, 10);
+        let seconds = parseInt(timer % 60, 10);
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -197,6 +248,7 @@ function updateCooldownText(duration, link) {
 }
 
 function resendCode(event) {
+    showPromptForget("")
     event.preventDefault();
     const email = document.getElementById('reset-email-input').value;
     const resendLink = document.getElementById('resend-link');
@@ -207,6 +259,7 @@ function resendCode(event) {
 }
 
 function verifyCode(userInputCode) {
+    showPromptForget("")
     fetch('/verify-code', {
         method: 'POST',
         headers: {
@@ -217,20 +270,19 @@ function verifyCode(userInputCode) {
     .then(response => response.json())
     .then(data => {
         if (data.status === "success") {
-            console.log("Code is correct.");
             moveToNextStep();
         } else {
             clearCode();
-            alert(data.message);
+            showPromptForget(data.message);
         }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert("An error occurred while verifying the code.");
+        showPromptForget("An error occurred while verifying the code.");
     });
 }
 
 function collectCode() {
+    showPromptForget("")
     let code = "";
     for (let i = 1; i <= 4; i++) {
         code += document.getElementById(`verify-input${i}`).value.trim();
@@ -245,6 +297,7 @@ function clearCode() {
 }
 
 function moveToNextStep() {
+    showPromptForget("")
     if (currentDivIndex < maxDivIndex) {
         updateEmailAddress();
         document.getElementById(`reset-page${currentDivIndex}`).classList.add('hidden');
@@ -264,7 +317,7 @@ function moveToNextStep() {
         document.querySelector(".next-button").setAttribute("onclick", "next_button();");
         const newPassword = document.getElementById('reset-page4-password').value;
         if (newPassword.length < 8) {
-            alert('Your password must be at least 8 characters.');
+            showPromptForget('Your password must be at least 8 characters.');
             return;
         }
         submitNewPassword();
@@ -283,8 +336,8 @@ function submitNewPassword() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: email,
-                newPassword: newPassword
+                'email': email,
+                'newPassword': newPassword
             })
         })
         .then(response => response.json())
@@ -293,14 +346,14 @@ function submitNewPassword() {
                 alert('Password has been updated successfully.');
                 window.location.href = '/login';
             } else {
-                alert(data.message);
+                showPromptForget(data.message);
             }
         })
         .catch((error) => {
             console.error('Error:', error);
         });
     } else {
-        alert('Your password must be at least 8 characters.');
+        showPromptForget('Your password must be at least 8 characters.');
     }
 }
 

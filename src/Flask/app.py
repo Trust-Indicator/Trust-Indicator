@@ -182,27 +182,31 @@ def register():
 
 
 # change password
-@app.route('/change-password', methods=['GET', 'POST'])
+@app.route('/change-password', methods=['POST'])
 @login_required
 def change_password():
-    if request.method == 'POST':
-        email = request.form['email']
-        old_password = request.form['old-password']
-        new_password = request.form['new-password']
-        confirm_new_password = request.form['confirm-new-password']
+    data = request.get_json()
+    if not data:
+        return jsonify({'status': 'error', 'message': 'No data provided.'}), 403
 
-        user = User.query.filter_by(Email=email).first()
+    email = data['email']
+    old_password = data['old-password']
+    new_password = data['new-password']
+    confirm_new_password = data['confirm-new-password']
 
-        if user and check_password_hash(user.Password, old_password):
-            if new_password == confirm_new_password:
-                user.Password = generate_password_hash(new_password)
-                db.session.commit()
-                return redirect(url_for('index'))
-            else:
-                return jsonify({'status': 'error', 'message': 'New passwords do not match.'}), 400
+    user = User.query.filter_by(Email=email).first()
+
+    if current_user == user:
+        return jsonify({'status': 'invalid', 'message': 'Invalid email.'}), 405
+    elif user and check_password_hash(user.Password, old_password):
+        if new_password == confirm_new_password:
+            user.Password = generate_password_hash(new_password)
+            db.session.commit()
+            return redirect(url_for('index'))
         else:
-            return jsonify({'status': 'error', 'message': 'Invalid old password or email.'}), 400
-    return redirect(url_for('change_password'))
+            return jsonify({'status': 'invalid', 'message': 'New passwords do not match.'}), 400
+    else:
+        return jsonify({'status': 'error', 'message': 'Incorrect password.'}), 401
 
 
 @app.route('/reset-password', methods=['POST'])
@@ -213,6 +217,9 @@ def reset_password():
     user = User.query.filter_by(Email=email).first()
     if user:
         if user.Password != generate_password_hash(new_password):
+            password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,12}$'
+            if not re.match(password_regex, new_password):
+                return jsonify({'status': 'error', 'message': 'Password must contain at least one uppercase letter, one lowercase letter, and one number.'}), 401
             user.Password = generate_password_hash(new_password)
             db.session.commit()
             return jsonify({'status': 'success', 'message': 'Password has been updated successfully.'}), 200
@@ -247,7 +254,7 @@ def login_function():
 
 
 @app.route('/uploadImage', methods=['POST'])
-@login_required  # Ensure that the user must be logged in to access this route
+@login_required
 def upload_file():
     if request.method == 'POST':
         if 'file' not in request.files:
