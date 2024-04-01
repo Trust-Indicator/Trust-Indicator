@@ -595,12 +595,9 @@ function analysis(event) {
             });
     } else {
         var analysisButton = document.querySelector('.analysis-button');
-
         var analysisButtonText = analysisButton.querySelector('span');
-
         analysisButton.classList.add('no-selection');
         analysisButtonText.textContent = 'Please Upload Image!';
-
     }
 };
 

@@ -408,7 +408,7 @@ body {
     height: 80%;
     justify-items: center;
     align-items: center;
-    background: #C4362E;
+
     margin: auto;
     position: relative;
 
@@ -525,12 +525,12 @@ body {
     animation: rot1 2s linear infinite;
     text-align: center;
     justify-items: center;
-    /*display: flex;*/
+    display: flex;
     margin: auto;
     position: relative;
     top: 0; /* 或者是需要的确切位置 */
     left: 0;
-    display: none;
+
 }
 .content{
     width: 100px;
@@ -572,7 +572,7 @@ body {
     justify-items: center;
     align-items: center;
     margin-left: 10%;
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 .analysis-result {
