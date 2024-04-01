@@ -167,6 +167,7 @@ function startCountdown(duration, display) {
         if (--timer < 0) {
             clearInterval(countdownInterval);
             display.textContent = "00:00";
+            globalToken = null
         }
     }, 1000);
 }
