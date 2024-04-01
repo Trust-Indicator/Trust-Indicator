@@ -89,7 +89,7 @@ function change_password(event) {
         showPromptChange(data.message);
     })
     .catch(error => {
-        showPromptChange("An error occurred while changing the password.");
+        showPromptChange("Log in before changing the password.");
     });
 }
 

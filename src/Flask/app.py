@@ -199,9 +199,7 @@ def change_password():
 
     user = User.query.filter_by(Email=email).first()
 
-    if current_user == user:
-        return jsonify({'status': 'invalid', 'message': 'Invalid email.'}), 405
-    elif user and check_password_hash(user.Password, old_password):
+    if user and check_password_hash(user.Password, old_password):
         if new_password == confirm_new_password:
             user.Password = generate_password_hash(new_password)
             db.session.commit()
