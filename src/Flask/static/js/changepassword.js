@@ -132,10 +132,79 @@ function sendCode(email) {
     .then(data => {
         if (data.message) {
             globalToken = data.token;
+            onCodeSent();
         }
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+        alert("An error occurred while sending the code.");
+    });
 }
+function onCodeSent() {
+    const resendLink = document.getElementById('resend-link');
+    startCooldown(60, resendLink);
+    const display = document.getElementById('countdown');
+    startCountdown(600, display)
+}
+
+let countdownInterval;
+let cooldownInterval;
+function startCountdown(duration, display) {
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+    }
+
+    var timer = duration;
+    countdownInterval = setInterval(function () {
+        var minutes = parseInt(timer / 60, 10);
+        var seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            clearInterval(countdownInterval);
+            display.textContent = "00:00";
+        }
+    }, 1000);
+}
+function startCooldown(duration, link) {
+    if (cooldownInterval) {
+        clearInterval(cooldownInterval);
+    }
+
+    link.classList.add('disabled');
+    updateCooldownText(duration, link);
+
+    cooldownInterval = setInterval(function () {
+        duration -= 1;
+        updateCooldownText(duration, link);
+
+        if (duration <= 0) {
+            clearInterval(cooldownInterval);
+            cooldownInterval = null;
+            link.classList.remove('disabled');
+            link.textContent = 'Resend';
+            link.addEventListener('click', resendCode);
+        }
+    }, 1000);
+}
+function updateCooldownText(duration, link) {
+    link.textContent = `Resend (${duration})`;
+}
+
+function resendCode(event) {
+    event.preventDefault();
+    const email = document.getElementById('reset-email-input').value;
+    const resendLink = document.getElementById('resend-link');
+
+    if (email && !resendLink.classList.contains('disabled')) {
+        sendCode(email);
+    }
+}
+
 function verifyCode(userInputCode) {
     fetch('/verify-code', {
         method: 'POST',
