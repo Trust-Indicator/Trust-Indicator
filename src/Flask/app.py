@@ -80,6 +80,7 @@ def login():
 def userprofile():
     return render_template('html/userprofile.html', user=current_user)
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -556,6 +557,29 @@ def get_image_for_analysis():
             return 'Image not found', 404
     else:
         return 'No image ID provided', 400
+
+
+@app.route('/change_profile_photo', methods=['POST'])
+@login_required
+def change_profile_photo():
+    selected_image_number = request.form.get('selected_image')
+    if selected_image_number:
+        try:
+            selected_image_number = int(selected_image_number)
+        except ValueError:
+            return jsonify({'status': 'error', 'message': 'Invalid image number.'}), 400
+
+        if 1 <= selected_image_number <= 16:
+            user = User.query.get(current_user.id)
+            if user:
+                user.ProfilePhotoNO = selected_image_number
+                db.session.commit()
+                return jsonify({'status': 'success', 'message': 'Profile photo updated successfully.'}), 200
+            else:
+                return jsonify({'status': 'error', 'message': 'User not found'}), 404
+        else:
+            return jsonify({'status': 'error', 'message': 'Image number out of range.'}), 400
+    return jsonify({'status': 'error', 'message': 'No image selected.'}), 400
 
 
 if __name__ == '__main__':

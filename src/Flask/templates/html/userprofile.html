@@ -253,7 +253,7 @@
         <div class="profile-container">
             <div class="profile-banner" style="background-color: #F3F2EF; padding: 20px; display: flex; align-items: center;">
                 <div class="profile-picture-container" style="flex-shrink: 0;" onclick="openModal()">
-                    <img src="{{ url_for('static', filename='profilephotos/' + user.ProfilePhotoNO + '.jpg') }}" alt="Profile"/>
+                    <img id = "user-profile-picture" src="{{ url_for('static', filename='profilephotos/' + user.ProfilePhotoNO + '.jpg') }}" alt="Profile"/>
                 </div>
                 <div class="profile-details" style="margin-left: 20px;">
                     <h1 style="margin: 0; color: #00376B;">{{ user.UserName }}</h1>
@@ -269,7 +269,7 @@
             <h4> Uploaded Images</h4>
             <div class="upload-container">
                 <div class="file-drop-area">
-                    <button class="upload-btn">Upload</button>
+                    <button class="upload-btn" onclick="window.location.href='/upload';">Upload</button>
                 </div>
             </div>
             <div class="favorite-images-container" style="display: none">
@@ -281,7 +281,7 @@
             <h4> Favorite Images</h4>
             <div class="upload-container">
                 <div class="file-drop-area">
-                    <button class="upload-btn">Browse</button>
+                    <button class="upload-btn" onclick="window.location.href='/gallery';">Browse</button>
                 </div>
             </div>
             <div class="uploaded-images-container" style="display: none">
@@ -302,8 +302,8 @@
                 {% endfor %}
             </div>
             <div class="modal-options">
-                <button>Save</button>
-                <button>Exit</button>
+                <button type="button" onclick="saveSelection()">Save</button>
+                <button type="button" onclick="close()">Exit</button>
             </div>
         </div>
     </div>
