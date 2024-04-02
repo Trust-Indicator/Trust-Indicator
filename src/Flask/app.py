@@ -202,7 +202,7 @@ def change_password():
         if new_password == confirm_new_password:
             user.Password = generate_password_hash(new_password)
             db.session.commit()
-            return jsonify({'status': 'success', 'message': 'Password updated successfully.', 'redirect': url_for('index')}), 200
+            return jsonify({'status': 'success', 'message': 'Password updated successfully.', 'redirect': url_for('login')}), 200
         else:
             return jsonify({'status': 'invalid', 'message': 'New passwords do not match.'}), 400
     else:
