@@ -86,7 +86,11 @@ function change_password(event) {
     })
     .then(response => response.json())
     .then(data => {
-        showPromptChange(data.message);
+        if (data.status === 'success') {
+            window.location.href = data.redirect;
+        } else {
+            showPromptChange(data.message);
+        }
     })
     .catch(error => {
         showPromptChange("Log in before changing the password.");

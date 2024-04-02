@@ -186,7 +186,6 @@ def register():
 
 # change password
 @app.route('/change-password', methods=['POST'])
-@login_required
 def change_password():
     data = request.get_json()
     if not data:
@@ -203,11 +202,11 @@ def change_password():
         if new_password == confirm_new_password:
             user.Password = generate_password_hash(new_password)
             db.session.commit()
-            return redirect(url_for('index'))
+            return jsonify({'status': 'success', 'message': 'Password updated successfully.', 'redirect': url_for('index')}), 200
         else:
             return jsonify({'status': 'invalid', 'message': 'New passwords do not match.'}), 400
     else:
-        return jsonify({'status': 'error', 'message': 'Incorrect password.'}), 401
+        return jsonify({'status': 'error', 'message': 'Incorrect email or password.'}), 401
 
 
 @app.route('/reset-password', methods=['POST'])
