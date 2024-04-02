@@ -88,6 +88,13 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const profile = document.getElementById('edit-profile');
+    profile.addEventListener('click', function() {
+        window.location.href = 'userprofile';
+    });
+});
+
 
 let wasContentShown = false;
 window.addEventListener('scroll', function() {

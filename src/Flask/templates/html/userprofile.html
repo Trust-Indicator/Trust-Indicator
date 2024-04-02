@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/userprofile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <script src="{{ url_for('static', filename='js/userprofile.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="top-title">
+        <p onclick="top_register()">Apply for becoming a membership </p>
+    </div>
+
+    <div class="navigation-bar-container">
+        <div class="navigation-bar-top">
+            <!--search box-->
+            <div class="search-container">
+                <div class="info-panels">
+                    <div class="input-color-group-one">
+                        <input class="search-input" autocomplete="on" name="text" type="text" required="" placeholder="Rapunga / Search">
+                        <label class="search-label">Search</label>
+                        <button class="search-button">
+                            <svg fill="white" width="15px" height="15px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--search box-->
+
+            <!--log in-->
+            <div class="login-container" onclick="sign_in(event)">
+                <div class="sign-icon">
+                    <i class="fa fa-user-circle-o" style="font-size:30px"></i>
+                </div>
+                <div class="sign-text">Sign In</div>
+            </div>
+            <!--log in-->
+
+            <!--log in content-->
+            <div class="sign-in-content">
+                <div class="content-section" id="show-name">Hi Song Han</div>
+                <hr class="divider">
+                <div class="content-section" id="change-password">Change Password<i class="fa fa-chevron-right fa-right" ></i></div>
+                <hr class="divider">
+                <div class="content-section" id="edit-profile">Edit Profile<i class="fa fa-chevron-right fa-right"></i></div>
+                <hr class="divider">
+                <div class="content-section" style="height: 50px;justify-content: center;align-content: center">
+                    <button type="button" title="Sign out"  class="sign-out-button  sign-out-button-color sign-out-button-background-color" onclick="sign_out(event)">
+                        <span>Sign Out &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></span>
+                    </button>
+                </div>
+                <div class="content-triangle"></div>
+            </div>
+            <!--log in content-->
+            <div class="language-change" onclick="toggleDropdown(event)">
+                <span id="selected-language">EN</span>
+                <span class="dropdown-arrow"><i class="fa fa-caret-down" style="font-size:20px;padding-left: 5px"></i></span>
+                <ul id="language-options" class="hidden">
+                    <li onclick="updateLanguage('EN', event)">English</li>
+                    <li onclick="updateLanguage('CN', event)">Chinese</li>
+                    <li onclick="updateLanguage('ES', event)">Spanish</li>
+                    <li onclick="updateLanguage('FR', event)">French</li>
+                    <li onclick="updateLanguage('DE', event)">German</li>
+                </ul>
+            </div>
+            <!--log in content-->
+        </div>
+        <div class="navigation-bar-bottom">
+            <div class="menu-icon-wrapper">
+                <div class="three-line">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <!-- 主菜单 -->
+                <div class="main-menu">
+                    <a href="/" class="color-home" data-target="home-submenu">Home</a>
+                    <a href="#" class="color-gallery" data-target="gallery-submenu">Gallery  <i class="fa fa-angle-right" style="font-size:30px;margin-left: 280px"></i></a>
+                    <a href="#" class="color-watchlist" data-target="watchlist-submenu">Watch List</a>
+                    <a href="#" class="color-help" data-target="help-submenu">Help <i class="fa fa-angle-right" style="font-size:30px;margin-left: 300px"></i></a>
+                    <a href="#" class="color-whatwedo" data-target="what We Do-submenu">What We Do</a>
+                    <a href="#" class="color-community" data-target="community-submenu">Community <i class="fa fa-angle-right" style="font-size:30px;margin-left: 240px"></i></a>
+                </div>
+
+                <!-- 子菜单 -->
+                <div class="submenu" id="gallery-submenu">
+                    <div class="submenu-div1 back-from-gallery">
+                        <i class="fa fa-angle-left" style="font-size: 30px"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>GALLERY</span>
+                    </div>
+                    <div class="submenu-div2">
+                        <h3><i class="fa fa-photo" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;All Images</h3>
+                        <a href="#" onclick="GotoGallery(event)">Default</a>
+                        <a href="#">Sort By Credibility</a>
+                        <a href="#">Sort By Publish Time</a>
+                    </div>
+                    <div class="submenu-div3">
+                        <h3><i class="fa fa-star" style="font-size:24px;color: #FFCD29"></i>&nbsp;&nbsp;&nbsp;Truth Images</h3>
+                        <a href="#">Show All</a>
+                        <a href="#">Top 10</a>
+                        <h3 style="margin-top: 15px"><i class="fa fa-star-half-empty" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Fake Image</h3>
+                        <a href="#">Show All</a>
+                        <a href="#">Sort By Credibility</a>
+                        <a href="#">Sort By Publish Time</a>
+                    </div>
+                    <div class="submenu-div4">
+                        <div style="width: 80%; height: 80%; display: flex;position: relative; left: 10%; top: 10%;background: #00467F">
+                            <a href="#"><img src="/static/images/background_gallery.jpeg" style="width: 330px;height: 100%"/></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submenu1" id="help-submenu">
+                    <div class="submenu1-div1 back-from-help">
+                        <i class="fa fa-angle-left" style="font-size: 30px"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>HELP</span>
+                    </div>
+                    <div class="submenu1-div5">
+                        <h3>About The Trust Indicator</h3>
+                        <a href="#">Operating guide</a>
+                        <a href="#">Our faculties and institutes</a>
+                        <a href="#">Business and employers</a>
+                        <a href="#">Community services</a>
+                    </div>
+                    <div class="submenu1-div6">
+                        <h3>Connect with us</h3>
+                        <a href="#">Contact us All</a>
+                        <a href="#">Our people</a>
+                        <a href="#">Cooperation partner</a>
+
+                    </div>
+                    <div class="submenu1-div7">
+                        <h3>Work with us</h3>
+                        <a href="#">Staff benefits</a>
+                        <a href="#">Career development</a>
+                    </div>
+                </div>
+
+                <div class="submenu2" id="community-submenu">
+                    <div class="submenu2-div1 back-from-community">
+                        <i class="fa fa-angle-left" style="font-size: 30px"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>Community</span>
+                    </div>
+                    <div class="submenu2-div8">
+                        Help Center
+                    </div>
+                    <div class="submenu2-div8">
+                        Contributor Zone
+                    </div>
+                    <div class="submenu2-div8">
+                        Feedback
+                    </div>
+                    <div class="submenu2-div8">
+                        Change Password
+                    </div>
+                    <div class="submenu2-div8">
+                        Edit Profile
+                    </div>
+                    <div class="submenu2-div8">
+                        Report Debug
+                    </div>
+                </div>
+            </div>
+
+            <div id="mcmenu">
+                <ul>
+                    <li  id="menu-home"><a href="/">Home</a></li>
+                    <li class="full-width" id="menu-gallery">
+                        <span>Gallery &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
+                        <div class="dropdown">
+                            <div class="clm">
+                                <h3><i class="fa fa-photo" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;All Images</h3>
+                                <a href="#" onclick="GotoGallery(event)">Default</a>
+                                <a href="#">Sort By Credibility</a>
+                                <a href="#">Sort By Publish Time</a>
+                            </div>
+                            <div class="clm">
+                                <h3><i class="fa fa-star" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Truth Images</h3>
+                                <a href="#">Show All</a>
+                                <a href="#">Top 10</a>
+                                <h3><i class="fa fa-star-half-empty" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Fake Image</h3>
+                                <a href="#">Show All</a>
+                                <a href="#">Sort By Credibility</a>
+                                <a href="#">Sort By Publish Time</a>
+                            </div>
+                            <div class="clm background-gallery">
+                                <a href="#" ><img src="/static/images/background_gallery.jpeg" style="width:280px"/></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="menu-watchlist"><a href="#">Watch List</a></li>
+                    <li id="menu-help" class="full-width">
+                        <span>Help &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
+                        <div class="dropdown">
+                            <div class="clm">
+                                <h3>About the Trust Indicator</h3>
+                                <a href="#">Operating guide</a>
+                                <a href="#">Our faculties and institutes</a>
+                                <a href="#">Business and employers</a>
+                                <a href="#">Community services</a>
+                                <hr class="line">
+                            </div>
+                            <div class="clm">
+                                <h3>Connect with us</h3>
+                                <a href="#">Contact us</a>
+                                <a href="#">Our people</a>
+                                <a href="#">Cooperation partner</a>
+                                <hr class="line">
+                            </div>
+                            <div class="clm">
+                                <h3>Work with us</h3>
+                                <a href="#">Staff benefits</a>
+                                <a href="#">Career development</a>
+                                <hr class="line">
+                            </div>
+                        </div>
+                    </li>
+                    <li id="menu-wwhatwedo"><a href="#">What We Do</a></li>
+                    <li id="menu-community">
+                        <span>Community &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
+                        <ul class="right0">
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Contributor Zone</a></li>
+                            <li><a href="#">Feedback</a></li>
+                            <li>
+                                <a>
+                                    <i class="fa fa-angle-left" style="font-size:30px"></i>
+                                    &nbsp;&nbsp;
+                                    User Center&nbsp;&nbsp;&nbsp;
+                                    <i class="fa fa-android" style="font-size:24px"></i>
+                                </a>
+                                <ul class="right1">
+                                    <li><a href="#">Change Password</a></li>
+                                    <li><a href="#">Edit Profile</a></li>
+                                    <li><a href="#">Report Debug</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="logo"></div>
+    </div>
+
+    <div class="user-profile-card">
+        <div class="profile-container">
+            <div class="profile-banner" style="background-color: #F3F2EF; padding: 20px; display: flex; align-items: center;">
+                <div class="profile-picture-container" style="flex-shrink: 0;" onclick="openModal()">
+                    <img src="{{ url_for('static', filename='profilephotos/' + user.ProfilePhotoNO + '.jpg') }}" alt="Profile"/>
+                </div>
+                <div class="profile-details" style="margin-left: 20px;">
+                    <h1 style="margin: 0; color: #00376B;">{{ user.UserName }}</h1>
+                    <br>
+                    <p style="margin: 0; color: #6A737C;">{{ user.LegalName }}</p>
+                    <br>
+                    <a href="mailto:{{ user.Email }}" style="text-decoration: none; color: #00376B;">{{ user.Email }}</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="image-containers">
+            <h4> Uploaded Images</h4>
+            <div class="upload-container">
+                <div class="file-drop-area">
+                    <button class="upload-btn">Upload</button>
+                </div>
+            </div>
+            <div class="favorite-images-container" style="display: none">
+                <div class="uploaded-images">
+                    <!-- Dynamic generation of favorite images -->
+                </div>
+            </div>
+
+            <h4> Favorite Images</h4>
+            <div class="upload-container">
+                <div class="file-drop-area">
+                    <button class="upload-btn">Browse</button>
+                </div>
+            </div>
+            <div class="uploaded-images-container" style="display: none">
+                <div class="favorite-images">
+                <!-- Dynamic generation of favorite images -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- change profile photo -->
+    <div id="profilePhotoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h1 style="font-size: 3vh">Profile photo</h1>
+            <div class="image-options">
+                {% for i in range(1, 17) %}
+                <img src="{{ url_for('static', filename='profilephotos/' + i|string + '.jpg') }}" alt="Image {{ i }}" class="selectable-image">
+                {% endfor %}
+            </div>
+            <div class="modal-options">
+                <button>Save</button>
+                <button>Exit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="bottom-navigation-bar">
+        <div class="connect-container">
+            <table class="connect-table">
+                <tr>
+                    <th><p style="font-size:10px;color:#ffffff;opacity: 0.6;margin-right: 20px" >Connect with us</p></th>
+                    <th><i class="fa fa-instagram" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-facebook" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-envelope" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-linkedin" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accessibility-container">
+            <div class="accessibility">
+                <div style="width: 80%; height: 100%;margin-left: 10%; display: flex; align-items: center;">
+                    <p class="site-link1">Accessibility</p>
+                    <p class="site-link">|</p>
+                    <p class="site-link1">Copyright</p>
+                    <p class="site-link">|</p>
+                    <p class="site-link1">Privacy</p>
+                    <p class="site-link">|</p>
+                    <p class="disclaimer-text">Disclaimer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

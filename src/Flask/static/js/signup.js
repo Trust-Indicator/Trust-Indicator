@@ -46,7 +46,8 @@ function sign_up() {
             UserName: username,
             Email: email,
             Password: password,
-            LegalName: legalName
+            LegalName: legalName,
+            ProfilePhotoNO: Math.floor(Math.random() * 3 + 1)
         })
     })
     .then(response => response.json())

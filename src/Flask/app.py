@@ -75,6 +75,11 @@ def login():
     return render_template('html/login.html')
 
 
+@app.route('/userprofile')
+@login_required
+def userprofile():
+    return render_template('html/userprofile.html', user=current_user)
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -84,9 +89,11 @@ def load_user(user_id):
 def changepassword():
     return render_template('html/changepassword.html')
 
+
 @app.route('/analysis')
 def analysis():
     return render_template('html/analysis.html')
+
 
 @app.route('/logout')
 def logout():
@@ -202,7 +209,8 @@ def change_password():
         if new_password == confirm_new_password:
             user.Password = generate_password_hash(new_password)
             db.session.commit()
-            return jsonify({'status': 'success', 'message': 'Password updated successfully.', 'redirect': url_for('login')}), 200
+            return jsonify(
+                {'status': 'success', 'message': 'Password updated successfully.', 'redirect': url_for('login')}), 200
         else:
             return jsonify({'status': 'invalid', 'message': 'New passwords do not match.'}), 400
     else:
@@ -219,7 +227,8 @@ def reset_password():
         if user.Password != generate_password_hash(new_password):
             password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,12}$'
             if not re.match(password_regex, new_password):
-                return jsonify({'status': 'error', 'message': 'Password must contain at least one uppercase letter, one lowercase letter, and one number.'}), 401
+                return jsonify({'status': 'error',
+                                'message': 'Password must contain at least one uppercase letter, one lowercase letter, and one number.'}), 401
             user.Password = generate_password_hash(new_password)
             db.session.commit()
             return jsonify({'status': 'success', 'message': 'Password has been updated successfully.'}), 200
@@ -533,7 +542,6 @@ def update_image_type():
         return jsonify({'status': 'failed'})
 
 
-
 @app.route('/getImage')
 def get_image_for_analysis():
     # Get the image id from the user session
@@ -542,13 +550,12 @@ def get_image_for_analysis():
     if image_id:
         image = Image.query.get(image_id)
         if image and image.data:
-            return send_file(BytesIO(image.data),download_name=image.filename,
+            return send_file(BytesIO(image.data), download_name=image.filename,
                              mimetype='image/jpeg')  # Or the correct MIME type for the image
         else:
             return 'Image not found', 404
     else:
         return 'No image ID provided', 400
-
 
 
 if __name__ == '__main__':
