@@ -75,6 +75,7 @@
     float: left;
     margin-left: 200px;
     min-height: 80vh;
+    margin-bottom: 35px;
 }
 .photo-gallery {
     margin-top: 1%;
@@ -88,20 +89,28 @@
 }
 
 .photo {
-    width: calc((100% - 2* 20px - 40px) / 4);
-    height: 400px;
+    height: 300px;
+    width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 2px dashed #00467F;
     position: relative;
+    transition: transform 0.5s ease;
+}
+
+.photo:hover {
+    transform: scale(1.2);
+    z-index: 9;
 }
 
 .photo img {
     width: 95%;
     height: 95%;
     object-fit: cover;
+    transition: transform 0.5s ease;
 }
+
 .photo-indicators {
     position: absolute;
     bottom: 2vh;
@@ -109,10 +118,29 @@
     display: flex;
 }
 
-.indicator {
-    width: 2.5vw;
-    height: 2.5vw;
-    margin-left: 0.5vw;
-    border-radius: 50%;
-    object-fit: cover;
+.photo-indicators {
+    position: absolute;
+    bottom: 2vh;
+    right: 1vw;
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+#backToTop {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #00467F;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#backToTop:hover {
+    background-color: #009AC9;
 }

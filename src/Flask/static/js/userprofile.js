@@ -124,3 +124,48 @@ function fadeOutAlert(alertBox) {
         alertBox.remove();
     }, 500);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/getcurrentuserimages').then(response => response.json()).then(data => {
+        const gallery = document.getElementById('uploaded-images');
+        var firstIndicatorImages = ['5.png', '5.png', /* ... more icons ... */];
+        var secondIndicatorImages = ['6.png', '6.png', /* ... more icons ... */];
+
+        if (data.length > 0) {
+            document.getElementById("no-uploaded").style.display = "none"; // 改为display属性
+            document.getElementById("uploaded-images-container").style.display = "block"; // 改为display属性
+
+            data.forEach(image => {
+                const photoDiv = document.createElement('div');
+                photoDiv.className = 'photo';
+
+                const img = document.createElement('img');
+                img.src = `/image/${image.id}`;
+                photoDiv.appendChild(img);
+
+                const indicatorsDiv = document.createElement('div');
+                indicatorsDiv.className = 'photo-indicators';
+
+                const firstIndicator = document.createElement('div');
+                firstIndicator.className = 'indicator';
+                firstIndicator.style.backgroundImage = `url('/static/images/${firstIndicatorImages[1]}')`;
+                firstIndicator.style.backgroundSize = 'cover';
+                indicatorsDiv.appendChild(firstIndicator);
+
+                const secondIndicator = document.createElement('div');
+                secondIndicator.className = 'indicator';
+                secondIndicator.style.backgroundImage = `url('/static/images/${secondIndicatorImages[0]}')`;
+                secondIndicator.style.backgroundSize = 'cover';
+                indicatorsDiv.appendChild(secondIndicator);
+
+                photoDiv.appendChild(indicatorsDiv);
+                gallery.appendChild(photoDiv);
+            });
+        } else {
+            document.getElementById("no-uploaded").style.display = "block"; // 改为display属性
+            document.getElementById("uploaded-images-container").style.display = "none"; // 改为display属性
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+

@@ -300,6 +300,7 @@
             </div>
         </div>
     </div>
+    <button id="backToTop" title="Go to top" style="font-size: 20px">Top</button>
 </body>
 <script>
 document.getElementById('toggleSidebar').addEventListener('click', function() {
@@ -310,5 +311,18 @@ document.getElementById('toggleSidebar').addEventListener('click', function() {
         sidebar.style.transform = 'translateX(0)';
     }
 });
+
+window.onscroll = function() {scrollFunction()};
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("backToTop").style.display = "block";
+    } else {
+        document.getElementById("backToTop").style.display = "none";
+    }
+}
+document.getElementById('backToTop').addEventListener('click', function(){
+    window.scrollTo({top: 0, behavior: 'smooth'});
+});
+
 </script>
 </html>

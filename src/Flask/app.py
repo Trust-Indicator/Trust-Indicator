@@ -181,7 +181,8 @@ def register():
 
     hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
     # add to database
-    new_user = User(UserName=username, Email=email, LegalName=legal_name, Password=hashed_password, )
+    new_user = User(UserName=username, Email=email, LegalName=legal_name, Password=hashed_password,
+                    ProfilePhotoNO=str(random.randint(1, 3)))
     db.session.add(new_user)
     print('username:', username, 'email:', email)
     try:
@@ -517,6 +518,15 @@ def get_image(image_id):
         )
     else:
         os.abort(404)
+
+
+@app.route('/getcurrentuserimages')
+def get_current_user_images():
+    user_email = current_user.Email
+
+    images = Image.query.filter_by(user_email=user_email).all()
+    image_info = [{'id': image.id, 'filename': image.filename} for image in images]
+    return jsonify(image_info)
 
 
 @app.route('/getimages')

@@ -258,27 +258,36 @@
         </div>
 
         <div class="image-containers">
-            <h4> Uploaded Images</h4>
-            <div class="upload-container">
-                <div class="file-drop-area">
-                    <button class="upload-btn" onclick="window.location.href='/upload';">Upload</button>
+            <div class="section">
+                <h4> Uploaded Images</h4>
+                <div class="upload-container" id="no-uploaded">
+                    <div class="file-drop-area">
+                        <button class="upload-btn" onclick="window.location.href='/upload';">Upload</button>
+                    </div>
+                </div>
+                <div id="uploaded-images-container" style="display: none">
+                    <div class="photo-gallery" id="uploaded-images">
+                        <div class="photo" style="display: none">
+                            <div class="photo-indicators">
+                                <div class="indicator"></div>
+                                <div class="indicator"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="favorite-images-container" style="display: none">
-                <div class="uploaded-images">
+            <br>
+            <div class="section">
+                <h4> Favorite Images</h4>
+                <div class="upload-container">
+                    <div class="file-drop-area">
+                        <button class="upload-btn" onclick="window.location.href='/gallery';">Browse</button>
+                    </div>
+                </div>
+                <div id="favorite-images-container" style="display: none">
+                    <div class="favorite-images">
                     <!-- Dynamic generation of favorite images -->
-                </div>
-            </div>
-
-            <h4> Favorite Images</h4>
-            <div class="upload-container">
-                <div class="file-drop-area">
-                    <button class="upload-btn" onclick="window.location.href='/gallery';">Browse</button>
-                </div>
-            </div>
-            <div class="uploaded-images-container" style="display: none">
-                <div class="favorite-images">
-                <!-- Dynamic generation of favorite images -->
+                    </div>
                 </div>
             </div>
         </div>
