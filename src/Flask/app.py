@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from src.ExifExtractor.InterfaceTester import extract_exif_data
 
-from database import db, create_database, User, Image
+from database import db, create_database, User, Image, Feedback
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
@@ -101,6 +101,43 @@ def logout():
     session.clear()
     logout_user()
     return render_template('html/index.html')
+
+
+@app.route('/feedback')
+def GoToFeedback():
+    return render_template('html/feedback.html')
+
+
+@app.route('/submit_feedback', methods=['POST'])
+def submit_feedback():
+    data = request.get_json()
+    if data:
+        name = data.get('name')
+        email = data.get('email')
+        feedback_type = data.get('feedback-type')
+        content = data.get('feedback')
+
+        new_feedback = Feedback(name=name, email=email, date=datetime.utcnow(), feedback_type=feedback_type,
+                                content=content)
+        db.session.add(new_feedback)
+        db.session.commit()
+
+        rendered_html = render_template('html/feedback_confirmation.html',
+                                        name=name,
+                                        feedback_type=feedback_type,
+                                        year=datetime.now().year
+                                        )
+
+        msg = Message("We Received Your Feedback",
+                      sender="Trust-Indicator",
+                      recipients=[email])
+
+        msg.body = "Your email verification code is provided in the HTML part of this email."
+        msg.html = rendered_html
+        mail.send(msg)
+        return jsonify({"status": "success",
+                        "message": "Thank you for your feedback. A confirmation email has been sent to you."}), 200
+    return jsonify({"status": "error", "message": "Error, please try again."}), 400
 
 
 def generate_token(email, code):
@@ -590,6 +627,21 @@ def change_profile_photo():
         else:
             return jsonify({'status': 'error', 'message': 'Image number out of range.'}), 400
     return jsonify({'status': 'error', 'message': 'No image selected.'}), 400
+
+
+@app.route('/get_current_user', methods=['GET'])
+def get_current_user():
+    if current_user:
+        user_info = {
+            'name': current_user.LegalName,
+            'email': current_user.Email
+        }
+    else:
+        user_info = {
+            'name': "",
+            'email': ""
+        }
+    return jsonify(user_info), 200
 
 
 if __name__ == '__main__':

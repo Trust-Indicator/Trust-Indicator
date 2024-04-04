@@ -385,3 +385,6 @@ function ThumbnailSlider(a){"use strict";if(typeof String.prototype.trim!=="func
 function GotoGallery(event){
     window.location.href = "/gallery";
 }
+function GoToFeedback(event){
+    window.location.href = "/feedback";
+}

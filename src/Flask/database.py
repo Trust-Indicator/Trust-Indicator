@@ -53,6 +53,15 @@ class User(UserMixin, db.Model):
 #     Is_Favorite = db.Column(db.Integer)
 #     Comment = db.Column(db.Text)
 #     Create_Date = db.Column(db.Text)
+class Feedback(db.Model):
+    __tablename__ = 'feedback'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    date = db.Column(db.DateTime)
+    feedback_type = db.Column(db.String(120))
+    content = db.Column(db.Text)
+
 
 class Image(db.Model):
     __tablename__ = 'images'
