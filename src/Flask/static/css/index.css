@@ -408,8 +408,8 @@ body {
     display:flex;
     justify-content: space-between;
     flex-wrap: wrap;
-
 }
+
 #mcmenu a {
     text-decoration: none;
     color: #00467F;
@@ -430,6 +430,7 @@ body {
     justify-content: center;
     align-items: center;
     white-space: nowrap;  /* Add this line */
+    order: 1;
 }
 #mcmenu li a:hover{
     border-bottom: 4px solid #00467F;
@@ -613,7 +614,81 @@ body {
 #menu-community .right0 > li:hover > ul.right1 {
     display: block;
 }
+#menu-community span{
+    font-size: 1.1rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    display: flex;
+    white-space: nowrap;  /* Add this line */
+}
 
+#menu-community span:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 4px;
+    background-color: #00467F;
+}
+#menu-community .right0 {
+    position: absolute;
+    top: 100%;  /* Position below the parent */
+    /* Align left to the parent */
+    /*background: #C4362E;*/
+    border-radius: 5px;
+    transition: opacity 0.3s;
+    display: none; /* Initially hide the dropdown */
+    z-index: 6;  /* Ensure dropdown appears above other elements */
+    height: auto;
+    width: auto;
+    background-color: rgba(238, 238, 238, 0.8);
+}
+#menu-community .right0 li{
+    width: 100%;
+}
+
+/* Hover state to display dropdown */
+#menu-community:hover .right0 {
+    display: block;
+}
+
+/* Additional styles to make it visually appealing */
+#menu-community .right0 a {
+    padding: 10px;
+    color: #00467F;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-weight: normal;
+}
+
+#menu-community .right0 a:hover {
+    background-color: #00467F;
+    color: #FFFFFF;
+}
+
+/* Adjust second level dropdown */
+#menu-community .right0 > li > ul.right1 {
+    position: absolute; /* Set the position of the second dropdown */
+    left: -100%; /* Position it to the left of its parent */
+    top: 0; /* Align to the top of its parent */
+    display: none;
+    border-radius: 5px;
+}
+#menu-community .right0 > li > ul.right1 li{
+    width: 100%;
+    height: auto;
+    background-color: rgba(238, 238, 238, 0.8);
+}
+/* Hover state to display second level dropdown */
+#menu-community .right0 > li:hover > ul.right1 {
+    display: block;
+}
 @media (max-width: 1000px) and (min-width: 700px) {
     #mcmenu li {
         flex-basis: calc(33.33% - 10px);

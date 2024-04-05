@@ -16,7 +16,7 @@
     <div class="top-title">
     <p onclick="top_register()">Apply for becoming a membership </p>
 </div>
-    <div class="navigation-bar-container">
+<div class="navigation-bar-container">
     <div class="navigation-bar-top">
         <!--search box-->
         <div class="search-container">
@@ -73,105 +73,9 @@
         <!--log in content-->
     </div>
     <div class="navigation-bar-bottom">
-        <div class="menu-icon-wrapper">
-            <div class="three-line">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-
-        <div class="sidebar">
-            <!-- 主菜单 -->
-            <div class="main-menu">
-                <a href="/" class="color-home" data-target="home-submenu">Home</a>
-                <a href="#" class="color-gallery" data-target="gallery-submenu">Gallery  <i class="fa fa-angle-right" style="font-size:30px;margin-left: 280px"></i></a>
-                <a href="#" class="color-watchlist" data-target="watchlist-submenu">Watch List</a>
-                <a href="#" class="color-help" data-target="help-submenu">Help <i class="fa fa-angle-right" style="font-size:30px;margin-left: 300px"></i></a>
-                <a href="#" class="color-whatwedo" data-target="what We Do-submenu">What We Do</a>
-                <a href="#" class="color-community" data-target="community-submenu">Community <i class="fa fa-angle-right" style="font-size:30px;margin-left: 240px"></i></a>
-            </div>
-
-            <!-- 子菜单 -->
-            <div class="submenu" id="gallery-submenu">
-                <div class="submenu-div1 back-from-gallery">
-                    <i class="fa fa-angle-left" style="font-size: 30px"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>GALLERY</span>
-                </div>
-                <div class="submenu-div2">
-                    <h3><i class="fa fa-photo" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;All Images</h3>
-                    <a href="#" onclick="GotoGallery(event)">Default</a>
-                    <a href="#">Sort By Credibility</a>
-                    <a href="#">Sort By Publish Time</a>
-                </div>
-                <div class="submenu-div3">
-                    <h3><i class="fa fa-star" style="font-size:24px;color: #FFCD29"></i>&nbsp;&nbsp;&nbsp;Truth Images</h3>
-                    <a href="#">Show All</a>
-                    <a href="#">Top 10</a>
-                    <h3 style="margin-top: 15px"><i class="fa fa-star-half-empty" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Fake Image</h3>
-                    <a href="#">Show All</a>
-                    <a href="#">Sort By Credibility</a>
-                    <a href="#">Sort By Publish Time</a>
-                </div>
-                <div class="submenu-div4">
-                    <div style="width: 80%; height: 80%; display: flex;position: relative; left: 10%; top: 10%;background: #00467F">
-                        <a href="#"><img src="/static/images/background_gallery.jpeg" style="width: 330px;height: 100%"/></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="submenu1" id="help-submenu">
-                <div class="submenu1-div1 back-from-help">
-                    <i class="fa fa-angle-left" style="font-size: 30px"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>HELP</span>
-                </div>
-                <div class="submenu1-div5">
-                    <h3>About The Trust Indicator</h3>
-                    <a href="#">Operating guide</a>
-                    <a href="#">Our faculties and institutes</a>
-                    <a href="#">Business and employers</a>
-                    <a href="#">Community services</a>
-                </div>
-                <div class="submenu1-div6">
-                    <h3>Connect with us</h3>
-                    <a href="#">Contact us All</a>
-                    <a href="#">Our people</a>
-                    <a href="#">Cooperation partner</a>
-
-                </div>
-                <div class="submenu1-div7">
-                    <h3>Work with us</h3>
-                    <a href="#">Staff benefits</a>
-                    <a href="#">Career development</a>
-                </div>
-            </div>
-
-            <div class="submenu2" id="community-submenu">
-                <div class="submenu2-div1 back-from-community">
-                    <i class="fa fa-angle-left" style="font-size: 30px"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>Community</span>
-                </div>
-                <div class="submenu2-div8">
-                    Help Center
-                </div>
-                <div class="submenu2-div8">
-                    Contributor Zone
-                </div>
-                <div class="submenu2-div8">
-                    Feedback
-                </div>
-                <div class="submenu2-div8">
-                    Change Password
-                </div>
-                <div class="submenu2-div8">
-                    Edit Profile
-                </div>
-                <div class="submenu2-div8">
-                    Report Debug
-                </div>
-            </div>
-        </div>
-
         <div id="mcmenu">
             <ul>
-                <li  id="menu-home"><a href="/">Home</a></li>
+                <li id="menu-ahome"><a href="/">Home</a></li>
                 <li class="full-width" id="menu-gallery">
                     <span>Gallery &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
                     <div class="dropdown">
@@ -196,37 +100,10 @@
                     </div>
                 </li>
                 <li id="menu-watchlist"><a href="#">Watch List</a></li>
-                <li id="menu-help" class="full-width">
-                    <span>Help &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
-                    <div class="dropdown">
-                        <div class="clm">
-                            <h3>About the Trust Indicator</h3>
-                            <a href="#">Operating guide</a>
-                            <a href="#">Our faculties and institutes</a>
-                            <a href="#">Business and employers</a>
-                            <a href="#">Community services</a>
-                            <hr class="line">
-                        </div>
-                        <div class="clm">
-                            <h3>Connect with us</h3>
-                            <a href="#">Contact us</a>
-                            <a href="#">Our people</a>
-                            <a href="#">Cooperation partner</a>
-                            <hr class="line">
-                        </div>
-                        <div class="clm">
-                            <h3>Work with us</h3>
-                            <a href="#">Staff benefits</a>
-                            <a href="#">Career development</a>
-                            <hr class="line">
-                        </div>
-                    </div>
-                </li>
-                <li id="menu-wwhatwedo"><a href="#">What We Do</a></li>
+                <li id="menu-help"><a href="#">What We Do</a></li>
                 <li id="menu-community">
-                    <span>Community &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
+                    <span>Help &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
                     <ul class="right0">
-                        <li><a href="#">Help Center</a></li>
                         <li><a href="#">Contributor Zone</a></li>
                         <li><a href="#" onclick="GoToFeedback(event)">Feedback</a></li>
                         <li><a href="/feedback?source=debug">Report Debug &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bug-fill" viewBox="0 0 16 16">
