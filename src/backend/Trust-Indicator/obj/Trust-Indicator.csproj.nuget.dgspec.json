@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ANU作业\\COMP8715\\Trust-Indicator\\src\\backend\\Trust-Indicator\\Trust-Indicator.csproj": {}
+    "C:\\Users\\lingx\\Desktop\\Trust-Indicator\\src\\backend\\Trust-Indicator\\Trust-Indicator.csproj": {}
   },
   "projects": {
-    "D:\\ANU作业\\COMP8715\\Trust-Indicator\\src\\backend\\Trust-Indicator\\Trust-Indicator.csproj": {
+    "C:\\Users\\lingx\\Desktop\\Trust-Indicator\\src\\backend\\Trust-Indicator\\Trust-Indicator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ANU作业\\COMP8715\\Trust-Indicator\\src\\backend\\Trust-Indicator\\Trust-Indicator.csproj",
+        "projectUniqueName": "C:\\Users\\lingx\\Desktop\\Trust-Indicator\\src\\backend\\Trust-Indicator\\Trust-Indicator.csproj",
         "projectName": "Trust-Indicator",
-        "projectPath": "D:\\ANU作业\\COMP8715\\Trust-Indicator\\src\\backend\\Trust-Indicator\\Trust-Indicator.csproj",
-        "packagesPath": "C:\\Users\\songhan\\.nuget\\packages\\",
-        "outputPath": "D:\\ANU作业\\COMP8715\\Trust-Indicator\\src\\backend\\Trust-Indicator\\obj\\",
+        "projectPath": "C:\\Users\\lingx\\Desktop\\Trust-Indicator\\src\\backend\\Trust-Indicator\\Trust-Indicator.csproj",
+        "packagesPath": "C:\\Users\\lingx\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lingx\\Desktop\\Trust-Indicator\\src\\backend\\Trust-Indicator\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "F:\\VisualStudioSDK\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\songhan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\lingx\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,8 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -40,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -102,7 +101,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

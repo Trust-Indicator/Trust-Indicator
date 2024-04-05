@@ -45,6 +45,14 @@ function fadeOutAlert(alertBox) {
         alertBox.remove();
     }, 500);
 }
+
+window.onload = function() {
+  var urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('source') === 'debug') {
+    document.getElementById('bugs-option').checked = true;
+  }
+};
+
 document.addEventListener("DOMContentLoaded", function() {
     fetch('/get_current_user', {
         method: 'GET',

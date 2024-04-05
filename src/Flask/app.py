@@ -105,7 +105,8 @@ def logout():
 
 @app.route('/feedback')
 def GoToFeedback():
-    return render_template('html/feedback.html')
+    source = request.args.get('source', '')
+    return render_template('html/feedback.html', source=source)
 
 
 @app.route('/submit_feedback', methods=['POST'])
@@ -631,7 +632,7 @@ def change_profile_photo():
 
 @app.route('/get_current_user', methods=['GET'])
 def get_current_user():
-    if current_user:
+    if current_user and current_user.is_authenticated:
         user_info = {
             'name': current_user.LegalName,
             'email': current_user.Email
