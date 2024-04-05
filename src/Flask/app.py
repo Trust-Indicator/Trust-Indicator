@@ -80,6 +80,9 @@ def login():
 def userprofile():
     return render_template('html/userprofile.html', user=current_user)
 
+@app.route('/whatwedo')
+def whatwedo():
+    return render_template('html/whatwedo.html')
 
 @login_manager.user_loader
 def load_user(user_id):
