@@ -1,7 +1,15 @@
-body {
+html, body {
     margin: 0;
     padding: 0;
-
+    height: 100%;
+}
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main-content-container {
+  flex: 1;
 }
 .top-title{
     width: 100%;
@@ -2399,7 +2407,6 @@ body {
         display:none;
     }
 }
-
 
 .bottom-navigation-bar{
     width: 100%;

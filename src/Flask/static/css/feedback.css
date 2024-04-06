@@ -1,7 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-}
 h2{
     padding: 20px;
     color: #00467F;
@@ -45,7 +41,7 @@ form{
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    box-sizing: border-box; /* Added for better box sizing */
+    box-sizing: border-box;
 }
 .form-group input[type="submit"] {
     width: 100%;

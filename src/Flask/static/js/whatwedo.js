@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById('missionCard').onclick = function() {
     document.getElementById('missionModal').style.display = "block";
   }
-
+  document.getElementById('methodCard').onclick = function() {
+    document.getElementById('methodModal').style.display = "block";
+  }
   document.getElementById('credibilityCard').onclick = function() {
     document.getElementById('credibilityModal').style.display = "block";
   }
@@ -11,7 +13,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById('closeMission').onclick = function() {
     document.getElementById('missionModal').style.display = "none";
   }
-
+  document.getElementById('closeMethod').onclick = function() {
+    document.getElementById('methodModal').style.display = "none";
+  }
   document.getElementById('closeCredibility').onclick = function() {
     document.getElementById('credibilityModal').style.display = "none";
   }
