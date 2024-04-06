@@ -17,7 +17,7 @@ html, body {
     background: #009AC9;
     justify-content: center;
     align-items: center;
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: white;
     display: flex;
 }
@@ -51,7 +51,7 @@ html, body {
     justify-content: center;
     justify-items: center;
     display: flex;
-    margin-left: 20%;
+    margin-left: 10%;
 }
 
 .info-panels {
@@ -67,11 +67,11 @@ html, body {
     position: relative;
 }
 .search-input {
-    width: 60%;
+    width: 50%;
     border: 1.5px solid #00467F;
     border-radius: 30px;
     background: white;
-    margin-left: 20%;
+    margin-left: 25%;
     font-size: 1rem;
     transition: var(--all-transition);
     height: 30px;
@@ -185,7 +185,7 @@ html, body {
     align-items: center;
     text-align: center;
     position: relative;
-    right: 5%;
+    right: 13%;
 }
 .sign-icon {
     margin-top: 10px;
@@ -322,17 +322,26 @@ html, body {
 
 .logo {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     background-color: #00467F;
-    bottom: 15.5px;
-    left: 5%;
-    clip-path: polygon(25% 0%, 100% 0, 100% 75%, 75% 100%, 0 100%, 0 25%);
+    bottom: 10px;
+    left: 10%;
+    clip-path: polygon(0% 0%, 75% 0, 100% 25%, 100% 100%, 25% 100%, 0 75%);
     z-index: 3;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.logo img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
 }
 .language-change {
     position: relative;
-    right: 3%;
+    right: 10%;
     cursor: pointer;
     padding: 0 10px;
     display: inline-flex;
@@ -384,19 +393,21 @@ html, body {
 }
 
 .navigation-bar-bottom{
-    width: 100%;
+    right: -15%;
+    width: 70%;
     height: 65px;
-    display: flex;
     text-align:center;
     position: relative;
+    align-items: center;
+    display: flex;
 }
 #mcmenu
 {
-    width:70%;
+    width:100%;
     display: inline-block;
     text-align:center;
     z-index: 2;
-    margin-left: 15%;
+    margin-left: 10%;
     height: 100%;
     position: static;
 }
