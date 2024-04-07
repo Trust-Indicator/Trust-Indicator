@@ -46,11 +46,35 @@ function fadeOutAlert(alertBox) {
     }, 500);
 }
 
+function sign_in(event) {
+    event.stopPropagation();  // 阻止事件冒泡
+    var userEmail = sessionStorage.getItem('userEmail');
+    if (userEmail) {
+        // 如果用户已登录，显示或隐藏签入内容
+        const signInContent = document.querySelector('.sign-in-content');
+        if (signInContent.style.display === 'block') {
+            signInContent.style.display = 'none';
+        } else {
+            signInContent.style.display = 'block';
+        }
+    } else {
+        // 如果用户未登录，跳转到登录页面
+        window.location.href = "/login";
+    }
+    const dropdown = document.getElementById('language-options');
+    dropdown.classList.add('hidden');
+}
+
 window.onload = function() {
-  var urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('source') === 'debug') {
-    document.getElementById('bugs-option').checked = true;
-  }
+    var userEmail = sessionStorage.getItem('userEmail');
+    if (userEmail) {
+        document.querySelector(".sign-text").textContent = userEmail;
+        document.querySelector("#show-name").textContent = "Hi  " + userEmail;
+    }
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('source') === 'debug') {
+        document.getElementById('bugs-option').checked = true;
+    }
 };
 
 document.addEventListener("DOMContentLoaded", function() {

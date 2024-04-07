@@ -59,6 +59,15 @@ body {
     -webkit-filter: drop-shadow(0px 0.5px 0.5px #EFEFEF) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
     filter: drop-shadow(0px 0.5px 0.5px #EFEFEF) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
     border-radius: 11px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.logo_container img{
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
 }
 
 .title_container {

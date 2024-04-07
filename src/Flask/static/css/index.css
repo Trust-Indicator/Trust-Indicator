@@ -327,7 +327,7 @@ html, body {
     background-color: #00467F;
     bottom: 10px;
     left: 10%;
-    clip-path: polygon(0% 0%, 75% 0, 100% 25%, 100% 100%, 25% 100%, 0 75%);
+    clip-path: polygon(0% 0%, 85% 0, 100% 15%, 100% 100%, 15% 100%, 0 85%);
     z-index: 3;
     align-items: center;
     justify-content: center;
@@ -335,8 +335,8 @@ html, body {
 }
 .logo img {
     display: block;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 80%;
+    max-height: 80%;
     margin: auto;
 }
 .language-change {
@@ -407,7 +407,7 @@ html, body {
     display: inline-block;
     text-align:center;
     z-index: 2;
-    margin-left: 10%;
+    margin-left: 8%;
     height: 100%;
     position: static;
 }
@@ -2018,407 +2018,6 @@ html, body {
     }
 }
 
-.fake-gallery{
-    width: 100%;
-    height: auto;
-    margin-top: 4%;
-}
-@media (max-width: 800px) {
-    /* 允许主容器的高度自动扩展，并使其子元素垂直排列 */
-    .fake-gallery{
-        flex-direction: column;
-        align-items: center; /* 为了让子元素在容器中居中 */
-        height: auto;  /* 允许高度自动扩展 */
-    }
-    /* 设置子元素宽度为 80% 并且高度为 300px */
-    #ninja-slider{
-        width: 80%;
-        height: auto;
-        margin-top: 30px;  /* 添加一些上边距，使内容不会与顶部贴得太紧 */
-    }
-}
-.fake-title{
-    height: 50px;
-    text-align:left;
-    line-height: 50px;
-    font-size: 24px;
-    color: #00467F;
-    font-weight: bolder;
-    align-items: center;  /* Vertically center the text or content */
-    /* Horizontally center the text or content */
-    display: flex;
-    padding-left: 2%;
-}
-
-#ninja-slider {
-    width:100%;
-    background:#eeeeee;
-    padding-bottom:10px;
-    margin:0 auto;
-    overflow:hidden;
-    box-sizing:border-box;
-}
-
-#ninja-slider.fullscreen {
-    background:black;
-}
-
-#ninja-slider.fullscreen #ninja-slider-prev {
-    left: -50px;
-}
-#ninja-slider.fullscreen #ninja-slider-next {
-    right: -50px;
-}
-
-
-#ninja-slider .fs-icon {
-    top:0px;
-    right:0px;
-    width:45px;
-    height:45px;
-    background: rgba(0,0,0,0.1) url(/static/images/fullscreen.png) no-repeat 0 0;
-    z-index:2;
-    opacity:0;
-    -webkit-transition:opacity 0.8s;
-    transition:opacity 0.8s;
-}
-
-#ninja-slider:hover .fs-icon {
-    opacity: 1;
-}
-
-#ninja-slider.fullscreen .fs-icon {
-    background-position: center -45px;
-    opacity:1;
-}
-
-#ninja-slider .slider-inner {
-    max-width:1000px;
-    margin:0 auto;/*center-aligned*/
-    font-size:0px;
-    position:relative;
-    box-sizing:border-box;
-
-}
-
-#ninja-slider.fullscreen .slider-inner {
-    max-width:900px;
-    max-height:90%;
-}
-
-#ninja-slider ul {
-    /*overflow:hidden;*/
-    position:relative;
-    list-style:none;
-    padding:0;
-    box-sizing:border-box;
-}
-
-#ninja-slider li {
-    background-color:white;
-    width:100%;
-    height:130%;
-    top:0;
-    left:0;
-    position: absolute;
-    font-size:12px;
-    list-style:none;
-    margin:0;
-    padding:0;
-    opacity:0;
-    overflow:hidden;
-    box-sizing:border-box;
-}
-
-#ninja-slider li.ns-show {
-    opacity:1;
-}
-
-
-
-/* --------- slider image ------- */
-#ninja-slider .ns-img {
-    background-color:#eeeeee;
-    background-size:contain;/*Note: If transitionType is zoom, it will be overridden to cover.*/
-    border-radius:3px;
-    cursor:default;
-    display:block;
-    position: absolute;
-    width:100%;
-    height:100%;
-    background-repeat:no-repeat;
-    background-position:center center;
-}
-
-
-/* ---------Arrow buttons ------- */
-/* The arrow button id should be: slider id + ("-prev", "-next", and "-pause-play") */
-#ninja-slider-pause-play { display:none;}
-
-#ninja-slider-prev, #ninja-slider-next
-{
-    position: absolute;
-    display:inline-block;
-    width:42px;
-    height:56px;
-    line-height:56px;
-    top: 50%;
-    margin-top:-28px;
-    background-color:#0080A7;
-    background-color:#0080A7\9;/*IE8 hack*/
-    backface-visibility:hidden;
-    color:#FFFFFF;
-    overflow:hidden;
-    white-space:nowrap;
-    -webkit-user-select: none;
-    user-select:none;
-    border-radius:2px;
-    z-index:10;
-
-    font-family:sans-serif;
-    font-size:13px;
-    cursor:pointer;
-    -webkit-transition:all 0.7s;
-    transition:all 0.7s;
-}
-
-.slider-inner:hover #ninja-slider-prev, .slider-inner:hover #ninja-slider-next {
-    opacity:1;
-}
-
-
-#ninja-slider-prev {
-    left: 0;
-}
-#ninja-slider-next {
-    right: 0;
-}
-
-/* arrows */
-#ninja-slider-prev::before, #ninja-slider-next::before {
-    position: absolute;
-    top: 17px;
-    content: "";
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-left: 2px solid white;
-    border-top: 2px solid white;
-}
-
-#ninja-slider-prev::before {
-    -ms-transform:rotate(-45deg);/*IE 9*/
-    -webkit-transform:rotate(-45deg);
-    transform: rotate(-45deg);
-    backface-visibility:hidden;
-    right:4px;
-}
-
-#ninja-slider-next::before {
-    -ms-transform:rotate(135deg);/*IE 9*/
-    -webkit-transform:rotate(135deg);
-    transform: rotate(135deg);
-    backface-visibility:hidden;
-    left:4px;
-}
-
-
-/*pagination num within the arrow buttons*/
-#ninja-slider-prev div, #ninja-slider-next div {display:none;}
-
-
-/*------ pager(nav bullets) ------*/
-/* The pager id should be: slider id + "-pager" */
-#ninja-slider-pager { display:none;}
-
-
-#ninja-slider-pager, #ninja-slider-prev, #ninja-slider-next, #ninja-slider-pause-play
-{
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-
-/*Responsive settings*/
-@media only screen and (max-width:800px){
-
-    #ninja-slider .fs-icon {
-        display:none;
-    }
-}
-#thumbnail-slider {
-    transform:scale(1.5);
-    transition:transform 0.25s;
-    opacity:0.8;
-    margin:4px auto; /*center-aligned*/
-    width:100%;
-    max-width:550px;
-    padding:70px 40px;/*Gives room for arrow buttons*/
-    box-sizing:border-box;
-    position:relative;
-    -webkit-user-select: none;
-    user-select:none;
-}
-
-#thumbnail-slider:hover {
-
-    transform:scale(1.8);
-    opacity:1;
-}
-
-#ninja-slider.fullscreen #thumbnail-slider {
-    width:90%;
-    max-width:1120px;
-}
-
-#thumbnail-slider div.inner {
-    /*the followings should not be changed */
-    position:relative;
-    overflow:hidden;
-    padding:2px 0;
-    margin:0;
-}
-
-
-#thumbnail-slider div.inner ul {
-
-    /*the followings should not be changed */
-    white-space:nowrap;
-    position:relative;
-    left:0; top:0;
-    list-style:none;
-    font-size:0;
-    padding:0;
-    margin:0;
-    float:left!important;
-    width:auto!important;
-    height:auto!important;
-}
-
-#thumbnail-slider ul li {
-    opacity:1;
-    overflow:visible;
-    display:inline-block;
-    *display:inline!important; /*IE7 hack*/
-    border:2px solid #222;
-    margin:0 4px;/* Spacing between thumbs*/
-    box-sizing:content-box;
-
-    text-align:center;
-    vertical-align:middle;
-    padding:0;
-    position:relative;
-    list-style:none;
-    backface-visibility:hidden;
-
-    transition:all 0.2s;
-    -webkit-transform:scale(1);
-    transform:scale(1);
-}
-
-#thumbnail-slider ul li.active {
-    border-color:white;
-}
-
-#thumbnail-slider li:hover {
-    border-color:rgba(255,255,255,0.7);
-}
-
-
-#thumbnail-slider .thumb {
-    width:100%;
-    height: 100%;
-    background-size:contain;
-    background-repeat:no-repeat;
-    background-position:center center;
-    display:block;
-    position:absolute;
-    font-size:0;
-}
-
-
-/* --------- Captions ------- */
-#thumbnail-slider li > span {
-    position:absolute;
-    color:rgba(255,255,255,0.7);
-    font-size:22px;
-    bottom:2px;
-}
-
-
-/* --------- navigation controls ------- */
-/* The nav id should be: slider id + ("-prev", "-next", and "-pause-play") */
-
-#thumbnail-slider-pause-play {display:none;} /*.pause*/
-
-#thumbnail-slider-prev, #thumbnail-slider-next
-{
-    position: absolute;
-    background-color:none;
-    width:40px;
-    height:50px;
-    line-height:50px;
-    top: 50%;
-    margin:0;
-    margin-top:-25px;
-    color:#00467F;
-    z-index:10;
-    cursor:pointer;
-    opacity:1;
-    *background-color:#00467F;/*IE7 hack*/
-}
-
-#thumbnail-slider-prev {
-    left:0px; right:auto;
-}
-
-#thumbnail-slider-next {
-    left:auto; right:0px;
-}
-#thumbnail-slider-next.disabled, #thumbnail-slider-prev.disabled {
-    opacity:0.3;
-    cursor:default;
-}
-
-/* arrows */
-#thumbnail-slider-prev::before, #thumbnail-slider-next::before {
-    position: absolute;
-    top: 15px;
-    content: "";
-    display: block;
-    width: 20px;
-    height: 20px;
-    border-left: 3px solid #00467F;
-    border-top: 3px solid #00467F;
-}
-
-#thumbnail-slider-prev::before {
-    left:14px;
-    -ms-transform:rotate(-45deg);/*IE9*/
-    -webkit-transform:rotate(-45deg);
-    transform: rotate(-45deg);
-}
-
-#thumbnail-slider-next::before {
-    right:14px;
-    -ms-transform:rotate(135deg);/*IE9*/
-    -webkit-transform:rotate(135deg);
-    transform: rotate(135deg);
-}
-
-/*Responsive settings*/
-@media only screen and (max-width:736px){
-
-    #thumbnail-slider {
-        display:none;
-    }
-
-    #thumbnail-slider-prev, #thumbnail-slider-next {
-        display:none;
-    }
-}
-
 .bottom-navigation-bar{
     width: 100%;
     height: 80px;
@@ -2477,3 +2076,77 @@ html, body {
     border-bottom: 1px solid #ffffff;
 }
 
+.gallery-container2 {
+    width: 60%;
+    margin: 15px auto;
+    text-align: center;
+}
+
+#slider {
+    position: relative;
+    margin: 20px auto;
+}
+
+.slides-container {
+    position: relative;
+    width: 100%;
+    height: 400px; /* 或者您想要的固定高度 */
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: contain; /* 或者 'cover'，视您的需求而定 */
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 5;
+}
+
+button.prev {
+    left: 10px;
+}
+
+button.next {
+    right: 10px;
+}
+
+.thumbnails-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 60px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.5s ease;
+}
+
+.thumbnail.active {
+    opacity: 1;
+}
+.thumbnail:hover{
+    opacity: 0.8
+}
