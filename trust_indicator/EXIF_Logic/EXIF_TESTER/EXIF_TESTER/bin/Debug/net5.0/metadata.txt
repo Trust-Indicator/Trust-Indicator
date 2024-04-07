@@ -1,0 +1,128 @@
+Type: SourceFile, Value: C:/Users/yifan/Desktop/??????片/20230408_Canberra/0B89B3F8-EEA9-4219-8B18-EC1F079BC3BF-17677-00001F6120BE746A.jpg
+Type: ExifToolVersion, Value: 12.67
+Type: FileName, Value: 0B89B3F8-EEA9-4219-8B18-EC1F079BC3BF-17677-00001F6120BE746A.jpg
+Type: Directory, Value: C:/Users/yifan/Desktop/??????片/20230408_Canberra
+Type: Warning, Value: FileName encoding not specified
+Type: FileSize, Value: 2.5 MB
+Type: FileModifyDate, Value: 2023:04:08 20:49:00+10:00
+Type: FileAccessDate, Value: 2023:10:03 23:42:45+11:00
+Type: FileCreateDate, Value: 2023:04:08 22:24:37+10:00
+Type: FilePermissions, Value: -rw-rw-rw-
+Type: FileType, Value: JPEG
+Type: FileTypeExtension, Value: jpg
+Type: MIMEType, Value: image/jpeg
+Type: ExifByteOrder, Value: Big-endian (Motorola, MM)
+Type: Make, Value: FUJIFILM
+Type: Model, Value: X-T30 II
+Type: Orientation, Value: Horizontal (normal)
+Type: XResolution, Value: 72
+Type: YResolution, Value: 72
+Type: ResolutionUnit, Value: inches
+Type: Software, Value: Digital Camera X-T30 II Ver1.12
+Type: ModifyDate, Value: 2023:04:05 11:38:13
+Type: Artist, Value: 
+Type: YCbCrPositioning, Value: Centered
+Type: Copyright, Value: 
+Type: ExposureTime, Value: 1/100
+Type: FNumber, Value: 5.6
+Type: ExposureProgram, Value: Shutter speed priority AE
+Type: ISO, Value: 250
+Type: SensitivityType, Value: Standard Output Sensitivity
+Type: ExifVersion, Value: 0232
+Type: DateTimeOriginal, Value: 2023:04:05 11:38:13
+Type: CreateDate, Value: 2023:04:05 11:38:13
+Type: ComponentsConfiguration, Value: Y, Cb, Cr, -
+Type: CompressedBitsPerPixel, Value: 4.8
+Type: ShutterSpeedValue, Value: 1/102
+Type: ApertureValue, Value: 5.7
+Type: BrightnessValue, Value: 4.51
+Type: ExposureCompensation, Value: -0.67
+Type: MaxApertureValue, Value: 3.5
+Type: MeteringMode, Value: Multi-segment
+Type: LightSource, Value: Unknown
+Type: Flash, Value: No Flash
+Type: FocalLength, Value: 45.0 mm
+Type: FlashpixVersion, Value: 0100
+Type: ColorSpace, Value: sRGB
+Type: ExifImageWidth, Value: 6240
+Type: ExifImageHeight, Value: 4160
+Type: FocalPlaneXResolution, Value: 2660
+Type: FocalPlaneYResolution, Value: 2660
+Type: FocalPlaneResolutionUnit, Value: cm
+Type: SensingMethod, Value: One-chip color area
+Type: FileSource, Value: Digital Camera
+Type: SceneType, Value: Directly photographed
+Type: CustomRendered, Value: Normal
+Type: ExposureMode, Value: Auto
+Type: WhiteBalance, Value: Auto
+Type: FocalLengthIn35mmFormat, Value: 68 mm
+Type: SceneCaptureType, Value: Standard
+Type: Sharpness, Value: Normal
+Type: SubjectDistanceRange, Value: Unknown
+Type: SerialNumber, Value: 2C010904
+Type: LensInfo, Value: 15-45mm f/3.5-5.6
+Type: LensMake, Value: FUJIFILM
+Type: LensModel, Value: XC15-45mmF3.5-5.6 OIS PZ
+Type: LensSerialNumber, Value: 2BC10214
+Type: CompositeImage, Value: Not a Composite Image
+Type: XMPToolkit, Value: XMP Core 6.0.0
+Type: Creator, Value:                                                                                                                                                                                                                                                                
+Type: Rights, Value:                                                                                                                                                                                                                                                                
+Type: Lens, Value: 15.0-45.0 mm f/3.5-5.6
+Type: Rating, Value: 0
+Type: CreatorTool, Value: Digital Camera X-T30 II Ver1.12
+Type: ProfileCMMType, Value: Apple Computer Inc.
+Type: ProfileVersion, Value: 4.0.0
+Type: ProfileClass, Value: Display Device Profile
+Type: ColorSpaceData, Value: RGB 
+Type: ProfileConnectionSpace, Value: XYZ 
+Type: ProfileDateTime, Value: 2022:01:01 00:00:00
+Type: ProfileFileSignature, Value: acsp
+Type: PrimaryPlatform, Value: Apple Computer Inc.
+Type: CMMFlags, Value: Not Embedded, Independent
+Type: DeviceManufacturer, Value: Apple Computer Inc.
+Type: DeviceModel, Value: 
+Type: DeviceAttributes, Value: Reflective, Glossy, Positive, Color
+Type: RenderingIntent, Value: Perceptual
+Type: ConnectionSpaceIlluminant, Value: 0.9642 1 0.82491
+Type: ProfileCreator, Value: Apple Computer Inc.
+Type: ProfileID, Value: ecfda38e388547c36db4bd4f7ada182f
+Type: ProfileDescription, Value: Display P3
+Type: ProfileCopyright, Value: Copyright Apple Inc., 2022
+Type: MediaWhitePoint, Value: 0.96419 1 0.82489
+Type: RedMatrixColumn, Value: 0.51512 0.2412 -0.00105
+Type: GreenMatrixColumn, Value: 0.29198 0.69225 0.04189
+Type: BlueMatrixColumn, Value: 0.1571 0.06657 0.78407
+Type: RedTRC, Value: (Binary data 32 bytes, use -b option to extract)
+Type: ChromaticAdaptation, Value: 1.04788 0.02292 -0.0502 0.02959 0.99048 -0.01706 -0.00923 0.01508 0.75168
+Type: BlueTRC, Value: (Binary data 32 bytes, use -b option to extract)
+Type: GreenTRC, Value: (Binary data 32 bytes, use -b option to extract)
+Type: CurrentIPTCDigest, Value: 11d2a9f38771ffbdc1196f1492b13169
+Type: CodedCharacterSet, Value: UTF8
+Type: ApplicationRecordVersion, Value: 2
+Type: By-line, Value:                                                                                                                                                                                                                                                                
+Type: DigitalCreationDate, Value: 2023:04:05
+Type: DigitalCreationTime, Value: 11:38:13
+Type: DateCreated, Value: 2023:04:05
+Type: TimeCreated, Value: 11:38:13
+Type: CopyrightNotice, Value:                                                                                                                                                                                                                                                                
+Type: IPTCDigest, Value: 11d2a9f38771ffbdc1196f1492b13169
+Type: ImageWidth, Value: 3618
+Type: ImageHeight, Value: 5427
+Type: EncodingProcess, Value: Baseline DCT, Huffman coding
+Type: BitsPerSample, Value: 8
+Type: ColorComponents, Value: 3
+Type: YCbCrSubSampling, Value: YCbCr4:2:0 (2 2)
+Type: Aperture, Value: 5.6
+Type: ImageSize, Value: 3618x5427
+Type: Megapixels, Value: 19.6
+Type: ScaleFactor35efl, Value: 1.5
+Type: ShutterSpeed, Value: 1/100
+Type: DateTimeCreated, Value: 2023:04:05 11:38:13
+Type: DigitalCreationDateTime, Value: 2023:04:05 11:38:13
+Type: CircleOfConfusion, Value: 0.020 mm
+Type: FOV, Value: 29.7 deg
+Type: FocalLength35efl, Value: 45.0 mm (35 mm equivalent: 68.0 mm)
+Type: HyperfocalDistance, Value: 18.19 m
+Type: LightValue, Value: 10.3
+Type: LensID, Value: XC15-45mm F3.5-5.6 OIS PZ

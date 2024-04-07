@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/analysis.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='images/CredibilitySiginal_v2.0.0.png') }}" type="image/png">
+</head>
+<body>
+
+<div style="position: relative; height: 100%; display: flex;flex-direction: column;min-height: 100vh;min-width: fit-content">
+    <div class="top-title"></div>
+    <div class="navigation-bar-container">
+        <div class="navigation-bar-top">
+            <!--search box-->
+            <div class="search-container">
+                <div class="info-panels">
+                    <div class="input-color-group-one">
+                        <input class="search-input" autocomplete="on" name="text" type="text" required="" placeholder="Rapunga / Search">
+                        <label class="search-label">Search</label>
+                        <button class="search-button">
+                            <svg fill="white" width="15px" height="15px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--search box-->
+
+            <!--log in-->
+            <div class="login-container" onclick="sign_in(event)">
+                <div class="sign-icon">
+                    <i class="fa fa-user-circle-o" style="font-size:30px"></i>
+                </div>
+                <div class="sign-text">Sign In</div>
+            </div>
+            <!--log in-->
+
+            <!--log in content-->
+            <div class="sign-in-content">
+                <div class="content-section" id="show-name">Hi Song Han</div>
+                <hr class="divider">
+                <div class="content-section" id="change-password">Change Password<i class="fa fa-chevron-right fa-right" ></i></div>
+                <hr class="divider">
+                <div class="content-section" id="edit-profile">Edit Profile<i class="fa fa-chevron-right fa-right"></i></div>
+                <hr class="divider">
+                <div class="content-section" style="height: 50px;justify-content: center;align-content: center">
+                    <button type="button" title="Sign out"  class="sign-out-button  sign-out-button-color sign-out-button-background-color" onclick="sign_out_upload(event)">
+                        <span>Sign Out &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></span>
+                    </button>
+                </div>
+                <div class="content-triangle"></div>
+            </div>
+            <!--log in content-->
+            <div class="language-change" onclick="toggleDropdown(event)">
+                <span id="selected-language">EN</span>
+                <span class="dropdown-arrow"><i class="fa fa-caret-down" style="font-size:20px;padding-left: 5px"></i></span>
+                <ul id="language-options" class="hidden">
+                    <li onclick="updateLanguage('EN', event)">English</li>
+                    <li onclick="updateLanguage('CN', event)">Chinese</li>
+                    <li onclick="updateLanguage('ES', event)">Spanish</li>
+                    <li onclick="updateLanguage('FR', event)">French</li>
+                    <li onclick="updateLanguage('DE', event)">German</li>
+                </ul>
+            </div>
+            <!--log in content-->
+        </div>
+
+        <div class="logo"><img src="{{ url_for('static', filename='images/CredibilitySiginal.png') }}" alt="Trust Indicator Logo"/></div>
+    </div>
+
+    <div class="main">
+        <div class="image-result-container">
+            <div class="image-show-container">
+                <div class="show-image">
+                    <div class="image-display"></div>
+                </div>
+
+                <div class="show-icon">
+                    <div class="wrapper">
+                        <div class="button"  id="zoomIn">
+                            <div class="icon">
+                                <i class='fas fa-plus-circle'></i>
+                            </div>
+                            <span class="icon-introduce">Enlarge</span>
+                        </div>
+                        <div class="button" id="zoomOut">
+                            <div class="icon">
+                                <i class='fas fa-minus-circle'></i>
+                            </div>
+                            <span class="icon-introduce">Shrink</span>
+                        </div>
+                        <div class="button" id="Download">
+                            <div class="icon">
+                                <i class='fas fa-cloud-download-alt'></i>
+                            </div>
+                            <span class="icon-introduce">Download</span>
+                        </div>
+
+                        <div class="button">
+                            <div class="icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <span class="icon-introduce">Instagram</span>
+                        </div>
+                        <div class="button">
+                            <div class="icon">
+                                <i class="fab fa-twitter"></i>
+                            </div>
+                            <span class="icon-introduce">Twitter</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="result-container">
+                <div class="show-result">
+                    <div class="warpper-wait">
+                        <div class="content"></div>
+                        <div class="number">3</div>
+                    </div>
+
+                    <div class="result">
+                        <div class="analysis-result">
+                            <div class="header">Analysis Result</div>
+                            <div class="chart">
+                                <div class="progress-circle">
+                                    <svg viewBox="0 0 36 36" class="circular-chart">
+                                        <path class="circle-bg"
+                                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                              fill="none"
+                                              stroke="#eee"
+                                              stroke-width="2.5"/>
+
+                                        <path class="circle" id="circle-Original"
+                                              stroke-dasharray="100, 100"
+                                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                              fill="none"
+                                              stroke="#C4362E"
+                                              stroke-width="2.5"
+                                              stroke-linecap="round"/>
+                                        <text x="18" y="20.35" class="percentage" id="percentage-Original" fill="#00467F" text-anchor="middle">100%</text>
+                                    </svg>
+                                        <div class="label">Original</div>
+                                </div>
+
+                                <div class="progress-circle">
+                                    <svg viewBox="0 0 36 36" class="circular-chart">
+                                        <path class="circle-bg"
+                                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                              fill="none"
+                                              stroke="#eee"
+                                              stroke-width="2.5"/>
+                                        <path class="circle" id="circle-AIGC"
+                                              stroke-dasharray="100, 100"
+                                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                              fill="none"
+                                              stroke="#C4362E"
+                                              stroke-width="2.5"
+                                              stroke-linecap="round"/>
+                                        <text x="18" y="20.35" class="percentage" id="percentage-AIGC" fill="#00467F" text-anchor="middle">100%</text>
+                                    </svg>
+                                    <div class="label">AIGC</div>
+                                </div>
+
+                                <div class="progress-circle">
+                                    <svg viewBox="0 0 36 36" class="circular-chart">
+                                        <path class="circle-bg"
+                                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                              fill="none"
+                                              stroke="#eee"
+                                              stroke-width="2.5"/>
+
+                                        <path class="circle" id="circle-Manipulation"
+                                              stroke-dasharray="100, 100"
+                                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                              fill="none"
+                                              stroke="#C4362E"
+                                              stroke-width="2.5"
+                                              stroke-linecap="round"/>
+                                        <text x="18" y="20.35" class="percentage" id="percentage-Manipulation" fill="#00467F" text-anchor="middle">100%</text>
+                                    </svg>
+                                    <div class="label">Manipulation</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="signal-result">
+                            <div class="header">Credibility Signal </div>
+                            <div class="chart" >
+                                <div class="signal" id="signal1">
+                                </div>
+                                <div class="signal" id="signal2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="result-button-container">
+
+                            <div class="result-button"  onclick="AnalysisOtherImage(event)">
+                                <button type="button"  class="analysis-button  analysis-button-color analysis-button-background-color">
+                                    <span>Analysis Other Image</span>
+                                </button>
+                            </div>
+
+                            <div class="result-button" onclick="Gohome(event)">
+                                <button type="button"  class="home-button  home-button-color home-button-background-color">
+                                    <span>Go Homepage</span>
+                                </button>
+                            </div>
+
+                            <div class="result-button" >
+                                <button type="button"  class="report-button  report-button-color report-button-background-color">
+                                    <span>Report Wrong Analysis</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-navigation-bar">
+        <div class="connect-container">
+            <table class="connect-table">
+                <tr>
+                    <th><p style="font-size:10px;color:#ffffff;opacity: 0.6;margin-right: 20px" >Connect with us</p></th>
+                    <th><i class="fa fa-instagram" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-facebook" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-envelope" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-linkedin" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accessibility-container">
+            <div class="accessibility">
+                <div style="width: 80%; height: 100%;margin-left: 10%; display: flex; align-items: center;">
+                    <p class="site-link1">Accessibility</p>
+                    <p class="site-link">|</p>
+                    <p class="site-link1">Copyright</p>
+                    <p class="site-link">|</p>
+                    <p class="site-link1">Privacy</p>
+                    <p class="site-link">|</p>
+                    <p class="disclaimer-text">Disclaimer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script src="{{ url_for('static', filename='js/analysis.js') }}"></script>
+</html>
