@@ -650,4 +650,5 @@ def get_current_user():
 
 
 if __name__ == '__main__':
-    app.run(ssl_context=('env/localhost.crt', 'env/localhost.key'))
+    # app.run(ssl_context=('env/localhost.crt', 'env/localhost.key'))
+    app.run()
