@@ -45,7 +45,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=0)
 db.init_app(app)
 create_database(app)
 
-# Flask-Login配置
+# Flask-Login Configuration
 app.secret_key = 'COMP8715'
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -290,15 +290,15 @@ def load_user(user_id):
 
 @app.route('/login_function', methods=['POST'])
 def login_function():
-    # 从请求中获取数据
+    # Get data from the request
     data = request.get_json()
     username_or_email = data.get('username')
     password = data.get('password')
 
-    # 查询数据库中的用户
+    # Query the user in the database
     user = User.query.filter((User.UserName == username_or_email) | (User.Email == username_or_email)).first()
 
-    # 验证密码并登录用户
+    # Verify the password and log in the user
     if user and check_password_hash(user.Password, password):
         login_user(user)
         return jsonify({'message': 'Logged in successfully'}), 200
