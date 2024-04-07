@@ -29,6 +29,7 @@ app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg'}
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
+app.config["SESSION_FILE_DIR"] = "./flask_session_cache"
 # Email Server
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
