@@ -3,7 +3,7 @@ h2{
     color: #00467F;
     font-size: 3vh;
 }
-p{
+.feedback-message p{
     padding-left: 20px;
     padding-right: 20px;
     font-size: 1vh;

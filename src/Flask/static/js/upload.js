@@ -22,7 +22,16 @@ document.addEventListener('DOMContentLoaded', function () {
             // ...
         }
     });
-})
+});
+
+function sign_out_upload(event){
+    event.stopPropagation();
+    sessionStorage.removeItem('userEmail');
+    document.querySelector(".sign-text").textContent = "Sign In";
+    const signInContent = document.querySelector('.sign-in-content');
+    signInContent.style.display = 'none';
+    window.location.href="/";
+}
 
 document.addEventListener("DOMContentLoaded", function() {
     var dropBox = document.querySelector('.drop-box'); // Selecting using class
@@ -189,8 +198,12 @@ document.addEventListener("DOMContentLoaded", function() {
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function() {
-            let img = document.querySelector('#image-preview'); // Assuming image-preview is an ID
+            let img = document.getElementById('image-preview'); // Assuming image-preview is an ID
             img.src = reader.result;
+            img.style.display = "block";
+            let box = document.querySelector(".drop-box");
+            box.innerHTML = "";
+            box.appendChild(img);
         }
     }
 

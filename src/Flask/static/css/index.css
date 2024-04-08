@@ -558,7 +558,7 @@ html, body {
     color:#000000;
 }
 
-#menu-community span{
+#menu-zhelp span{
     font-size: 1.1rem;
     text-align: center;
     justify-content: center;
@@ -568,7 +568,7 @@ html, body {
     white-space: nowrap;  /* Add this line */
 }
 
-#menu-community span:hover::after {
+#menu-zhelp span:hover::after {
     content: '';
     position: absolute;
     left: 0;
@@ -577,7 +577,7 @@ html, body {
     height: 4px;
     background-color: #00467F;
 }
-#menu-community .right0 {
+#menu-zhelp .right0 {
     position: absolute;
     top: 100%;  /* Position below the parent */
     /* Align left to the parent */
@@ -590,17 +590,17 @@ html, body {
     width: auto;
     background-color: rgba(238, 238, 238, 0.8);
 }
-#menu-community .right0 li{
+#menu-zhelp .right0 li{
     width: 100%;
 }
 
 /* Hover state to display dropdown */
-#menu-community:hover .right0 {
+#menu-zhelp:hover .right0 {
     display: block;
 }
 
 /* Additional styles to make it visually appealing */
-#menu-community .right0 a {
+#menu-zhelp .right0 a {
     padding: 10px;
     color: #00467F;
     transition: background-color 0.2s;
@@ -611,29 +611,29 @@ html, body {
     font-weight: normal;
 }
 
-#menu-community .right0 a:hover {
+#menu-zhelp .right0 a:hover {
     background-color: #00467F;
     color: #FFFFFF;
 }
 
 /* Adjust second level dropdown */
-#menu-community .right0 > li > ul.right1 {
+#menu-zhelp .right0 > li > ul.right1 {
     position: absolute; /* Set the position of the second dropdown */
     left: -100%; /* Position it to the left of its parent */
     top: 0; /* Align to the top of its parent */
     display: none;
     border-radius: 5px;
 }
-#menu-community .right0 > li > ul.right1 li{
+#menu-zhelp .right0 > li > ul.right1 li{
     width: 100%;
     height: auto;
     background-color: rgba(238, 238, 238, 0.8);
 }
 /* Hover state to display second level dropdown */
-#menu-community .right0 > li:hover > ul.right1 {
+#menu-zhelp .right0 > li:hover > ul.right1 {
     display: block;
 }
-#menu-community span{
+#menu-zhelp span{
     font-size: 1.1rem;
     text-align: center;
     justify-content: center;
@@ -643,7 +643,7 @@ html, body {
     white-space: nowrap;  /* Add this line */
 }
 
-#menu-community span:hover::after {
+#menu-zhelp span:hover::after {
     content: '';
     position: absolute;
     left: 0;
@@ -652,7 +652,7 @@ html, body {
     height: 4px;
     background-color: #00467F;
 }
-#menu-community .right0 {
+#menu-zhelp .right0 {
     position: absolute;
     top: 100%;  /* Position below the parent */
     /* Align left to the parent */
@@ -665,17 +665,17 @@ html, body {
     width: auto;
     background-color: rgba(238, 238, 238, 0.8);
 }
-#menu-community .right0 li{
+#menu-zhelp .right0 li{
     width: 100%;
 }
 
 /* Hover state to display dropdown */
-#menu-community:hover .right0 {
+#menu-zhelp:hover .right0 {
     display: block;
 }
 
 /* Additional styles to make it visually appealing */
-#menu-community .right0 a {
+#menu-zhelp .right0 a {
     padding: 10px;
     color: #00467F;
     transition: background-color 0.2s;
@@ -686,26 +686,26 @@ html, body {
     font-weight: normal;
 }
 
-#menu-community .right0 a:hover {
+#menu-zhelp .right0 a:hover {
     background-color: #00467F;
     color: #FFFFFF;
 }
 
 /* Adjust second level dropdown */
-#menu-community .right0 > li > ul.right1 {
+#menu-zhelp .right0 > li > ul.right1 {
     position: absolute; /* Set the position of the second dropdown */
     left: -100%; /* Position it to the left of its parent */
     top: 0; /* Align to the top of its parent */
     display: none;
     border-radius: 5px;
 }
-#menu-community .right0 > li > ul.right1 li{
+#menu-zhelp .right0 > li > ul.right1 li{
     width: 100%;
     height: auto;
     background-color: rgba(238, 238, 238, 0.8);
 }
 /* Hover state to display second level dropdown */
-#menu-community .right0 > li:hover > ul.right1 {
+#menu-zhelp .right0 > li:hover > ul.right1 {
     display: block;
 }
 @media (max-width: 1000px) and (min-width: 700px) {
@@ -719,7 +719,7 @@ html, body {
     .navigation-bar-container{
         height: 180px;
     }
-    #menu-community .right0{
+    #menu-zhelp .right0{
         top:80%
     }
 }
@@ -796,7 +796,7 @@ html, body {
 }
 .main-menu {
     width: 400px;
-    height: 300px;
+    height: auto;
     background: #FFFFFF;
     text-align: left;
     display: none;

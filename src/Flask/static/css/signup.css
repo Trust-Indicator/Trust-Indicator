@@ -21,6 +21,16 @@ body {
     background: #00467F;
     width: 130px;
     position: absolute;
+    margin:auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.logo img{
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+    margin: auto;
 }
 .form-container {
     display: flex;

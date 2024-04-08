@@ -18,7 +18,7 @@
     background-color: #00467F;
     width: 200px;
     position: fixed;
-    bottom: 25%;
+    top: 32%;
     left: 0;
     display: flex;
     flex-direction: column;
@@ -33,42 +33,38 @@
     transform: translateX(0);
 }
 .navigation{
-    height: 80%;
     display: flex;
     flex-direction: column;
     width: 100%;
     color: white;
-
 }
 
 .navigation ul {
-    padding: 0; /* Remove default padding */
-    list-style-type: none; /* Remove list item bullets */
+    padding: 0;
+    list-style-type: none;
 
 }
 
 .navigation li {
-    margin-top: 5%;
-    border-radius: 4px; /* Rounded corners for the items */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    border-radius: 4px;
+    transition: background-color 0.3s;
     margin-left: 10px;
     margin-right: 10px;
     padding: 10px;
 }
 
 .navigation li:hover {
-    background-color: white; /* Slightly lighter blue on hover */
+    background-color: white;
     color: #00467F;
 }
 
 .navigation li.active {
-    background-color: #1ABC9C; /* Different color for the active/current item */
+    background-color: #1ABC9C;
 }
 
-/* Icon styles (assuming you're using Font Awesome or similar) */
 .navigation i {
-    margin-right: 10px; /* Space between icon and text */
-    width: 20px; /* Fixed width for alignment */
+    margin-right: 10px;
+    width: 20px;
 }
 .main-content {
     flex-grow: 1;

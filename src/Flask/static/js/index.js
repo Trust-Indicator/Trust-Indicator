@@ -127,166 +127,6 @@ function updateLanguage(code, event) {
     event.stopPropagation();
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    function rearrangeMenu() {
-        var ul = document.querySelector('#mcmenu > ul');
-        // 获取各个元素
-        var home = document.getElementById('menu-home');
-        var gallery = document.getElementById('menu-gallery');
-        var watchList = document.getElementById('menu-watchlist');
-        var help = document.getElementById('menu-help');
-        var whatWeDo = document.getElementById('menu-wwhatwedo');
-        var community = document.getElementById('menu-community');
-        if(window.innerWidth <= 1000 && window.innerWidth >700) {
-
-            ul.appendChild(home);
-            ul.appendChild(watchList);
-            ul.appendChild(whatWeDo);
-            ul.appendChild(gallery);
-            ul.appendChild(help);
-            ul.appendChild(community);
-        } else {
-            ul.appendChild(home);
-            ul.appendChild(gallery);
-            ul.appendChild(watchList);
-            ul.appendChild(help);
-            ul.appendChild(whatWeDo);
-            ul.appendChild(community);
-        }
-    }
-    rearrangeMenu();
-    window.addEventListener('resize', rearrangeMenu);
-
-
-    var menuIconWrapper = document.querySelector('.menu-icon-wrapper');
-    var sidebar = document.querySelector('.sidebar');
-    var mainMenu = sidebar.querySelector('.main-menu');
-    var submenus = sidebar.querySelectorAll('.submenu');
-    var submenus1 = sidebar.querySelectorAll('.submenu1');
-    var submenus2 = sidebar.querySelectorAll('.submenu2');
-    var menuLinks = mainMenu.querySelectorAll('a[data-target]');
-
-    if (menuIconWrapper) {
-        menuIconWrapper.addEventListener('click', function() {
-            var threeLine = this.querySelector('.three-line');
-
-            if (threeLine.classList.contains('cross')) {
-                threeLine.classList.remove('cross');
-                sidebar.style.display = 'none'; // 关闭侧边栏
-            } else {
-                threeLine.classList.add('cross');
-                sidebar.style.display = 'block'; // 打开侧边栏
-
-                // 每次显示sidebar时，确保始终显示主菜单并隐藏所有子菜单
-                mainMenu.style.display = 'block';
-                submenus.forEach(function(submenu) {
-                    submenu.style.display = 'none';
-                });
-                submenus1.forEach(function(submenu1) {
-                    submenu1.style.display = 'none';
-                });
-                submenus2.forEach(function(submenu2) {
-                    submenu2.style.display = 'none';
-                });
-            }
-        });
-    }
-
-    menuLinks.forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            var targetMenuId = link.getAttribute('data-target');
-            var targetMenu = sidebar.querySelector('#' + targetMenuId);
-            if (targetMenu) {
-                mainMenu.style.display = 'none';
-                targetMenu.style.display = 'block';
-            }
-        });
-    });
-
-    var backLinks = sidebar.querySelectorAll('.back-to-main');
-    backLinks.forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            mainMenu.style.display = 'block';
-            submenus.forEach(function(submenu) {
-                submenu.style.display = 'none';
-            });
-            submenus1.forEach(function(submenu1) {
-                submenu1.style.display = 'none';
-            });
-            submenus2.forEach(function(submenu2) {
-                submenu2.style.display = 'none';
-            });
-        });
-    });
-    var backFromGallery = document.querySelector('.back-from-gallery');
-    if (backFromGallery) {
-        backFromGallery.addEventListener('click', function(event) {
-            event.preventDefault();
-            mainMenu.style.display = 'block';
-            submenus.forEach(function(submenu) {
-                submenu.style.display = 'none';
-            });
-            submenus1.forEach(function(submenu1) {
-                submenu1.style.display = 'none';
-            });
-            submenus2.forEach(function(submenu2) {
-                submenu2.style.display = 'none';
-            });
-        });
-    }
-    var backFromHelp = document.querySelector('.back-from-help');
-    if (backFromHelp) {
-        backFromHelp.addEventListener('click', function(event) {
-            event.preventDefault();
-            mainMenu.style.display = 'block';
-            submenus.forEach(function(submenu) {
-                submenu.style.display = 'none';
-            });
-            submenus1.forEach(function(submenu1) {
-                submenu1.style.display = 'none';
-            });
-            submenus2.forEach(function(submenu2) {
-                submenu2.style.display = 'none';
-            });
-        });
-    }
-    var backFromCommunity = document.querySelector('.back-from-community');
-    if (backFromCommunity) {
-        backFromCommunity.addEventListener('click', function(event) {
-            event.preventDefault();
-            mainMenu.style.display = 'block';
-            submenus.forEach(function(submenu) {
-                submenu.style.display = 'none';
-            });
-            submenus1.forEach(function(submenu1) {
-                submenu1.style.display = 'none';
-            });
-            submenus2.forEach(function(submenu2) {
-                submenu2.style.display = 'none';
-            });
-        });
-    }
-
-    window.addEventListener('resize', function() {
-        var threeLine = document.querySelector('.menu-icon-wrapper .three-line');
-        if (window.innerWidth > 700) {
-            // 隐藏sidebar
-            document.querySelector('.sidebar').style.display = 'none';
-            // 如果当前是错号，更改为横线
-            if (threeLine.classList.contains('cross')) {
-                threeLine.classList.remove('cross');
-            }
-        } else {
-            // 如果sidebar是显示的，确保图标是错号
-            if (document.querySelector('.sidebar').style.display === 'block' && !threeLine.classList.contains('cross')) {
-                threeLine.classList.add('cross');
-            }
-        }
-    });
-});
-
 function GotoGallery(event){
     window.location.href = "/gallery";
 }
@@ -326,4 +166,160 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial set up
     setActiveSlide(currentSlide);
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    function rearrangeMenu() {
+        var ul = document.querySelector('#mcmenu > ul');
+        // 获取各个元素
+        var home = document.getElementById('menu-ahome');
+        var gallery = document.getElementById('menu-gallery');
+        var upload = document.getElementById('menu-upload');
+        var whatWeDo = document.getElementById('menu-whatwedo');
+        var help = document.getElementById('menu-zhelp');
+        if(window.innerWidth <= 1000 && window.innerWidth >700) {
+            ul.appendChild(home);
+            ul.appendChild(gallery);
+            ul.appendChild(upload);
+            ul.appendChild(whatWeDo);
+            ul.appendChild(help);
+        } else {
+            ul.appendChild(home);
+            ul.appendChild(gallery);
+            ul.appendChild(upload);
+            ul.appendChild(whatWeDo);
+            ul.appendChild(help);
+        }
+    }
+    rearrangeMenu();
+    window.addEventListener('resize', rearrangeMenu);
+
+    var menuIconWrapper = document.querySelector('.menu-icon-wrapper');
+    var sidebar = document.querySelector('.sidebar');
+    var mainMenu = sidebar.querySelector('.main-menu');
+    var submenus = sidebar.querySelectorAll('.submenu');
+    var submenus2 = sidebar.querySelectorAll('.submenu2');
+    var menuLinks = mainMenu.querySelectorAll('a[data-target]');
+
+    if (menuIconWrapper) {
+        menuIconWrapper.addEventListener('click', function() {
+            var threeLine = this.querySelector('.three-line');
+
+            if (threeLine.classList.contains('cross')) {
+                threeLine.classList.remove('cross');
+                sidebar.style.display = 'none'; // 关闭侧边栏
+            } else {
+                threeLine.classList.add('cross');
+                sidebar.style.display = 'block'; // 打开侧边栏
+
+                // 每次显示sidebar时，确保始终显示主菜单并隐藏所有子菜单
+                mainMenu.style.display = 'block';
+                submenus.forEach(function(submenu) {
+                    submenu.style.display = 'none';
+                });
+                submenus2.forEach(function(submenu2) {
+                    submenu2.style.display = 'none';
+                });
+            }
+        });
+    }
+
+    menuLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            var targetMenuId = link.getAttribute('data-target');
+            var targetMenu = sidebar.querySelector('#' + targetMenuId);
+            if (targetMenu) {
+                mainMenu.style.display = 'none';
+                targetMenu.style.display = 'block';
+            }
+        });
+    });
+
+    var backLinks = sidebar.querySelectorAll('.back-to-main');
+    backLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            mainMenu.style.display = 'block';
+            submenus.forEach(function(submenu) {
+                submenu.style.display = 'none';
+            });
+            submenus2.forEach(function(submenu2) {
+                submenu2.style.display = 'none';
+            });
+        });
+    });
+    var backFromGallery = document.querySelector('.back-from-gallery');
+    if (backFromGallery) {
+        backFromGallery.addEventListener('click', function(event) {
+            event.preventDefault();
+            mainMenu.style.display = 'block';
+            submenus.forEach(function(submenu) {
+                submenu.style.display = 'none';
+            });
+            submenus2.forEach(function(submenu2) {
+                submenu2.style.display = 'none';
+            });
+        });
+    }
+    var backFromHelp = document.querySelector('.back-from-help');
+    if (backFromHelp) {
+        backFromHelp.addEventListener('click', function(event) {
+            event.preventDefault();
+            mainMenu.style.display = 'block';
+            submenus.forEach(function(submenu) {
+                submenu.style.display = 'none';
+            });
+            submenus2.forEach(function(submenu2) {
+                submenu2.style.display = 'none';
+            });
+        });
+    }
+    var backFromCommunity = document.querySelector('.back-from-community');
+    if (backFromCommunity) {
+        backFromCommunity.addEventListener('click', function(event) {
+            event.preventDefault();
+            mainMenu.style.display = 'block';
+            submenus.forEach(function(submenu) {
+                submenu.style.display = 'none';
+            });
+            submenus2.forEach(function(submenu2) {
+                submenu2.style.display = 'none';
+            });
+        });
+    }
+
+    window.addEventListener('resize', function() {
+        var threeLine = document.querySelector('.menu-icon-wrapper .three-line');
+        if (window.innerWidth > 700) {
+            // 隐藏sidebar
+            document.querySelector('.sidebar').style.display = 'none';
+            // 如果当前是错号，更改为横线
+            if (threeLine.classList.contains('cross')) {
+                threeLine.classList.remove('cross');
+            }
+        } else {
+            // 如果sidebar是显示的，确保图标是错号
+            if (document.querySelector('.sidebar').style.display === 'block' && !threeLine.classList.contains('cross')) {
+                threeLine.classList.add('cross');
+            }
+        }
+    });
+
+});
+
+
+// Fix for screen resize
+window.addEventListener('resize', function() {
+    const gallery = document.getElementById('gallery');
+    const divs = gallery.children;
+
+    // Calculate the margin in pixels (3% of gallery width)
+    const marginRightPixels = 0.03 * gallery.clientWidth;
+
+    // Combine the width of the div and the margin to get the total width per div
+    const divWidth = divs[0].getBoundingClientRect().width + marginRightPixels;
+
+    // Update the transform position of the gallery
+    gallery.style.transform = `translateX(-${currentSlide * divWidth}px)`;
 });
