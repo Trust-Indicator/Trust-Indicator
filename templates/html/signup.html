@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    <script src="{{ url_for('static', filename='js/signup.js') }}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='images/CredibilitySiginal_v2.0.0.png') }}" type="image/png">
+</head>
+<body>
+    <div class="top" style="background: #F2F2F2;;width: 100%;height: 80px">
+    </div>
+    <div class="logo-container">
+        <div class="logo" style="padding: 10px;"><img src="{{ url_for('static', filename='images/CredibilitySiginal.png') }}" width="100" alt="Trust Indicator Logo"/></div>
+    </div>
+
+    <div class="form-container">
+        <form class="form">
+            <p class="title">Register </p>
+            <p class="message">Signup now and get full access to Trust Indicator. </p>
+
+            <label>
+                <input required="" placeholder="" type="text" class="input" id="username_input">
+                <span>Username</span>
+            </label>
+
+            <label>
+                <input required="" placeholder="" type="text" class="input" id="email_input">
+                <span>Email</span>
+            </label>
+
+            <label>
+                <input required="" placeholder="" type="text" class="input" id="legalName_input" oninput="show()">
+                <span>Legal name</span>
+                <span class="legal-name-reminder">Please be sure to enter your real name.</span>
+            </label>
+
+            <label class="password-container">
+                <input required="" placeholder="" type="password" class="input password-input" id="password_input">
+                <span>Password</span>
+                <span class="password-hint-icon"><i class="fa fa-exclamation-circle" style="font-size:24px; color: #C4362E"></i></span>
+                <div class="password-hint-wrapper">
+                    <div class="password-hint">
+                        <p><span class="exclamation"><i class="fa fa-exclamation" style="font-size:20px"></i></span> &nbsp;&nbsp;&nbsp;The password must be 6-12 characters.</p>
+                        <p><span class="exclamation"><i class="fa fa-exclamation" style="font-size:20px"></i></span> &nbsp;&nbsp;&nbsp;The password must be with uppercase letters, lowercase letters and numbers.</p>
+                        <p><span class="exclamation"><i class="fa fa-exclamation" style="font-size:20px"></i></span> &nbsp;&nbsp;&nbsp;The first letter must be capitalized.</p>
+                    </div>
+                </div>
+            </label>
+
+            <label>
+                <input required="" placeholder="" type="password" class="input" id="confirm_input">
+                <span>Confirm password</span>
+            </label>
+
+            <button type="submit" title="Sign Up"  class="sign-up_btn  sign-up-button-color sign-up-button-background-color" onclick="sign_up(event)">
+                <span>Sign Up <i class="fa fa-chevron-right"></i></span>
+            </button>
+
+            <p class="signin">Already have an acount ? <a href="/login">Log In</a> </p>
+        </form>
+    </div>
+
+
+    <div class="bottom-navigation-bar">
+        <div class="connect-container">
+            <table class="connect-table">
+                <tr>
+                    <th><p style="font-size:10px;color:#ffffff;opacity: 0.6;margin-right: 20px" >Connect with us</p></th>
+                    <th><i class="fa fa-instagram" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-facebook" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-envelope" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-linkedin" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accessibility-container">
+            <div class="accessibility">
+                <div style="width: 80%; height: 100%;margin-left: 10%; display: flex; align-items: center;">
+                    <p class="site-link1">Accessibility</p>
+                    <p class="site-link">|</p>
+                    <p class="site-link1">Copyright</p>
+                    <p class="site-link">|</p>
+                    <p class="site-link1">Privacy</p>
+                    <p class="site-link">|</p>
+                    <p class="disclaimer-text">Disclaimer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

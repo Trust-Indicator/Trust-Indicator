@@ -1,0 +1,142 @@
+.container {
+    display: flex;
+}
+#toggleSidebar {
+    position: fixed;
+    left: 0;
+    top: 30%;
+    transform: translateY(-50%);
+    z-index: 1001;
+    background-color: #00467F;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+}
+.sidebar_image {
+    background-color: #00467F;
+    width: 200px;
+    position: fixed;
+    top: 32%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: auto;
+    height: auto;
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+}
+
+.sidebar_image:hover {
+    transform: translateX(0);
+}
+.navigation{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: white;
+}
+
+.navigation ul {
+    padding: 0;
+    list-style-type: none;
+
+}
+
+.navigation li {
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.navigation li:hover {
+    background-color: white;
+    color: #00467F;
+}
+
+.navigation li.active {
+    background-color: #1ABC9C;
+}
+
+.navigation i {
+    margin-right: 10px;
+    width: 20px;
+}
+.main-content {
+    flex-grow: 1;
+    float: left;
+    margin-left: 200px;
+    min-height: 80vh;
+    margin-bottom: 35px;
+}
+.photo-gallery {
+    margin-top: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 20px;
+    padding: 20px;
+    height: auto;
+    justify-content: flex-start;
+}
+
+.photo {
+    height: 300px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #00467F;
+    position: relative;
+    transition: transform 0.5s ease;
+}
+
+.photo:hover {
+    transform: scale(1.2);
+    z-index: 9;
+}
+
+.photo img {
+    width: 95%;
+    height: 95%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.photo-indicators {
+    position: absolute;
+    bottom: 2vh;
+    right: 1vw;
+    display: flex;
+}
+
+.photo-indicators {
+    position: absolute;
+    bottom: 2vh;
+    right: 1vw;
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+#backToTop {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #00467F;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#backToTop:hover {
+    background-color: #009AC9;
+}

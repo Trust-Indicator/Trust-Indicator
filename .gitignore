@@ -1,3 +1,5 @@
 
-src/PS_Detector/weights/local.pth
-src/Flask/instance/MyDatabase.db
+trust_indicator/PS_Detector/weights/local.pth
+instance/MyDatabase.db
+.vs
+.idea

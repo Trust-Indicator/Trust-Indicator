@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload and Analyse</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='images/CredibilitySiginal_v2.0.0.png') }}" type="image/png">
+</head>
+<body>
+<div class="page-container">
+    <div class="top-title">
+        <p onclick="top_register()">Apply for becoming a membership </p>
+    </div>
+
+    <div class="navigation-bar-container">
+        <div class="navigation-bar-top">
+            <!--search box-->
+            <div class="search-container">
+                <div class="info-panels">
+                    <div class="input-color-group-one">
+                        <input class="search-input" autocomplete="on" name="text" type="text" required="" placeholder="Rapunga / Search">
+                        <label class="search-label">Search</label>
+                        <button class="search-button">
+                            <svg fill="white" width="15px" height="15px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--search box-->
+
+            <!--log in-->
+            <div class="login-container" onclick="sign_in(event)">
+                <div class="sign-icon">
+                    <i class="fa fa-user-circle-o" style="font-size:30px"></i>
+                </div>
+                <div class="sign-text">Sign In</div>
+            </div>
+            <!--log in-->
+
+            <!--log in content-->
+            <div class="sign-in-content">
+                <div class="content-section" id="show-name">Hi Song Han</div>
+                <hr class="divider">
+                <div class="content-section" id="change-password">Change Password<i class="fa fa-chevron-right fa-right" ></i></div>
+                <hr class="divider">
+                <div class="content-section" id="edit-profile">Edit Profile<i class="fa fa-chevron-right fa-right"></i></div>
+                <hr class="divider">
+                <div class="content-section" style="height: 50px;justify-content: center;align-content: center">
+                    <button type="button" title="Sign out"  class="sign-out-button  sign-out-button-color sign-out-button-background-color" onclick="sign_out(event)">
+                        <span>Sign Out &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></span>
+                    </button>
+                </div>
+                <div class="content-triangle"></div>
+            </div>
+            <!--log in content-->
+            <div class="language-change" onclick="toggleDropdown(event)">
+                <span id="selected-language">EN</span>
+                <span class="dropdown-arrow"><i class="fa fa-caret-down" style="font-size:20px;padding-left: 5px"></i></span>
+                <ul id="language-options" class="hidden">
+                    <li onclick="updateLanguage('EN', event)">English</li>
+                    <li onclick="updateLanguage('CN', event)">Chinese</li>
+                    <li onclick="updateLanguage('ES', event)">Spanish</li>
+                    <li onclick="updateLanguage('FR', event)">French</li>
+                    <li onclick="updateLanguage('DE', event)">German</li>
+                </ul>
+            </div>
+            <!--log in content-->
+        </div>
+        <div class="navigation-bar-bottom">
+            <div class="menu-icon-wrapper">
+                <div class="three-line">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <!-- 主菜单 -->
+                <div class="main-menu">
+                    <a href='/' class="color-home" data-target="home-submenu">Home</a>
+                    <a href="#" class="color-gallery" data-target="gallery-submenu">Gallery  <i class="fa fa-angle-right" style="font-size:30px;margin-left: 280px"></i></a>
+                    <a href="#" class="color-upload" data-target="upload-submenu" onclick="upload()">Upload</a>
+                    <a href="/whatwedo" class="color-whatwedo" data-target="whatWeDo-submenu">What We Do</a>
+                    <a href="#" class="color-help" data-target="help-submenu">Help <i class="fa fa-angle-right" style="font-size:30px;margin-left: 300px"></i></a>
+                </div>
+
+                <!-- 子菜单 -->
+                <div class="submenu" id="gallery-submenu">
+                    <div class="submenu-div1 back-from-gallery">
+                        <i class="fa fa-angle-left" style="font-size: 30px"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>GALLERY</span>
+                    </div>
+                    <div class="submenu-div2">
+                        <h3 ><i class="fa fa-photo" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;All Images</h3>
+                        <a href="#" onclick="GotoGallery(event)">Default</a>
+                        <a href="#">Sort By Credibility</a>
+                        <a href="#">Sort By Publish Time</a>
+                    </div>
+                    <div class="submenu-div3">
+                        <h3><i class="fa fa-star" style="font-size:24px;color: #FFCD29"></i>&nbsp;&nbsp;&nbsp;Truth Images</h3>
+                        <a href="#">Show All</a>
+                        <a href="#">Top 10</a>
+                        <h3 style="margin-top: 15px"><i class="fa fa-star-half-empty" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Fake Image</h3>
+                        <a href="#">Show All</a>
+                        <a href="#">Sort By Credibility</a>
+                        <a href="#">Sort By Publish Time</a>
+                    </div>
+                    <div class="submenu-div4">
+                        <div style="width: 80%; height: 80%; display: flex;position: relative; left: 10%; top: 10%;background: #00467F">
+                            <a href="#"><img src="/static/images/background_gallery.jpeg" style="width: 330px;height: 100%"/></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submenu2" id="help-submenu">
+                    <div class="submenu2-div1 back-from-help">
+                        <i class="fa fa-angle-left" style="font-size: 30px"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>Help</span>
+                    </div>
+                    <div class="submenu2-div8">
+                        Contributor Zone
+                    </div>
+                    <div class="submenu2-div8" onclick="GoToFeedback(event)">
+                        Feedback
+                    </div>
+                    <div class="submenu2-div8">
+                        <a href="/feedback?source=debug">Report Debug &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bug-fill" viewBox="0 0 16 16">
+    <path d="M4.978.855a.5.5 0 1 0-.956.29l.41 1.352A4.985 4.985 0 0 0 3 6h10a4.985 4.985 0 0 0-1.432-3.503l.41-1.352a.5.5 0 1 0-.956-.29l-.291.956A4.978 4.978 0 0 0 8 1a4.979 4.979 0 0 0-2.731.811l-.29-.956z"/>
+    <path d="M13 6v1H8.5v8.975A5 5 0 0 0 13 11h.5a.5.5 0 0 1 .5.5v.5a.5.5 0 1 0 1 0v-.5a1.5 1.5 0 0 0-1.5-1.5H13V9h1.5a.5.5 0 0 0 0-1H13V7h.5A1.5 1.5 0 0 0 15 5.5V5a.5.5 0 0 0-1 0v.5a.5.5 0 0 1-.5.5H13zm-5.5 9.975V7H3V6h-.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 0-1 0v.5A1.5 1.5 0 0 0 2.5 7H3v1H1.5a.5.5 0 0 0 0 1H3v1h-.5A1.5 1.5 0 0 0 1 11.5v.5a.5.5 0 1 0 1 0v-.5a.5.5 0 0 1 .5-.5H3a5 5 0 0 0 4.5 4.975z"/>
+    </svg></a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mcmenu">
+                <ul>
+                    <li id="menu-ahome"><a href="/">Home</a></li>
+                    <li class="full-width" id="menu-gallery">
+                        <span>Gallery &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
+                        <div class="dropdown">
+                            <div class="clm">
+                                <h3><i class="fa fa-photo" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;All Images</h3>
+                                <a href="#" onclick="GotoGallery(event)">Default</a>
+                                <a href="#">Sort By Credibility</a>
+                                <a href="#">Sort By Publish Time</a>
+                            </div>
+                            <div class="clm">
+                                <h3><i class="fa fa-star" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Truth Images</h3>
+                                <a href="#">Show All</a>
+                                <a href="#">Top 10</a>
+                                <h3><i class="fa fa-star-half-empty" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Fake Image</h3>
+                                <a href="#">Show All</a>
+                                <a href="#">Sort By Credibility</a>
+                                <a href="#">Sort By Publish Time</a>
+                            </div>
+                            <div class="clm background-gallery">
+                                <a href="#" ><img src="/static/images/background_gallery.jpeg" style="width:280px"/></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="menu-upload"><a onclick="upload()">Upload and Analyse</a></li>
+                    <li id="menu-whatwedo"><a href="/whatwedo">What We Do</a></li>
+                    <li id="menu-zhelp">
+                        <span>Help &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
+                        <ul class="right0">
+                            <li><a href="https://github.com/Trust-Indicator/Trust-Indicator">Project Landing Page</a></li>
+                            <li><a href="#" onclick="GoToFeedback(event)">Feedback</a></li>
+                            <li><a href="/feedback?source=debug">Report Debug &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bug-fill" viewBox="0 0 16 16">
+    <path d="M4.978.855a.5.5 0 1 0-.956.29l.41 1.352A4.985 4.985 0 0 0 3 6h10a4.985 4.985 0 0 0-1.432-3.503l.41-1.352a.5.5 0 1 0-.956-.29l-.291.956A4.978 4.978 0 0 0 8 1a4.979 4.979 0 0 0-2.731.811l-.29-.956z"/>
+    <path d="M13 6v1H8.5v8.975A5 5 0 0 0 13 11h.5a.5.5 0 0 1 .5.5v.5a.5.5 0 1 0 1 0v-.5a1.5 1.5 0 0 0-1.5-1.5H13V9h1.5a.5.5 0 0 0 0-1H13V7h.5A1.5 1.5 0 0 0 15 5.5V5a.5.5 0 0 0-1 0v.5a.5.5 0 0 1-.5.5H13zm-5.5 9.975V7H3V6h-.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 0-1 0v.5A1.5 1.5 0 0 0 2.5 7H3v1H1.5a.5.5 0 0 0 0 1H3v1h-.5A1.5 1.5 0 0 0 1 11.5v.5a.5.5 0 1 0 1 0v-.5a.5.5 0 0 1 .5-.5H3a5 5 0 0 0 4.5 4.975z"/>
+    </svg></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="logo"><img src="{{ url_for('static', filename='images/CredibilitySiginal.png') }}" alt="Trust Indicator Logo"/></div>
+    </div>
+
+    <div class="main-content-container">
+        <div class="drop-show-metadata-container">
+            <div class="drop-box-container">
+                <div class="container">
+                    <form class="drop-form">
+                        <div class="drop-box">
+                            <img id="image-preview" src="#" alt="Image Preview" style="display: none; max-height: 100%; max-width: 100%;">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+                                <path d="M7 10V9C7 6.23858 9.23858 4 12 4C14.7614 4 17 6.23858 17 9V10C19.2091 10 21 11.7909 21 14C21 15.4806 20.1956 16.8084 19 17.5M7 10C4.79086 10 3 11.7909 3 14C3 15.4806 3.8044 16.8084 5 17.5M7 10C7.43285 10 7.84965 10.0688 8.24006 10.1959M12 12V21M12 12L15 15M12 12L9 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                            <p>Drag and drop an JPEG image here! </p>
+                            <p style="font-weight: normal;font-size: 0.9rem">Up to 5 MB, Your uploads are private</P>
+                        </div>
+                        <input type="file" accept=".jpg,.jpeg" required="" id="file-input">
+                    </form>
+                </div>
+            </div>
+            <div class="show-metadata">
+                <div class="show-metadata-container">
+                    <div class="metadata-item item1">
+                        <div class="image-information-container">
+                            <div class="image-header"><i class="fa fa-file-image-o" style="font-size:24px;color:#00467F "></i>&nbsp;&nbsp;&nbsp;Image Information</div>
+                            <div class="image-box gray">
+                                <p class="box-title">File Name</p>
+                                <p class="box-content" id="metadata-FileName"></p>
+                            </div>
+                            <div class="image-box white">
+                                <p class="box-title">File type</p>
+                                <p class="box-content" id="metadata-FileType"></p>
+                            </div>
+                            <div class="image-box gray">
+                                <p class="box-title" id="FileSize">File size</p>
+                                <p class="box-content"id="metadata-FileSize"></p>
+                            </div>
+                            <div class="image-box white">
+                                <p class="box-title">Image size</p>
+                                <p class="box-content" id="metadata-ImageSize"></p>
+                            </div>
+                            <div class="image-box gray">
+                                <p class="box-title">Color space</p>
+                                <p class="box-content" id="metadata-ColorSpace"></p>
+                            </div>
+                            <div class="image-box white">
+                                <p class="box-title">Created</p>
+                                <p class="box-content" id="metadata-created"></p>
+                            </div>
+                        </div>
+
+                        <div class="camera-information-container">
+                            <div class="camera-header"><i class="fa fa-camera-retro" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Camera Information</div>
+                            <div class="camera-box gray">
+                                <p class="box-title">Make</p>
+                                <p class="box-content" id="metadata-Make"></p>
+                            </div>
+                            <div class="camera-box white">
+                                <p class="box-title">Model</p>
+                                <p class="box-content" id="metadata-Model"></p>
+                            </div>
+                            <div class="camera-box gray">
+                                <p class="box-title">Focal length</p>
+                                <p class="box-content" id="metadata-FocalLength"></p>
+                            </div>
+                            <div class="camera-box white">
+                                <p class="box-title">Aperture</p>
+                                <p class="box-content" id="metadata-Aperture"></p>
+                            </div>
+                            <div class="camera-box gray">
+                                <p class="box-title">Exposure</p>
+                                <p class="box-content" id="metadata-Exposure"></p>
+                            </div>
+                            <div class="camera-box white">
+                                <p class="box-title">ISO</p>
+                                <p class="box-content" id="metadata-ISO"></p>
+                            </div>
+                            <div class="camera-box gray">
+                                <p class="box-title">Flash</p>
+                                <p class="box-content" id="metadata-Flash"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metadata-item item2">
+                        <div class="image-information-container">
+                            <div class="image-header"><i class="fa fa-map-marker" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Location information</div>
+                            <div class="image-box gray">
+                                <p class="box-title">Altitude</p>
+                                <p class="box-content" id="metadata-Altitude"></p>
+                            </div>
+                            <div class="image-box white">
+                                <p class="box-title">Latitude</p>
+                                <p class="box-content" id="metadata-Latitude"></p>
+                            </div>
+                            <div class="image-box gray">
+                                <p class="box-title">Longitude</p>
+                                <p class="box-content" id="metadata-Longitude"></p>
+                            </div>
+                            <div class="image-box white">
+                                <p class="box-title"></p>
+                                <p class="box-content"></p>
+                            </div>
+                            <div class="image-box white">
+                                <p class="box-title"></p>
+                                <p class="box-content"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="choice">
+                            <div class="choice-title">
+                                Determine Image type
+                            </div>
+
+                            <div style="width: 100%;height: 70%">
+                                <div class="switch-container">
+                                    <label for="original-switch" style=" padding-left: 10px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;color: #333;font-size: 15px;font-weight: 600">  <i class='fas fa-camera-retro' style="padding-right: 5px;font-size: 18px"></i> Original Image</label>
+                                    <label class="switch">
+                                        <input type="radio" name="image-type" id="original-switch" value="Original">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+
+                                <div class="switch-container">
+                                    <label for="AIGC-switch" style=" padding-left: 10px;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;color: #333;font-size: 15px;font-weight: 600"><i class='fas fa-chalkboard' style="padding-right: 8px;font-size: 16px"></i>AIGC Image</label>
+                                    <label class="switch">
+                                        <input type="radio" name="image-type" id="AIGC-switch" value="AIGC">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+
+                                <div class="switch-container">
+                                    <label for="Manipulation-switch" style=" padding-left: 10px;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;color: #333;font-size: 16px;font-weight: 600"><i class='far fa-file-image' style="padding-right: 12px;font-size: 20px"></i>Manipulation Image</label>
+                                    <label class="switch">
+                                        <input type="radio" name="image-type" id="Manipulation-switch" value="Manipulation">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="analysis-button-container" onclick="analysis(event)" >
+                            <button type="button"  class="analysis-button  analysis-button-color analysis-button-background-color">
+                                <span>Analysis Now !</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-navigation-bar">
+        <div class="connect-container">
+            <table class="connect-table">
+                <tr>
+                    <th><p style="font-size:10px;color:#ffffff;opacity: 0.6;margin-right: 20px" >Connect with us</p></th>
+                    <th><i class="fa fa-instagram" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-facebook" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-envelope" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th><i class="fa fa-linkedin" style="font-size:20px;color:#ffffff;opacity: 0.6" ></i></th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="accessibility-container">
+            <div class="accessibility">
+                <div style="width: 80%; height: 100%;margin-left: 10%; display: flex; align-items: center;">
+                    <p class="site-link1">Accessibility</p>
+                    <p class="site-link">|</p>
+                    <p class="site-link1">Copyright</p>
+                    <p class="site-link">|</p>
+                    <p class="site-link1">Privacy</p>
+                    <p class="site-link">|</p>
+                    <p class="disclaimer-text">Disclaimer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
