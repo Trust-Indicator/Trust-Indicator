@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <form class="form_container">
+        <form class="form_container" id="sign-in-form">
             <div class="logo_container"><img src="{{ url_for('static', filename='images/CredibilitySiginal.png') }}" alt="Trust Indicator Logo"/></div>
             <div class="title_container">
                 <p class="title">Login to your Account</p>
@@ -121,4 +121,11 @@
 
     </div>
 </body>
+<script>
+    document.getElementById('sign-in-form').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        sign_in(e);
+    }
+});
+</script>
 </html>
