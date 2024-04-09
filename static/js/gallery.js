@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const img = document.createElement('img');
             img.src = `/image/${image.id}`;  // Fetch the image from the server by image ID
+            img.style.cursor = 'pointer';     // Change the cursor on hover to indicate this is clickable
+            img.onclick = function() {        // Assign a function to the onclick event
+                location.href = `/imagedetail?source=${image.id}`; // Redirect to the image detail page
+            };
             console.log(img)
             photoDiv.appendChild(img);
 

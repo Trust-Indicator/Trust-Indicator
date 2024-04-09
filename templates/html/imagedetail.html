@@ -2,19 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Analysis</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/analysis.css') }}">
+    <title>The Trust Indicator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/imagedetail.css') }}">
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/analysis.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/imagedetail.js') }}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="{{ url_for('static', filename='images/CredibilitySiginal_v2.0.0.png') }}" type="image/png">
+
 </head>
 <body>
+<div class="page-container">
+    <div class="top-title">
+        <p onclick="top_register()">Apply for becoming a membership </p>
+    </div>
 
-<div style="position: relative; height: 100%; display: flex;flex-direction: column;min-height: 100vh;min-width: fit-content">
-    <div class="top-title"></div>
     <div class="navigation-bar-container">
         <div class="navigation-bar-top">
             <!--search box-->
@@ -167,7 +171,7 @@
                     <li id="menu-zhelp">
                         <span>Help &nbsp;<i class="fa fa-angle-down" style="font-size:30px"></i></span>
                         <ul class="right0">
-                            <li><a href="#">Contributor Zone</a></li>
+                            <li><a href="https://github.com/Trust-Indicator/Trust-Indicator">Project Landing Page</a></li>
                             <li><a href="#" onclick="GoToFeedback(event)">Feedback</a></li>
                             <li><a href="/feedback?source=debug">Report Debug &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bug-fill" viewBox="0 0 16 16">
     <path d="M4.978.855a.5.5 0 1 0-.956.29l.41 1.352A4.985 4.985 0 0 0 3 6h10a4.985 4.985 0 0 0-1.432-3.503l.41-1.352a.5.5 0 1 0-.956-.29l-.291.956A4.978 4.978 0 0 0 8 1a4.979 4.979 0 0 0-2.731.811l-.29-.956z"/>
@@ -181,8 +185,8 @@
         <div class="logo"><img src="{{ url_for('static', filename='images/CredibilitySiginal.png') }}" alt="Trust Indicator Logo"/></div>
     </div>
 
-    <div class="main">
-        <div class="image-result-container">
+    <div class="main-content-container">
+        <div class="drop-show-metadata-container">
             <div class="image-show-container">
                 <div class="show-image">
                     <div class="image-display"></div>
@@ -224,111 +228,105 @@
                     </div>
                 </div>
             </div>
+            <div class="show-metadata">
+                <div class="show-metadata-container">
+                    <div class="metadata-item item1">
+                        <div class="image-information-container">
+                            <div class="image-header"><i class="fa fa-file-image-o" style="font-size:24px;color:#00467F "></i>&nbsp;&nbsp;&nbsp;Image Information</div>
+                            <div class="image-box gray">
+                                <p class="box-title">File Name</p>
+                                <p class="box-content" id="metadata-FileName"></p>
+                            </div>
+                            <div class="image-box white">
+                                <p class="box-title">File type</p>
+                                <p class="box-content" id="metadata-FileType"></p>
+                            </div>
+                            <div class="image-box gray">
+                                <p class="box-title" id="FileSize">File size</p>
+                                <p class="box-content" id="metadata-FileSize"></p>
+                            </div>
+                            <div class="image-box white">
+                                <p class="box-title">Image size</p>
+                                <p class="box-content" id="metadata-ImageSize"></p>
+                            </div>
+                            <div class="image-box gray">
+                                <p class="box-title">Color space</p>
+                                <p class="box-content" id="metadata-ColorSpace"></p>
+                            </div>
+                            <div class="image-box white">
+                                <p class="box-title">Created</p>
+                                <p class="box-content" id="metadata-created"></p>
+                            </div>
+                        </div>
 
-
-            <div class="result-container">
-                <div class="show-result">
-                    <div class="warpper-wait">
-                        <div class="content"></div>
-                        <div class="number">3</div>
+                        <div class="camera-information-container">
+                            <div class="camera-header"><i class="fa fa-camera-retro" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Camera Information</div>
+                            <div class="camera-box gray">
+                                <p class="box-title">Make</p>
+                                <p class="box-content" id="metadata-Make"></p>
+                            </div>
+                            <div class="camera-box white">
+                                <p class="box-title">Model</p>
+                                <p class="box-content" id="metadata-Model"></p>
+                            </div>
+                            <div class="camera-box gray">
+                                <p class="box-title">Focal length</p>
+                                <p class="box-content" id="metadata-FocalLength"></p>
+                            </div>
+                            <div class="camera-box white">
+                                <p class="box-title">Aperture</p>
+                                <p class="box-content" id="metadata-Aperture"></p>
+                            </div>
+                            <div class="camera-box gray">
+                                <p class="box-title">Exposure</p>
+                                <p class="box-content" id="metadata-Exposure"></p>
+                            </div>
+                            <div class="camera-box white">
+                                <p class="box-title">ISO</p>
+                                <p class="box-content" id="metadata-ISO"></p>
+                            </div>
+                            <div class="camera-box gray">
+                                <p class="box-title">Flash</p>
+                                <p class="box-content" id="metadata-Flash"></p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="result">
-                        <div class="analysis-result">
-                            <div class="header">Analysis Result</div>
-                            <div class="chart">
-                                <div class="progress-circle">
-                                    <svg viewBox="0 0 36 36" class="circular-chart">
-                                        <path class="circle-bg"
-                                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                              fill="none"
-                                              stroke="#eee"
-                                              stroke-width="2.5"/>
-
-                                        <path class="circle" id="circle-Original"
-                                              stroke-dasharray="100, 100"
-                                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                              fill="none"
-                                              stroke="#C4362E"
-                                              stroke-width="2.5"
-                                              stroke-linecap="round"/>
-                                        <text x="18" y="20.35" class="percentage" id="percentage-Original" fill="#00467F" text-anchor="middle">100%</text>
-                                    </svg>
-                                        <div class="label">Original</div>
-                                </div>
-
-                                <div class="progress-circle">
-                                    <svg viewBox="0 0 36 36" class="circular-chart">
-                                        <path class="circle-bg"
-                                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                              fill="none"
-                                              stroke="#eee"
-                                              stroke-width="2.5"/>
-                                        <path class="circle" id="circle-AIGC"
-                                              stroke-dasharray="100, 100"
-                                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                              fill="none"
-                                              stroke="#C4362E"
-                                              stroke-width="2.5"
-                                              stroke-linecap="round"/>
-                                        <text x="18" y="20.35" class="percentage" id="percentage-AIGC" fill="#00467F" text-anchor="middle">100%</text>
-                                    </svg>
-                                    <div class="label">AIGC</div>
-                                </div>
-
-                                <div class="progress-circle">
-                                    <svg viewBox="0 0 36 36" class="circular-chart">
-                                        <path class="circle-bg"
-                                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                              fill="none"
-                                              stroke="#eee"
-                                              stroke-width="2.5"/>
-
-                                        <path class="circle" id="circle-Manipulation"
-                                              stroke-dasharray="100, 100"
-                                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                              fill="none"
-                                              stroke="#C4362E"
-                                              stroke-width="2.5"
-                                              stroke-linecap="round"/>
-                                        <text x="18" y="20.35" class="percentage" id="percentage-Manipulation" fill="#00467F" text-anchor="middle">100%</text>
-                                    </svg>
-                                    <div class="label">Manipulation</div>
-                                </div>
+                    <div class="metadata-item item2">
+                        <div class="image-information-container">
+                            <div class="image-header"><i class="fa fa-map-marker" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Location information</div>
+                            <div class="image-box gray">
+                                <p class="box-title">Altitude</p>
+                                <p class="box-content" id="metadata-Altitude"></p>
+                            </div>
+                            <div class="image-box white">
+                                <p class="box-title">Latitude</p>
+                                <p class="box-content" id="metadata-Latitude"></p>
+                            </div>
+                            <div class="image-box gray">
+                                <p class="box-title">Longitude</p>
+                                <p class="box-content" id="metadata-Longitude"></p>
+                            </div>
+                            <div class="image-box white">
+                                <p class="box-title"></p>
+                                <p class="box-content"></p>
+                            </div>
+                            <div class="image-box white">
+                                <p class="box-title"></p>
+                                <p class="box-content"></p>
                             </div>
                         </div>
 
-                        <div class="signal-result">
-                            <div class="header">Credibility Signal </div>
-                            <div class="chart" >
-                                <div class="signal" id="signal1">
-                                </div>
-                                <div class="signal" id="signal2">
-                                </div>
+
+                        <div class="choice">
+                            <div class="choice-title">
+                                Image type
+                            </div>
+
+                            <div style="width: 100%;height: 70%">
+                                PLACEHOLDER
                             </div>
                         </div>
-
-                        <div class="result-button-container">
-
-                            <div class="result-button"  onclick="AnalysisOtherImage(event)">
-                                <button type="button"  class="analysis-button  analysis-button-color analysis-button-background-color">
-                                    <span>Analysis Other Image</span>
-                                </button>
-                            </div>
-
-                            <div class="result-button" onclick="Gohome(event)">
-                                <button type="button"  class="home-button  home-button-color home-button-background-color">
-                                    <span>Go Homepage</span>
-                                </button>
-                            </div>
-
-                            <div class="result-button" >
-                                <button type="button"  class="report-button  report-button-color report-button-background-color">
-                                    <span>Report Wrong Analysis</span>
-                                </button>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -363,8 +361,6 @@
             </div>
         </div>
     </div>
-
 </div>
-
 </body>
 </html>

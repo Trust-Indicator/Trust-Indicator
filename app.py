@@ -81,9 +81,11 @@ def login():
 def userprofile():
     return render_template('html/userprofile.html', user=current_user)
 
+
 @app.route('/whatwedo')
 def whatwedo():
     return render_template('html/whatwedo.html')
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -105,6 +107,49 @@ def logout():
     session.clear()
     logout_user()
     return render_template('html/index.html')
+
+
+@app.route('/imagedetail')
+def imagedetail():
+    source = request.args.get('source', '')
+    return render_template('html/imagedetail.html', source=source)
+
+
+@app.route('/getimagedetail/<int:image_id>')
+def getImageDetail(image_id):
+    if image_id is None:
+        return jsonify({'error': 'Missing image ID'}), 400
+
+    image = Image.query.get(image_id)
+    if image is None:
+        return jsonify({'error': 'Image not found'}), 404
+
+    image_detail = {
+        'id': image.id,
+        'filename': image.filename,
+        'user_email': image.user_email,
+        'ImageTitle': image.ImageTitle,
+        'ImageDescription': image.ImageDescription,
+        'UploadDate': image.UploadDate,
+        'Tag': image.Tag,
+        'ColorSpace': image.ColorSpace,
+        'Created': image.Created,
+        'Make': image.Make,
+        'Model': image.Model,
+        'FocalLength': image.FocalLength,
+        'Aperture': image.Aperture,
+        'Exposure': image.Exposure,
+        'ISO': image.ISO,
+        'Flash': image.Flash,
+        'ImageWidth': image.ImageWidth,
+        'ImageLength': image.ImageLength,
+        'Altitude': image.Altitude,
+        'LatitudeRef': image.LatitudeRef,
+        'Latitude': image.Latitude,
+        'LongitudeRef': image.LongitudeRef,
+        'Longitude': image.Longitude,
+    }
+    return jsonify(image_detail)
 
 
 @app.route('/feedback')

@@ -1,70 +1,3 @@
-function sign_in(event) {
-    event.stopPropagation();  // 阻止事件冒泡
-    var userEmail = sessionStorage.getItem('userEmail');
-    if (userEmail) {
-        // 如果用户已登录，显示或隐藏签入内容
-        const signInContent = document.querySelector('.sign-in-content');
-        if (signInContent.style.display === 'block') {
-            signInContent.style.display = 'none';
-        } else {
-            signInContent.style.display = 'block';
-        }
-    } else {
-        // 如果用户未登录，跳转到登录页面
-        window.location.href = "/login";
-    }
-    const dropdown = document.getElementById('language-options');
-    dropdown.classList.add('hidden');
-}
-window.onload = function() {
-    var userEmail = sessionStorage.getItem('userEmail');
-    if (userEmail) {
-        document.querySelector(".sign-text").textContent = userEmail;
-        document.querySelector("#show-name").textContent = "Hi  " + userEmail;
-    }
-};
-
-function sign_out_upload(event){
-    event.stopPropagation();
-    sessionStorage.removeItem('userEmail');
-    document.querySelector(".sign-text").textContent = "Sign In";
-    const signInContent = document.querySelector('.sign-in-content');
-    signInContent.style.display = 'none';
-    window.location.href="/";
-}
-
-
-let wasContentShown = false;
-window.addEventListener('scroll', function() {
-    let content = document.querySelector('.sign-in-content');
-    if (window.scrollY > 0) {
-        content.style.display = 'none';
-    } else if (window.scrollY === 0 && wasContentShown) {
-        content.style.display = 'block';
-    }
-});
-
-function toggleDropdown(event) {
-    event.stopPropagation();
-
-    const dropdown = document.getElementById('language-options');
-    const signInContent = document.querySelector('.sign-in-content');
-    if(dropdown.classList.contains('hidden')) {
-        dropdown.classList.remove('hidden');
-        signInContent.style.display = 'none';
-    } else {
-        dropdown.classList.add('hidden');
-    }
-    wasContentShown = false;
-}
-function updateLanguage(code, event) {
-    const selectedLanguage = document.getElementById('selected-language');
-    selectedLanguage.textContent = code;
-    const dropdown = document.getElementById('language-options');
-    dropdown.classList.add('hidden');
-    event.stopPropagation();
-}
-
 function AnalysisOtherImage(event){
     window.location.href='/upload'
 }
@@ -77,19 +10,21 @@ const imageDisplay = document.querySelector('.image-display');
 const showImage = document.querySelector('.show-image');
 const zoomInButton = document.getElementById('zoomIn');
 const zoomOutButton = document.getElementById('zoomOut');
+
+let currentScale = 1;
 function resizeImageDisplay(increase) {
-    let currentWidth = parseInt(getComputedStyle(imageDisplay).width);
-    let currentHeight = parseInt(getComputedStyle(imageDisplay).height);
-    let maxWidth = parseInt(getComputedStyle(showImage).width) * 0.9;
-    let maxHeight = parseInt(getComputedStyle(showImage).height) * 0.9;
-    let newWidth = increase ? currentWidth + 20 : currentWidth - 20;
-    let newHeight = increase ? currentHeight + 20 : currentHeight - 20;
-    newWidth = Math.min(newWidth, maxWidth);
-    newHeight = Math.min(newHeight, maxHeight);
-    newWidth = Math.max(newWidth, 200);
-    newHeight = Math.max(newHeight, 200);
-    imageDisplay.style.width = newWidth + 'px';
-    imageDisplay.style.height = newHeight + 'px';
+    const zoomFactor = 0.1;
+    if (increase){
+        if (currentScale < 1.5){
+            currentScale =  currentScale * (1 + zoomFactor);
+            imageDisplay.style.transform = `scale(${currentScale})`;
+        }
+    }else{
+        if (currentScale > 0.5){
+            currentScale = currentScale / (1 + zoomFactor);
+            imageDisplay.style.transform = `scale(${currentScale})`;
+        }
+    }
 }
 zoomInButton.addEventListener('click', () => resizeImageDisplay(true));
 zoomOutButton.addEventListener('click', () => resizeImageDisplay(false));
