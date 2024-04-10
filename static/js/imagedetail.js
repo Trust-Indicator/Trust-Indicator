@@ -1,12 +1,11 @@
+const urlParams = new URLSearchParams(window.location.search);
+let imageId = urlParams.get('source');
 window.onload = function() {
-    var userEmail = sessionStorage.getItem('userEmail');
+    const userEmail = sessionStorage.getItem('userEmail');
     if (userEmail) {
         document.querySelector(".sign-text").textContent = userEmail;
         document.querySelector("#show-name").textContent = "Hi  " + userEmail;
     }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    let imageId = urlParams.get('source');
 
     const imageDisplay = document.querySelector(".image-display");
     const img = document.createElement('img');
@@ -121,4 +120,77 @@ function loadImage(imageId){
     .catch(error => {
         console.error('Error fetching the image details:', error);
     });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('favourite-button').addEventListener('click', function() {
+        fetch('/addToFavourite', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ image_id: imageId }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    throw errorData;
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            showSuccessAlert(data.message);
+        })
+        .catch(errorData => {
+            showErrorAlert(errorData.error);
+        });
+    });
+});
+
+
+function showSuccessAlert(message) {
+    var alertBox = createAlert(message);
+    alertBox.style.backgroundColor = 'rgba(76, 175, 80, 0.9)';
+    alertBox.classList.add('success-alert');
+    document.body.prepend(alertBox);
+
+    setTimeout(function() {
+        fadeOutAlert(alertBox);
+    }, 3000);
+}
+
+function showErrorAlert(message) {
+    var alertBox = createAlert(message);
+    alertBox.style.backgroundColor = 'rgba(244, 67, 54, 0.9)';
+    alertBox.classList.add('error-alert');
+    document.body.prepend(alertBox);
+
+    setTimeout(function() {
+        fadeOutAlert(alertBox);
+    }, 5000);
+}
+function createAlert(message) {
+    var alertBox = document.createElement('div');
+    alertBox.textContent = message;
+    alertBox.style.color = 'white';
+    alertBox.style.padding = '15px';
+    alertBox.style.margin = '15px';
+    alertBox.style.borderRadius = '4px';
+    alertBox.style.position = 'fixed';
+    alertBox.style.left = '50%';
+    alertBox.style.top = '20px';
+    alertBox.style.transform = 'translateX(-50%)';
+    alertBox.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.2)';
+    alertBox.style.transition = 'opacity 0.5s ease, top 0.5s ease';
+    alertBox.style.zIndex = '1000';
+    return alertBox;
+}
+function fadeOutAlert(alertBox) {
+    alertBox.style.opacity = '0';
+    alertBox.style.top = '10px';
+
+    setTimeout(function() {
+        alertBox.remove();
+    }, 500);
 }

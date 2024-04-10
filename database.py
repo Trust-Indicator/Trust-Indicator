@@ -5,10 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
-    UserName = db.Column(db.String(80),  nullable=False)
+    UserName = db.Column(db.String(80), nullable=False)
     Email = db.Column(db.String(120), unique=True, nullable=False)
     Password = db.Column(db.String(100))
     LegalName = db.Column(db.String(100))
@@ -44,21 +45,24 @@ class User(UserMixin, db.Model):
 #     MigrationId = db.Column(db.Text, primary_key=True)
 #     ProductVersion = db.Column(db.Text)
 #
-# class Favorites(db.Model):
-#     __tablename__ = 'Favorites'
-#     RecordID = db.Column(db.Integer, primary_key=True)
-#     ImageID = db.Column(db.Integer)
-#     UserID = db.Column(db.Integer)
-#     Rate = db.Column(db.Integer)
-#     Is_Favorite = db.Column(db.Integer)
-#     Comment = db.Column(db.Text)
-#     Create_Date = db.Column(db.Text)
+class Favorites(db.Model):
+    __tablename__ = 'favorites'
+    RecordID = db.Column(db.Integer, primary_key=True)
+    ImageID = db.Column(db.Integer, db.ForeignKey('images.id'), nullable=False)
+    UserID = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    FileName = db.Column(db.String(120))
+    Rate = db.Column(db.Integer)
+    Is_Favorite = db.Column(db.Integer)
+    Comment = db.Column(db.Text)
+    Create_Date = db.Column(db.Text)
+
+
 class Feedback(db.Model):
     __tablename__ = 'feedback'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), nullable=False)
-    date = db.Column(db.DateTime)
+    date = db.Column(db.Text)
     feedback_type = db.Column(db.String(120))
     content = db.Column(db.Text)
 
@@ -78,18 +82,19 @@ class Image(db.Model):
     Created = db.Column(db.Text)
     Make = db.Column(db.Text)
     Model = db.Column(db.Text)
-    FocalLength = db.Column(db.Float,nullable=True)
-    Aperture = db.Column(db.Float,nullable=True)
-    Exposure = db.Column(db.Float,nullable=True)
-    ISO = db.Column(db.Float,nullable=True)
-    Flash = db.Column(db.Float,nullable=True)
-    ImageWidth = db.Column(db.Float,nullable=True)
-    ImageLength = db.Column(db.Float,nullable=True)
-    Altitude = db.Column(db.Text,nullable=True)
+    FocalLength = db.Column(db.Float, nullable=True)
+    Aperture = db.Column(db.Float, nullable=True)
+    Exposure = db.Column(db.Float, nullable=True)
+    ISO = db.Column(db.Float, nullable=True)
+    Flash = db.Column(db.Float, nullable=True)
+    ImageWidth = db.Column(db.Float, nullable=True)
+    ImageLength = db.Column(db.Float, nullable=True)
+    Altitude = db.Column(db.Text, nullable=True)
     LatitudeRef = db.Column(db.Text)
-    Latitude = db.Column(db.Text,nullable=True)
+    Latitude = db.Column(db.Text, nullable=True)
     LongitudeRef = db.Column(db.Text)
-    Longitude = db.Column(db.Text,nullable=True)
+    Longitude = db.Column(db.Text, nullable=True)
+
 
 def create_database(app):
     """Create SQLite database if it doesn't exist."""

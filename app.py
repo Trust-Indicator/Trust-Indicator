@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from trust_indicator.ExifExtractor.InterfaceTester import extract_exif_data
 
-from database import db, create_database, User, Image, Feedback
+from database import db, create_database, User, Image, Feedback, Favorites
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
@@ -113,6 +113,47 @@ def logout():
 def imagedetail():
     source = request.args.get('source', '')
     return render_template('html/imagedetail.html', source=source)
+
+
+@app.route('/addToFavourite', methods=['POST'])
+def addToFavourite():
+    user_id = current_user.id
+    image_id = request.json.get('image_id')
+
+    if not user_id or not image_id:
+        return jsonify({'error': 'Missing user_id or image_id'}), 401
+
+    existing_favorite = Favorites.query.filter_by(UserID=user_id, ImageID=image_id).first()
+    if existing_favorite:
+        return jsonify({'error': 'Image already in favorites'}), 500
+    image = Image.query.filter_by(id=image_id).first()
+    new_favorite = Favorites(UserID=user_id, FileName=image.filename, ImageID=image_id, Is_Favorite=1, Create_Date=datetime.utcnow())
+    db.session.add(new_favorite)
+    db.session.commit()
+
+    return jsonify({'message': 'Image added to favorites successfully'}), 201
+
+
+@app.route('/deleteFavourite', methods=['POST'])
+def deleteFavourite():
+    user_id = current_user.id
+    image_id = request.json.get('image_id')
+    if not user_id or not image_id:
+        return jsonify({'error': 'Missing user_id or image_id'}), 400
+    favorite_to_remove = Favorites.query.filter_by(UserID=user_id, ImageID=image_id).first()
+    if not favorite_to_remove:
+        return jsonify({'message': 'No such favorite found'}), 404
+    db.session.delete(favorite_to_remove)
+    db.session.commit()
+    return jsonify({'message': 'Favorite removed successfully'}), 200
+
+
+@app.route('/getAllFavouritesByUser')
+def getAllFavouritesByUser():
+    favorites = Favorites.query.filter_by(UserID=current_user.id).all()
+    favorites_list = [{'id': favorite.RecordID, 'filename': favorite.FileName} for favorite in favorites]
+
+    return jsonify(favorites_list)
 
 
 @app.route('/getimagedetail/<int:image_id>')
