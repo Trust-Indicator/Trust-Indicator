@@ -1223,8 +1223,9 @@ html, body {
 }
 
 .card__img {
-    width: 80%;
-    margin-left: 10%;
+    width: 240px;
+    height: 240px;
+    margin: 2% auto;
 }
 
 .card__title {

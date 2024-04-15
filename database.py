@@ -1,4 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
@@ -98,7 +97,7 @@ class Image(db.Model):
 
 def create_database(app):
     """Create SQLite database if it doesn't exist."""
-    if not os.path.exists('mydatabase.db'):
+    if not os.path.exists('instance/MyDatabase.db'):
         with app.app_context():
             # db.init_app(app)
             db.create_all()
