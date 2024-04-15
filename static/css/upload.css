@@ -8,7 +8,7 @@
 .drop-show-metadata-container{
     display: flex;
     width: 100%;
-    height: auto;
+    height: 550px;
     margin-top: 5%;
     justify-content: space-between;
     margin-bottom: 5%;
@@ -115,8 +115,8 @@
 }
 
 .show-metadata-container{
-    width: auto;
-    height: auto;
+    width: 90%;
+    height: 98%;
     margin-left: 5%;
     display: flex;
     justify-content: space-between;
@@ -352,5 +352,8 @@ input:checked + .slider:before {
         width: 80%;
         height: auto;
         margin-top: 30px;
+    }
+    .bottom-navigation-bar{
+        display: none;
     }
 }
