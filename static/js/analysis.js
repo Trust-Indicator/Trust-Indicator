@@ -13,18 +13,18 @@ const zoomOutButton = document.getElementById('zoomOut');
 
 let currentScale = 1;
 function resizeImageDisplay(increase) {
-    const zoomFactor = 0.1;
-    if (increase){
-        if (currentScale < 1.5){
-            currentScale =  currentScale * (1 + zoomFactor);
-            imageDisplay.style.transform = `scale(${currentScale})`;
-        }
-    }else{
-        if (currentScale > 0.5){
-            currentScale = currentScale / (1 + zoomFactor);
-            imageDisplay.style.transform = `scale(${currentScale})`;
-        }
-    }
+      let currentWidth = parseInt(getComputedStyle(imageDisplay).width);
+      let currentHeight = parseInt(getComputedStyle(imageDisplay).height);
+      let maxWidth = parseInt(getComputedStyle(showImage).width) * 0.9;
+      let maxHeight = parseInt(getComputedStyle(showImage).height) * 0.9;
+      let newWidth = increase ? currentWidth + 20 : currentWidth - 20;
+      let newHeight = increase ? currentHeight + 20 : currentHeight - 20;
+      newWidth = Math.min(newWidth, maxWidth);
+      newHeight = Math.min(newHeight, maxHeight);
+      newWidth = Math.max(newWidth, 200);
+      newHeight = Math.max(newHeight, 200);
+      imageDisplay.style.width = newWidth + 'px';
+      imageDisplay.style.height = newHeight + 'px';
 }
 zoomInButton.addEventListener('click', () => resizeImageDisplay(true));
 zoomOutButton.addEventListener('click', () => resizeImageDisplay(false));
@@ -43,11 +43,11 @@ function countdown() {
 }
 var interval = setInterval(countdown, 1000);
 
-// 设定分数
-let score = 80; // 分数可以是从0到100的任何值
-let scoreNormalized = score; // 分数在这里已经是百分比了
 
-// 更新 SVG 的 stroke-dasharray 属性来反映当前分数
+let score = 80;
+let scoreNormalized = score;
+
+
 document.querySelector('#circle-Original').style.strokeDasharray = `${scoreNormalized}, 100`;
 document.querySelector('#percentage-Original').textContent = `${score}%`;
 
@@ -58,12 +58,17 @@ document.querySelector('#percentage-AIGC').textContent = `${score}%`;
 var firstIndicatorImages = ['5.png', '5.png', /* ... more icons ... */];
 var secondIndicatorImages = ['6.png', '6.png', /* ... more icons ... */];
 document.getElementById("signal1").style.backgroundImage = `url('/static/images/${firstIndicatorImages[1]}')`;
-document.getElementById("signal1").style.backgroundSize = 'cover';
+document.getElementById("signal1").style.backgroundSize = 'contain';
+document.getElementById("signal1").style.backgroundRepeat = 'no-repeat';
+
+
 document.getElementById("signal2").style.backgroundImage = `url('/static/images/${secondIndicatorImages[1]}')`;
-document.getElementById("signal2").style.backgroundSize = 'cover';
+document.getElementById("signal2").style.backgroundSize = 'contain';
+document.getElementById("signal2").style.backgroundRepeat = 'no-repeat';
+
 
 // show image
-let downloadBlobUrl = null; // 用于保存图像Blob URL的变量
+let downloadBlobUrl = null;
 document.addEventListener('DOMContentLoaded', function() {
   const imageDisplayDiv = document.querySelector('.image-display');
   const downloadButton = document.getElementById('Download');

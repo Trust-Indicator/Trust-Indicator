@@ -1,20 +1,28 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 .main{
     flex-grow: 1;
     width: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     margin:auto;
 }
 .image-result-container{
     width: 100%;
-    height: auto;
     min-height: 600px;
     min-width: 420px;
     justify-content: space-between;
     margin-top: 5vh;
     margin-bottom: 2vh;
     display: flex;
+    height: 75vh;
 }
 
 .image-show-container {
@@ -135,8 +143,9 @@
 
 }
 .show-result{
+    height: 95%;
     width: 80%;
-    min-height: 800px;
+
     text-align: center;
     justify-items: center;
     display: flex;
@@ -147,16 +156,37 @@
 }
 
 @media (max-width: 887px) {
+
     .image-result-container{
         flex-direction: column;
         align-items: center;
-
+        display: flex;
     }
-    .image-show-container,
+    .image-show-container
+    {
+
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        position: relative;
+        align-content: center;
+        width: 80%;
+        min-height: 600px;
+        margin-top: 30px;
+        margin-left: 20%;
+    }
+
+
     .result-container {
         width: 80%;
-        min-height: 500px;
+        min-height: 600px;
         margin-top: 30px;
+        justify-content: center;
+        align-content: center;
+    }
+    .bottom-navigation-bar{
+        display: none !important;
     }
 }
 .warpper-wait{
@@ -172,7 +202,7 @@
     display: flex;
     margin: auto;
     position: relative;
-    top: 0; /* 或者是需要的确切位置 */
+    top: 0;
     left: 0;
 
 }
@@ -259,6 +289,9 @@
     width: 100%;
     height: 69%;
     margin-top: 6px;
+    justify-content: space-around;
+    position: relative;
+
 
     flex-direction: row;
     justify-items: center;
@@ -297,7 +330,6 @@
     text-anchor: middle;
 }
 
-/* 动画效果 */
 @keyframes progress {
     0% {
         stroke-dasharray: 0 100;
@@ -313,7 +345,6 @@
 
 .signal-result {
     height: 32%;
-
     margin-bottom: 3%;
     width: 97%;
     justify-items: center;
@@ -324,11 +355,19 @@
     margin-top: 2%;
     border: 2px solid #00467F;
     border-radius: 10px;
+
 }
-.signal{
+#signal1{
     width: 40%;
     height: 80%;
-    margin-left:5%;
+    position: relative;
+    margin-left: 5%;
+}
+#signal2{
+    width: 40%;
+    height: 80%;
+    position: relative;
+    margin-left: 5%;
 }
 
 .result-button-container {

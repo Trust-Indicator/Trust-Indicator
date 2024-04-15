@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/gallery.js') }}"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
     <link rel="icon" href="{{ url_for('static', filename='images/CredibilitySiginal_v2.0.0.png') }}" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <!--</div>-->
@@ -233,6 +235,12 @@
     </div>
     <div class="main-content">
         <div class="photo-gallery">
+            <div class="photo" style="display: none">
+                <div class="photo-indicators">
+                    <div class="indicator"></div>
+                    <div class="indicator"></div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -298,4 +306,5 @@ document.getElementById('backToTop').addEventListener('click', function(){
 });
 
 </script>
+<script src="{{ url_for('static', filename='js/gallery.js') }}"></script>
 </html>

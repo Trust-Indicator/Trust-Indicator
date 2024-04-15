@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     imageTypeRadios.forEach(function(radio) {
         radio.addEventListener('change', function() {
             if (this.checked) {
-                // 如果某个单选按钮被选中，恢复按钮的初始样式和文字
                 analysisButton.classList.remove('no-selection');
                 analysisButtonText.textContent = 'Analysis Now!';
             }
@@ -18,8 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
             analysisButton.classList.add('no-selection');
             analysisButtonText.textContent = 'Please Select Type!';
         } else {
-            // 如果选中了图片类型，执行相应操作
-            // ...
+
         }
     });
 });
@@ -34,6 +32,12 @@ function sign_out_upload(event){
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('file-input').addEventListener('change', function(event) {
+        if (event.target.files.length > 0) {
+            const file = event.target.files[0];
+            previewImage(file);
+        }
+    });
     var dropBox = document.querySelector('.drop-box'); // Selecting using class
     var fileInput = document.querySelector('#file-input'); // Assuming file-input is still an ID
 
@@ -78,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
     ([...files]).forEach(file => {
         if (["image/jpeg", "image/jpg"].includes(file.type)) {
             uploadFile(file);
-            previewFile(file);
+            previewImage(file);
         } else {
             alert("Only JPEG files are allowed.");
         }
@@ -111,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function resetImageTypeSelection() {
         var imageTypeInputs = document.querySelectorAll('input[name="image-type"]');
         imageTypeInputs.forEach(function(input) {
-            input.checked = false;  // 重置所有单选按钮为未选中状态
+            input.checked = false;
         });
         var analysisButton = document.querySelector('.analysis-button');
         var analysisButtonText = analysisButton.querySelector('span');
@@ -121,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
 }
    function updateMetadataOnPage(metadata) {
     const imageSizeElement = document.getElementById('metadata-ImageSize');
-    // 检查宽度和高度是否不是 'None'
+
     const imageWidth = metadata['ImageWidth'] !== 'None' ? metadata['ImageWidth'] : 'None';
     const imageLength = metadata['ImageLength'] !== 'None' ? metadata['ImageLength'] : 'None';
     imageSizeElement.textContent = `${imageWidth} x ${imageLength}`;
@@ -198,14 +202,31 @@ document.addEventListener("DOMContentLoaded", function() {
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function() {
-            let img = document.getElementById('image-preview'); // Assuming image-preview is an ID
+            let img = document.querySelector('#image-preview'); // Assuming image-preview is an ID
             img.src = reader.result;
-            img.style.display = "block";
-            let box = document.querySelector(".drop-box");
-            box.innerHTML = "";
-            box.appendChild(img);
+
+            console.log(reader.result)
+            // img.style.display = "block";
+            // let box = document.querySelector(".drop-box");
+            // box.innerHTML = "";
+            // box.appendChild(img);
         }
     }
+    function previewImage(file) {
+        let reader = new FileReader();
+        reader.onloadend = function() {
+            dropBox.style.backgroundImage = 'url(' + reader.result + ')';
+
+            dropBox.innerHTML = '<p>Uploaded Successfully</p>';
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+    // Clicking on the dropBox will trigger the hidden file input dialog
+    dropBox.addEventListener('click', function() {
+        fileInput.click();
+    });
 
     fileInput.addEventListener('change', function(e) {
         var files = e.target.files;
@@ -214,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 });
-let uploadedImageId = null; // 全局变量来保存上传图片的ID
+let uploadedImageId = null;
 
 function analysis(event) {
     var selectedImageType = document.querySelector('input[name="image-type"]:checked');

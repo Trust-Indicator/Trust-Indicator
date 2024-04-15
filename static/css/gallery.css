@@ -121,7 +121,13 @@
     display: flex;
     transition: transform 0.5s ease;
 }
-
+.indicator {
+    width: 2.5vw;
+    height: 2.5vw;
+    margin-left: 0.5vw;
+    border-radius: 50%;
+    object-fit: cover;
+}
 #backToTop {
     display: none;
     position: fixed;
