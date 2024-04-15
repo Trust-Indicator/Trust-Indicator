@@ -216,7 +216,7 @@ html, body {
     background: white;
     border: 1px solid #00467F;
     top: 105px;
-    right: 13%;
+    right: 26%;
     z-index: 3;
     box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
     position: fixed;
@@ -327,7 +327,7 @@ html, body {
     height: 110px;
     background-color: #00467F;
     bottom: 10px;
-    right: 78%;
+    right: 80%;
     clip-path: polygon(0% 0%, 85% 0, 100% 15%, 100% 100%, 15% 100%, 0 85%);
     z-index: 3;
     align-items: center;
