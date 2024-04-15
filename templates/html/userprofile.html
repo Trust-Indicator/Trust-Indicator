@@ -241,18 +241,22 @@
             </div>
         </div>
         <!-- change profile photo -->
-        <div id="profilePhotoModal" class="modal">
+        <div id="profilePhotoModal" class="modal" style="display: none">
             <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h1 style="font-size: 3vh">Profile photo</h1>
-                <div class="image-options">
-                    {% for i in range(1, 17) %}
-                    <img src="{{ url_for('static', filename='profilephotos/' + i|string + '.jpg') }}" alt="Image {{ i }}" class="selectable-image">
-                    {% endfor %}
+                <div class="modal-content-header">
+                    <h1 style="font-size: 3vh; padding-left: 20px">Profile photo</h1>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                <div class="modal-content-container">
+                    <div class="image-options">
+                        {% for i in range(1, 17) %}
+                        <img src="{{ url_for('static', filename='profilephotos/' + i|string + '.jpg') }}" alt="Image {{ i }}" class="selectable-image">
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="modal-options">
-                    <button type="button" onclick="saveSelection()">Save</button>
-                    <button type="button" onclick="close()">Exit</button>
+                    <button type="button" onclick="saveSelection()" id="confirmButton">Save</button>
+                    <button type="button" onclick="close()" id="cancelButton">Exit</button>
                 </div>
             </div>
         </div>

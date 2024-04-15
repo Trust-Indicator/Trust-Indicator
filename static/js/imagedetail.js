@@ -123,7 +123,62 @@ function loadImage(imageId){
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('favourite-button').addEventListener('click', function() {
+    const modal = document.getElementById("myModal");
+    const span = document.getElementById("myModalClose");
+    const confirmBtn = document.getElementById("confirmDelete");
+    const cancelBtn = document.getElementById("cancelDelete");
+    function checkAndSetFavourite() {
+        fetch(`/checkFavourite`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ image_id: imageId }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            const favButton = document.getElementById('favourite');
+            if (data.isFavourite) {
+                favButton.style.color = 'red';
+                favButton.onclick = confirmDelete;
+            } else {
+                favButton.style.color = 'black';
+                favButton.onclick = addToFavourite;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error)
+            const favButton = document.getElementById('favourite');
+            favButton.style.color = 'black';
+            favButton.onclick = addToFavourite;
+        });
+    }
+    checkAndSetFavourite()
+    hideModal()
+     function showModal() {
+        modal.style.display = "block"
+    }
+    function hideModal() {
+        modal.style.display = "none"
+    }
+
+    span.onclick = function() {
+        hideModal();
+    }
+    confirmBtn.onclick = function() {
+        deleteFavourite();
+        hideModal();
+    }
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            hideModal();
+        }
+    }
+    cancelBtn.onclick = function() {
+        hideModal();
+    }
+
+    function addToFavourite(){
         fetch('/addToFavourite', {
             method: 'POST',
             headers: {
@@ -140,12 +195,41 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
+            checkAndSetFavourite()
             showSuccessAlert(data.message);
         })
         .catch(errorData => {
             showErrorAlert(errorData.error);
         });
-    });
+    }
+    function confirmDelete(){
+        showModal()
+    }
+
+    function deleteFavourite() {
+        fetch('/deleteFavourite', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ image_id: imageId }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    throw errorData;
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            checkAndSetFavourite();
+            showSuccessAlert(data.message);
+        })
+        .catch(errorData => {
+            showErrorAlert(errorData.error);
+        });
+    }
 });
 
 

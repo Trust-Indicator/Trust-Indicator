@@ -117,21 +117,35 @@ def imagedetail():
 
 @app.route('/addToFavourite', methods=['POST'])
 def addToFavourite():
-    user_id = current_user.id
-    image_id = request.json.get('image_id')
+    if current_user and current_user.is_authenticated:
+        user_id = current_user.id
+        image_id = request.json.get('image_id')
 
-    if not user_id or not image_id:
-        return jsonify({'error': 'Missing user_id or image_id'}), 401
+        if not user_id or not image_id:
+            return jsonify({'error': 'Missing user_id or image_id'}), 401
 
-    existing_favorite = Favorites.query.filter_by(UserID=user_id, ImageID=image_id).first()
-    if existing_favorite:
-        return jsonify({'error': 'Image already in favorites'}), 500
-    image = Image.query.filter_by(id=image_id).first()
-    new_favorite = Favorites(UserID=user_id, FileName=image.filename, ImageID=image_id, Is_Favorite=1, Create_Date=datetime.utcnow())
-    db.session.add(new_favorite)
-    db.session.commit()
+        existing_favorite = Favorites.query.filter_by(UserID=user_id, ImageID=image_id).first()
+        if existing_favorite:
+            return jsonify({'error': 'Image already in favorites'}), 500
+        image = Image.query.filter_by(id=image_id).first()
+        new_favorite = Favorites(UserID=user_id, FileName=image.filename, ImageID=image_id, Is_Favorite=1,
+                                 Create_Date=datetime.utcnow())
+        db.session.add(new_favorite)
+        db.session.commit()
 
-    return jsonify({'message': 'Image added to favorites successfully'}), 201
+        return jsonify({'message': 'Image added to favorites successfully'}), 201
+    return jsonify({'error': 'Please login to add favourite.'}), 401
+
+
+@app.route('/checkFavourite', methods=['POST'])
+def checkFavourite():
+    if current_user and current_user.is_authenticated:
+        user_id = current_user.id
+        image_id = request.json.get('image_id')
+        existing_favorite = Favorites.query.filter_by(UserID=user_id, ImageID=image_id).first()
+        if existing_favorite:
+            return jsonify({'isFavourite': True})
+    return jsonify({'isFavourite': False})
 
 
 @app.route('/deleteFavourite', methods=['POST'])
