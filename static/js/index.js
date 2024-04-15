@@ -34,10 +34,9 @@ document.addEventListener('click', function(event) {
 });
 
 function sign_in(event) {
-    event.stopPropagation();  // 阻止事件冒泡
+    event.stopPropagation();
     var userEmail = sessionStorage.getItem('userEmail');
     if (userEmail) {
-        // 如果用户已登录，显示或隐藏签入内容
         const signInContent = document.querySelector('.sign-in-content');
         if (signInContent.style.display === 'block') {
             signInContent.style.display = 'none';
@@ -45,7 +44,6 @@ function sign_in(event) {
             signInContent.style.display = 'block';
         }
     } else {
-        // 如果用户未登录，跳转到登录页面
         window.location.href = "/login";
     }
     const dropdown = document.getElementById('language-options');
@@ -207,12 +205,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (threeLine.classList.contains('cross')) {
                 threeLine.classList.remove('cross');
-                sidebar.style.display = 'none'; // 关闭侧边栏
+                sidebar.style.display = 'none';
             } else {
                 threeLine.classList.add('cross');
-                sidebar.style.display = 'block'; // 打开侧边栏
-
-                // 每次显示sidebar时，确保始终显示主菜单并隐藏所有子菜单
+                sidebar.style.display = 'block';
                 mainMenu.style.display = 'block';
                 submenus.forEach(function(submenu) {
                     submenu.style.display = 'none';
@@ -292,14 +288,11 @@ document.addEventListener("DOMContentLoaded", function() {
     window.addEventListener('resize', function() {
         var threeLine = document.querySelector('.menu-icon-wrapper .three-line');
         if (window.innerWidth > 700) {
-            // 隐藏sidebar
             document.querySelector('.sidebar').style.display = 'none';
-            // 如果当前是错号，更改为横线
             if (threeLine.classList.contains('cross')) {
                 threeLine.classList.remove('cross');
             }
         } else {
-            // 如果sidebar是显示的，确保图标是错号
             if (document.querySelector('.sidebar').style.display === 'block' && !threeLine.classList.contains('cross')) {
                 threeLine.classList.add('cross');
             }
@@ -309,6 +302,34 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+// Fix for screen resize
+let currentSlide = 0;
+
+function slide(direction) {
+    const gallery = document.getElementById('gallery');
+    const divs = gallery.children;
+    let visibleDivs = 5;
+
+    // Calculate the margin in pixels (3% of gallery width)
+    const marginRightPixels = 0.03 * gallery.clientWidth;
+
+    // Combine the width of the div and the margin to get the total width per div
+    let divWidth = divs[0].getBoundingClientRect().width + marginRightPixels;
+
+    // Logic for smaller screens
+    if (window.innerWidth <= 950) {
+        visibleDivs = 3;
+        // If there are any different specifications for smaller screens, adjust here
+    }
+
+    if (direction === 'left' && currentSlide > 0) {
+        currentSlide--;
+    } else if (direction === 'right' && currentSlide < divs.length - visibleDivs) {
+        currentSlide++;
+    }
+
+    gallery.style.transform = `translateX(-${currentSlide * divWidth}px)`;
+}
 // Fix for screen resize
 window.addEventListener('resize', function() {
     const gallery = document.getElementById('gallery');
