@@ -52,7 +52,7 @@ html, body {
     justify-content: center;
     justify-items: center;
     display: flex;
-    margin-left: 10%;
+    margin-left: 20%;
 }
 
 .info-panels {
@@ -216,7 +216,7 @@ html, body {
     background: white;
     border: 1px solid #00467F;
     top: 105px;
-    right: 26%;
+    right: 21%;
     z-index: 3;
     box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
     position: fixed;
@@ -2083,6 +2083,28 @@ html, body {
     margin: 15px auto;
     text-align: center;
 }
+.gallery-container2 > div:first-child {
+    width: 90%;
+    height:50px;
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #00467F;
+    margin-left: 20px;
+    font-weight: bolder;
+    align-items: center;  /* Vertically center the text or content */
+    /* Horizontally center the text or content */
+    display: flex;
+
+}
+.gallery-container2:before {
+    content: "";
+    left: 0;
+    position: absolute;
+    width: 10px;  /* Adjust the thickness of the line as needed */
+    height: 10%; /* The line height is 10% of the .top-10-container */
+    background-color: #FFCD29;  /* Adjust the color of the line */
+}
 
 #slider {
     position: relative;
@@ -2113,20 +2135,31 @@ button.prev, button.next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
-    color: white;
+    /*background-color: rgba(0,0,0,0.5);*/
+    /*color: white;*/
+    width:50px;
+    height:100px;
     border: none;
     cursor: pointer;
-    padding: 10px;
     z-index: 5;
+    background-color: #0080A7;
+    margin-left:0.75%;
+    margin-right:0.75%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 10px;
+    font-size:30px;
+    color: #FFFFFF;
+
 }
 
 button.prev {
-    left: 10px;
+    left:20%; right:auto;
 }
 
 button.next {
-    right: 10px;
+      left:auto; right:20%;
 }
 
 .thumbnails-container {
