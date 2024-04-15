@@ -19,13 +19,29 @@
 }
 
 .modal-content {
+    margin: 20px auto;
     background-color: #fefefe;
-    margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
     max-width: 800px;
+    max-height: 80%;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.modal-content-header {
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+.modal-content-container{
+    overflow: auto;
+    height: 80%;
 }
 
 .close {

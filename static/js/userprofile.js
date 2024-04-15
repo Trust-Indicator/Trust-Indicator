@@ -142,7 +142,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const img = document.createElement('img');
                 img.src = `/image/${image.id}`;
                 photoDiv.appendChild(img);
-
+                img.onclick = function() {        // Assign a function to the onclick event
+                    location.href = `/imagedetail?source=${image.id}`; // Redirect to the image detail page
+                };
                 const indicatorsDiv = document.createElement('div');
                 indicatorsDiv.className = 'photo-indicators';
 
@@ -184,6 +186,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const img = document.createElement('img');
                 img.src = `/image/${image.id}`;
                 photoDiv.appendChild(img);
+                img.onclick = function() {        // Assign a function to the onclick event
+                    location.href = `/imagedetail?source=${image.id}`; // Redirect to the image detail page
+                };
 
                 const indicatorsDiv = document.createElement('div');
                 indicatorsDiv.className = 'photo-indicators';

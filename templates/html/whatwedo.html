@@ -211,31 +211,48 @@
 
     <div id="missionModal" class="modal">
         <div class="modal-content">
-            <span class="close" id="closeMission">&times;</span>
-            <h2>Mission Statement</h2>
-            <p>
-                Trust Indicators is a research project undertaken by the students at ANU College of Engineering, Cybernetics, and Computing under the guidance of Dr. Sabrina Caldwell. It is a part of the TechLauncher project at the Australian National University and the team members are: Lingxiu Cai, Vidhu Chaudhary, Tony Chen, Song Han, Yifang Meng and Zhaoyun Zhang.</p>
-            <p>The project takes inspiration from Dr. Sabrina’s ambition to create a reliable community platform as a source of trustworthy pictures. The objective of the project is to provide trust indicators that identify and differentiate media, primarily images, on the basis of their origins. These origins are initially recognised as sources from creators or artists, artificially generated images and modified or manipulated pictures. The impact of the project is expected to influence the way media assets are perceived by individual users and organisations. Trustworthy media assets can be utilised to preserve the emotions, values, ideas, and information they carry and pass it on without the fear of losing integrity. </p>
-<p>The scope of the project is limited in terms of authorised users, number of pictures used to build a trustworthy indicator for the model and the exposure of the project. The website facilitates customization for users to describe their presented pictures and metadata information related to a picture is used as a basis to categorise pictures as trustworthy or untrustworthy. </p>
-<p>Contribution towards this project officially started in July 2023 and is in continuation. We request the users to acknowledge the teams’ efforts in delivering the objectives and accomplishing their goals by contributing their work on the website and providing relevant descriptions to associate credibility to their pictures. </p>
-<p>All criticisms and suggestions for the project are welcome and can be put forward to the team representatives: Yifang Meng and Vidhu Chaudhary – yifang.meng@anu.edu.au and vidhu.chaudhary@anu.edu.au.</p>
+            <div class="modal-content-header">
+                <h2>Mission Statement</h2>
+                <span class="close" id="closeMission">&times;</span>
+            </div>
+            <div class="modal-content-container">
+                <p>Trust Indicators is a research project undertaken by the students at ANU College of Engineering, Cybernetics, and Computing under the guidance of Dr. Sabrina Caldwell. It is a part of the TechLauncher project at the Australian National University and the team members are: Lingxiu Cai, Vidhu Chaudhary, Tony Chen, Song Han, Yifang Meng and Zhaoyun Zhang.</p>
+                <p>The project takes inspiration from Dr. Sabrina’s ambition to create a reliable community platform as a source of trustworthy pictures. The objective of the project is to provide trust indicators that identify and differentiate media, primarily images, on the basis of their origins. These origins are initially recognised as sources from creators or artists, artificially generated images and modified or manipulated pictures. The impact of the project is expected to influence the way media assets are perceived by individual users and organisations. Trustworthy media assets can be utilised to preserve the emotions, values, ideas, and information they carry and pass it on without the fear of losing integrity. </p>
+                <p>The scope of the project is limited in terms of authorised users, number of pictures used to build a trustworthy indicator for the model and the exposure of the project. The website facilitates customization for users to describe their presented pictures and metadata information related to a picture is used as a basis to categorise pictures as trustworthy or untrustworthy. </p>
+                <p>Contribution towards this project officially started in July 2023 and is in continuation. We request the users to acknowledge the teams’ efforts in delivering the objectives and accomplishing their goals by contributing their work on the website and providing relevant descriptions to associate credibility to their pictures. </p>
+                <p>All criticisms and suggestions for the project are welcome and can be put forward to the team representatives: Yifang Meng and Vidhu Chaudhary – yifang.meng@anu.edu.au and vidhu.chaudhary@anu.edu.au.</p>
+            </div>
         </div>
     </div>
     <div id="methodModal" class="modal">
         <div class="modal-content">
-            <span class="close" id="closeMethod">&times;</span>
-            <h2>Recognition Method</h2>
-            <p>Yifang's Part</p>
+            <div class="modal-content-header">
+                <h2>Recognition Method</h2>
+                <span class="close" id="closeMethod">&times;</span>
+            </div>
+            <div class="modal-content-container">
+                <p>The entire extractor consists of three files containing the main extraction logic code, console tests, an interface to convert the readings into JSON for parsing by the front-end, and an interface to package the readings into a dictionary format.</p>
+                <p>Pillow is a widely used Python image processing library that provides a wealth of functionality for working with digital images.The Trust Indicator Project makes heavy use of the Image and ExifTags modules of the Pillow library.</p>
+                <p>The Image module is the core of the Pillow library and provides a set of basic image manipulation functions. Through this module, we can perform a variety of image manipulation tasks, such as opening and saving images, resizing images, performing image conversions, and so on.</p>
+                <p>The ExifTags module focuses on processing the EXIF data of an image, which includes the various settings and conditions used to take the photo, such as the camera model, the date and time of the shooting, the focal length, and so on. With the ExifTags module, the program can access and parse this EXIF data, which is very useful for image analysis, archiving. Combined with the needs of Trust Indicator, EXIF data is also an important data support for trustworthiness judgement.</p>
+                <p>For the generation process of Google Map Creation, the programme first reads the image file and extracts the EXIF data: if the image contains EXIF data, the code will look for a specific tag (GPSInfo) that contains GPS information. After that, it extracts latitude, longitude and their reference directions (N, S, E, W) from GPSInfo by using a decimal degree conversion function, and generates a URL using this information.</p>
+                <p>To detect whether an image is manipulated or not, we draw on research from UC Berkeley and Adobe Research. This is a deep learning model based on Dilated Residual Networks (DRN), which, by introducing dilated convolution, is able to increase the receptive field of the model without losing the details of the image, which is particularly important for image manipulation detection, as manipulation often occurs in the details. The model uses deep learning to reduce the complex image analysis problem to a binary classification problem by learning a large set of modified and unmodified images: each image is either "original" or "modified". And the model training process is creative. The team used the Face-Aware-Liquify tool in Photoshop to automatically generate a large training dataset. This process involves collecting photos of real faces and randomly adjusting parameters to simulate all possible image manipulation, thus providing the model with rich and generalised input data. Going a step further, the model also introduces the concept of optical flow field, a technique that describes the motion or changes in an image, for visualising areas suspected of being modified. An optical flow field is a vector field that predicts the movement path of each pixel point in an image from the original state to the modified state. In this way, we are not only able to tell the user whether an image has been modified or not, but also point out the specific areas that may have been manipulated.</p>
+                <p>For the optimisation and performance evaluation of the model, after the team's discussion, we will start from the following aspects in the future:</p>
+                <p>In order to verify the effect of the model in practical applications, we will manually modify some images as inputs, such as compressing the image, adding NOISE, artificial PS, etc., as an important test of the model's generalisation ability.</p>
+            </div>
         </div>
     </div>
     <div id="credibilityModal" class="modal">
         <div class="modal-content">
-            <span class="close" id="closeCredibility">&times;</span>
-            <h2>Credibility Signals</h2>
-            <p>Credibility symbols have been created for each category of picture that can be distinguished on the website. These symbols have been generated following the rules of visual design and provide easy information to the users about the picture classification. As mentioned, the primary categories are trustworthy and untrustworthy images, manipulated pictures which have been modified using software or other means and an ambiguous category to represent unknown source of the image.</p>
-<p>These visual cues come together to deliver quick information through the user interface and completes the delivery of research work along with the developed features related to visual cue design and contextual display. </p>
+            <div class="modal-content-header">
+                <h2>Credibility Signals</h2>
+                <span class="close" id="closeCredibility">&times;</span>
+            </div>
+            <div class="modal-content-container">
+                <p>Credibility symbols have been created for each category of picture that can be distinguished on the website. These symbols have been generated following the rules of visual design and provide easy information to the users about the picture classification. As mentioned, the primary categories are trustworthy and untrustworthy images, manipulated pictures which have been modified using software or other means and an ambiguous category to represent unknown source of the image.</p>
+                <p>These visual cues come together to deliver quick information through the user interface and completes the delivery of research work along with the developed features related to visual cue design and contextual display. </p>
+            </div>
         </div>
-    </div>
     </div>
 
     <div class="bottom-navigation-bar">
