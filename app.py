@@ -301,8 +301,10 @@ def verify_code():
 
 @app.route('/gallery')
 def GotoGallery():
+    sort_order = request.args.get('sort', 'desc')
     user_email = current_user.UserName if current_user.is_authenticated else 'Welcome'
-    return render_template('html/gallery.html', user_email=user_email)
+
+    return render_template('html/gallery.html', user_email=user_email, sort=sort_order)
 
 
 # signup function

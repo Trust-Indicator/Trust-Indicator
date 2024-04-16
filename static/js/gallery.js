@@ -1,9 +1,28 @@
 
 document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sortOrder = urlParams.get('sort');
+    if (sortOrder === 'asce') {
+        fetchSortedImages('asce');
+    } else {
+        fetchDefaultImages();
+    }
+});
+
+let sortOrder = 'default';
+
+function fetchDefaultImages(){
+    sortOrder = 'default';
     fetch('/getimages').then(response => response.json()).then(data => {
         const gallery = document.querySelector('.photo-gallery');
         var firstIndicatorImages = ['5.png', '5.png', /* ... more icons ... */];
         var secondIndicatorImages = ['6.png', '6.png', /* ... more icons ... */];
+        gallery.innerHTML = "<div class=\"photo\" style=\"display: none\">\n" +
+                    "                <div class=\"photo-indicators\">\n" +
+                    "                    <div class=\"indicator\"></div>\n" +
+                    "                    <div class=\"indicator\"></div>\n" +
+                    "                </div>\n" +
+                    "            </div>"
 
         data.forEach(image => {
             const photoDiv = document.createElement('div');
@@ -12,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const img = document.createElement('img');
             img.src = `/image/${image.id}`;  // Fetch the image from the server by image ID
             img.style.cursor = 'pointer';     // Change the cursor on hover to indicate this is clickable
-            img.onclick = function() {        // Assign a function to the onclick event
+            img.onclick = function () {        // Assign a function to the onclick event
                 location.href = `/imagedetail?source=${image.id}`; // Redirect to the image detail page
             };
             console.log(img)
@@ -38,9 +57,14 @@ document.addEventListener('DOMContentLoaded', function() {
             gallery.appendChild(photoDiv);
         });
     });
-});
+}
 
-let sortOrder = 'desc';  // Keeps track of the current sort order
+function fetchSortedImages(sort){
+    if (sort === "asce"){
+        sortOrder = "asce"
+        toggleSort()
+    }
+}
 
 function toggleSort() {
     const sortIcon = document.getElementById('sortIcon');

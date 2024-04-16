@@ -102,7 +102,7 @@
                         <h3 ><i class="fa fa-photo" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;All Images</h3>
                         <a href="#" onclick="GotoGallery(event)">Default</a>
                         <a href="#">Sort By Credibility</a>
-                        <a href="#">Sort By Publish Time</a>
+                        <a href="/gallery?sort=asce">Sort By Publish Time</a>
                     </div>
                     <div class="submenu-div3">
                         <h3><i class="fa fa-star" style="font-size:24px;color: #FFCD29"></i>&nbsp;&nbsp;&nbsp;Truth Images</h3>
@@ -111,7 +111,7 @@
                         <h3 style="margin-top: 15px"><i class="fa fa-star-half-empty" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Fake Image</h3>
                         <a href="#">Show All</a>
                         <a href="#">Sort By Credibility</a>
-                        <a href="#">Sort By Publish Time</a>
+                        <a href="/gallery?sort=asce">Sort By Publish Time</a>
                     </div>
                     <div class="submenu-div4">
                         <div style="width: 80%; height: 80%; display: flex;position: relative; left: 10%; top: 10%;background: #00467F">
@@ -149,7 +149,7 @@
                                 <h3><i class="fa fa-photo" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;All Images</h3>
                                 <a href="#" onclick="GotoGallery(event)">Default</a>
                                 <a href="#">Sort By Credibility</a>
-                                <a href="#">Sort By Publish Time</a>
+                                <a href="/gallery?sort=asce">Sort By Publish Time</a>
                             </div>
                             <div class="clm">
                                 <h3><i class="fa fa-star" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Truth Images</h3>
@@ -158,7 +158,7 @@
                                 <h3><i class="fa fa-star-half-empty" style="font-size:24px"></i>&nbsp;&nbsp;&nbsp;Fake Image</h3>
                                 <a href="#">Show All</a>
                                 <a href="#">Sort By Credibility</a>
-                                <a href="#">Sort By Publish Time</a>
+                                <a href="/gallery?sort=asce">Sort By Publish Time</a>
                             </div>
                             <div class="clm background-gallery">
                                 <a href="#" ><img src="/static/images/background_gallery.jpeg" style="width:280px"/></a>
@@ -217,18 +217,18 @@
             <nav class="navigation">
                 <ul>
                     <li style="text-align: center;pointer-events: none;">Show Options</li>
-                    <li><i class="fas fa-tachometer-alt"></i> All Images</li>
+                    <li onclick="fetchDefaultImages();"><i class="fas fa-tachometer-alt"></i> All Images</li>
                     <li><i class="fas fa-users"></i> True Images</li>
                     <li><i class="fas fa-credit-card"></i> Fake Images</li>
-                    <li><i class="fas fa-credit-card"></i> Random</li>
+                    <li onclick="fetchDefaultImages();"><i class="fas fa-credit-card"></i> Random</li>
 
                 </ul>
                 <ul>
                     <li style="text-align: center;pointer-events: none;"> Sort Options</li>
-                    <li><i class="fas fa-tachometer-alt"></i> Default</li>
+                    <li onclick="fetchDefaultImages();"><i class="fas fa-tachometer-alt"></i> Default</li>
                     <li><i class="fas fa-tachometer-alt"></i> Credibility</li>
                     <li id="sortLink" onclick="toggleSort(); return false;"><span id="sortIcon" style="margin-right: 10px"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: auto"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M13 6L21 6.00048M13 12L21 12.0005M13 18L21 18.0005M6 4V20M6 4L3 7M6 4L9 7M6 20L3 17M6 20L9 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></span>Publish Time</li>
-                    <li><i class="fas fa-credit-card"></i> Random</li>
+                    <li onclick="fetchDefaultImages();"><i class="fas fa-credit-card"></i> Random</li>
                 </ul>
             </nav>
         </div>
