@@ -217,18 +217,18 @@
             <nav class="navigation">
                 <ul>
                     <li style="text-align: center;pointer-events: none;">Show Options</li>
-                    <li onclick="fetchDefaultImages();"><i class="fas fa-tachometer-alt"></i> All Images</li>
+                    <li onclick="fetchAllImages();"><i class="fas fa-tachometer-alt"></i> All Images</li>
                     <li><i class="fas fa-users"></i> True Images</li>
                     <li><i class="fas fa-credit-card"></i> Fake Images</li>
-                    <li onclick="fetchDefaultImages();"><i class="fas fa-credit-card"></i> Random</li>
-
+                    <li onclick="fetchSortedImagesByType('Original')"><i class="fas fa-camera-retro"></i> Original</li>
+                    <li onclick="fetchSortedImagesByType('Manipulation')"><i class="fas fa-paint-brush"></i> Manipulation</li>
+                    <li onclick="fetchSortedImagesByType('AIGC')"><i class="fas fa-robot"></i> AIGC</li>
                 </ul>
                 <ul>
                     <li style="text-align: center;pointer-events: none;"> Sort Options</li>
                     <li onclick="fetchDefaultImages();"><i class="fas fa-tachometer-alt"></i> Default</li>
                     <li><i class="fas fa-tachometer-alt"></i> Credibility</li>
-                    <li id="sortLink" onclick="toggleSort(); return false;"><span id="sortIcon" style="margin-right: 10px"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: auto"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M13 6L21 6.00048M13 12L21 12.0005M13 18L21 18.0005M6 4V20M6 4L3 7M6 4L9 7M6 20L3 17M6 20L9 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></span>Publish Time</li>
-                    <li onclick="fetchDefaultImages();"><i class="fas fa-credit-card"></i> Random</li>
+                    <li id="sortIcon" onclick="toggleSort(); return false;"><i class="fas fa-sort"></i> Publish Time</li>
                 </ul>
             </nav>
         </div>

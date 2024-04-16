@@ -684,7 +684,15 @@ def get_images():
 
 @app.route('/images/sortByTimeDesc')
 def sorted_images_by_time_desc():
-    images = Image.query.order_by(Image.UploadDate.desc()).all()
+    tag = request.args.get('tag', default='')
+    if tag == 'Original':
+        images = Image.query.filter(Image.Tag == 'Original').order_by(Image.UploadDate.desc()).all()
+    elif tag == 'Manipulation':
+        images = Image.query.filter(Image.Tag == 'Manipulation').order_by(Image.UploadDate.desc()).all()
+    elif tag == 'AIGC':
+        images = Image.query.filter(Image.Tag == 'AIGC').order_by(Image.UploadDate.desc()).all()
+    else:
+        images = Image.query.order_by(Image.UploadDate.desc()).all()
     image_info = [{'id': image.id, 'filename': image.filename} for image in images]
     print(image_info)
     return jsonify(image_info)
@@ -692,8 +700,34 @@ def sorted_images_by_time_desc():
 
 @app.route('/images/sortByTimeAsce')
 def sorted_images_by_time_asce():
-    images = Image.query.order_by(Image.UploadDate).all()
+    tag = request.args.get('tag', default='')
+    if tag == 'Original':
+        images = Image.query.filter(Image.Tag == 'Original').order_by(Image.UploadDate).all()
+    elif tag == 'Manipulation':
+        images = Image.query.filter(Image.Tag == 'Manipulation').order_by(Image.UploadDate).all()
+    elif tag == 'AIGC':
+        images = Image.query.filter(Image.Tag == 'AIGC').order_by(Image.UploadDate).all()
+    else:
+        images = Image.query.order_by(Image.UploadDate).all()
     image_info = [{'id': image.id, 'filename': image.filename} for image in images]
+    print(image_info)
+    return jsonify(image_info)
+
+
+@app.route('/images/sortByTag')
+def sorted_images_by_tag():
+    tag = request.args.get('tag', default='')
+    if tag == 'Original':
+        images = Image.query.filter(Image.Tag == 'Original').all()
+    elif tag == 'Manipulation':
+        images = Image.query.filter(Image.Tag == 'Manipulation').all()
+    elif tag == 'AIGC':
+        images = Image.query.filter(Image.Tag == 'AIGC').all()
+    else:
+        images = Image.query.all()
+
+    image_info = [{'id': image.id, 'filename': image.filename} for image in images]
+    random.shuffle(image_info)
     print(image_info)
     return jsonify(image_info)
 
