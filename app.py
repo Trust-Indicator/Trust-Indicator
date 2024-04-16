@@ -675,6 +675,23 @@ def get_current_user_images():
 def get_images():
     images = Image.query.all()
     image_info = [{'id': image.id, 'filename': image.filename} for image in images]
+    random.shuffle(image_info)
+    print(image_info)
+    return jsonify(image_info)
+
+
+@app.route('/images/sortByTimeDesc')
+def sorted_images_by_time_desc():
+    images = Image.query.order_by(Image.UploadDate.desc()).all()
+    image_info = [{'id': image.id, 'filename': image.filename} for image in images]
+    print(image_info)
+    return jsonify(image_info)
+
+
+@app.route('/images/sortByTimeAsce')
+def sorted_images_by_time_asce():
+    images = Image.query.order_by(Image.UploadDate).all()
+    image_info = [{'id': image.id, 'filename': image.filename} for image in images]
     print(image_info)
     return jsonify(image_info)
 

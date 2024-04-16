@@ -66,6 +66,11 @@
     margin-right: 10px;
     width: 20px;
 }
+
+#sortLink:hover path {
+    stroke: #00467F;
+}
+
 .main-content {
     flex-grow: 1;
     float: left;
