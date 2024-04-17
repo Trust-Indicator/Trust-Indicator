@@ -51,7 +51,7 @@ For bugs and feature requests, please [raise an issue](https://github.com/Clxiu/
 
 #### Installation
 
-Trust-Indicator is designed to function primarily as an online tool. The development team is in the process of deploying the tool to a server, which, once complete, can be accessed through the following link: [image.com.au]().
+Trust-Indicator is designed to function primarily as an online tool. The development team is in the process of deploying the tool to a server, which, once complete, can be accessed through the following link: [https://picture.au/]().
 
 In addition, Trust-Indicator is open to personal adaptions or updates. Below are the instructions for setting up locally:
 
