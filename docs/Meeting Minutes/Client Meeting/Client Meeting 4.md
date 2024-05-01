@@ -19,6 +19,8 @@ Lingxiu Cai, Vidhu Chaudhary, Tony Chen, Song Han, Yifang Meng, Zhaoyun Zhang, P
 1. Update the scanned document symbol to be consistent with theme.
 2. Update the image theme colour to be consistent with the website theme.
 3. Address the usability using a user test and understanding test for the credibility symbols -  to be conducted by Dr.Sabrina.
-4. 
+4. Discuss the scope of the extractor in detecting the manipulated areas in the images.
+5. Limit the ability of users to upload the number of images to the platform.
+6. Address the modulation issue of the users to create a fake and real profile.
    
    
