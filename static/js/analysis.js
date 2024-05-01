@@ -44,15 +44,23 @@ function countdown() {
 var interval = setInterval(countdown, 1000);
 
 
-let score = 80;
-let scoreNormalized = score;
+let score_original = 0;
+let score_aigc = 100;
+let score_manipulation = 0;
+
+let scoreNormalized_original = score_original;
+let scoreNormalized_aigc = score_aigc;
+let scoreNormalized_manipulation = score_manipulation;
 
 
-document.querySelector('#circle-Original').style.strokeDasharray = `${scoreNormalized}, 100`;
-document.querySelector('#percentage-Original').textContent = `${score}%`;
+document.querySelector('#circle-Original').style.strokeDasharray = `${scoreNormalized_original}, 100`;
+document.querySelector('#percentage-Original').textContent = `${score_original}%`;
 
-document.querySelector('#circle-AIGC').style.strokeDasharray = `${scoreNormalized}, 100`;
-document.querySelector('#percentage-AIGC').textContent = `${score}%`;
+document.querySelector('#circle-AIGC').style.strokeDasharray = `${scoreNormalized_aigc}, 100`;
+document.querySelector('#percentage-AIGC').textContent = `${score_aigc}%`;
+
+document.querySelector('#circle-Manipulation').style.strokeDasharray = `${scoreNormalized_manipulation}, 100`;
+document.querySelector('#percentage-Manipulation').textContent = `${score_manipulation}%`;
 
 // signal 替换
 var firstIndicatorImages = ['5.png', '5.png', /* ... more icons ... */];
