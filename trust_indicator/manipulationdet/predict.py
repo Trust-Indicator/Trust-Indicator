@@ -99,6 +99,21 @@ def predict_img(model, img_path):
     inputs = image.type(torch.FloatTensor)
     inputs = inputs.cpu()
     outputs = model(inputs)
+
+    #Calculate the maximal confidence (confidence of green area)
+    confidence = torch.sigmoid(outputs)
+    max_value = torch.max(confidence)
+    cfmax = max_value.item()
+    print('Maximal confidence：')
+    print(cfmax)    
+
+    
+    average_confidence = torch.mean(confidence)
+    cfmean = average_confidence.item()
+    print('Average confidence：')
+    print(cfmean)
+    #Calculate the overall confidence
+
     outputs = outputs.data.cpu().numpy()[:, 0, :, :]
 
     outputs = np.array(outputs > 0.5, dtype=np.uint8)
