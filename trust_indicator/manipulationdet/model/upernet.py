@@ -239,7 +239,7 @@ class UperNet(nn.Module):
         if self.use_roi:
             self.outc_roi = OutConv(num_classes, num_classes, activation)
 
-        self._freeze_backbone()  # 冻结主干网络
+        self._freeze_backbone()  # freeze main network
 
     def forward(self, x, label=None, **kwargs):
         B, _, H, W = x.shape

@@ -1,4 +1,8 @@
 #240426coding
+# Setup Guide:
+# 1. Load the whole project to VS Code
+# 2. Open terminal, type "pip install -r requirements.txt"
+# 3. Open predict.py and change the path in last line to the location of the image you want to analyze
 
 import os
 import torch
@@ -171,7 +175,4 @@ if __name__ == '__main__':
         model.use_edge = False
         model.eval()
 
-        predict_img(model=model, img_path='Sp_D_CND_A_sec0056_sec0015_0282.jpg')
-        #predict_img(model=model, img_path='Sp_D_CNN_A_nat0071_ani0024_0270.jpg')
-        #predict_img(model=model, img_path='Au_ani_0001.jpg')
-        #predict_img(model=model, img_path='C:\Users\yifan\Desktop\profile\afterps.jpg')
+        predict_img(model=model, img_path='Sp_D_CRN_A_nat0093_art0037_0388.jpg')

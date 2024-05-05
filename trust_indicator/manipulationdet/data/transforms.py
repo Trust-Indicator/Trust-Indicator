@@ -15,7 +15,7 @@ from skimage import feature, filters, morphology
 
 
 
-# 数据增强
+# data advancing
 def get_transforms(data_type='train', is_albu=False, size=[512, 512]):
     if not is_albu:
         default_data_transforms = {
@@ -72,10 +72,10 @@ def get_transforms(data_type='train', is_albu=False, size=[512, 512]):
         return albu_transforms
 
 
-# ______________________________________自定义数据增强_____________________________________________
-# 添加背景
+# ______________________________________Custom data enhancement_____________________________________________
+# Add background
 def add_background(img, target_shape, padding_number=0):
-    # PIL：（宽，高） cv2：（高，宽）
+    # PIL：（width, height） cv2：（height，width）
     original_shape = img.shape
 
     new_target_shape = [max(original_shape[0], target_shape[0]), max(original_shape[1], target_shape[1])]
@@ -97,15 +97,15 @@ def add_background(img, target_shape, padding_number=0):
     return target_img
 
 
-# 随机裁剪
+# random crop
 def random_crop(img, mask=None, crop_shape=[512, 512]):
-    # 如果图片小于crop shape, 则进行加背景
+    # If the image is smaller than crop shape, then add background
     if img.shape[0] < crop_shape[0] or img.shape[1] < crop_shape[1]:
         img = add_background(img=img, target_shape=crop_shape, padding_number=0)
         if mask is not None:
             mask = add_background(img=mask, target_shape=crop_shape, padding_number=0)
 
-    # 随机裁剪 crop_shape
+    # random crop_shape
     original_shape = img.shape
     start_h = np.random.randint(0, original_shape[0] - crop_shape[0] + 1)
     start_w = np.random.randint(0, original_shape[1] - crop_shape[1] + 1)
@@ -118,7 +118,7 @@ def random_crop(img, mask=None, crop_shape=[512, 512]):
     return crop_img
 
 
-# 中心裁剪
+# center crop
 def center_crop(img, mask=None, crop_shape=[512, 512]):
     if img.shape[0] < crop_shape[0] or img.shape[1] < crop_shape[1]:
         img = add_background(img=img, target_shape=crop_shape, padding_number=0)
@@ -136,9 +136,9 @@ def center_crop(img, mask=None, crop_shape=[512, 512]):
     return crop_img
 
 
-# 随机旋转翻转
+# random rotation
 def random_flip_and_rot90(img, mask, is_rot=True):
-    # axis=0 垂直翻转, axis=1 水平翻转
+    # axis=0 vertical axis=1 horizontal
     if np.random.random() > 0.5:
         img = np.flip(img, axis=0)
         mask = np.flip(mask, axis=0)
@@ -152,14 +152,13 @@ def random_flip_and_rot90(img, mask, is_rot=True):
 
     # ValueError: some of the strides of a given numpy array are negative.
     # This is currently not supported, but will be added in future releases.
-    # 解决需要加入下面两行代码
+    # solution is the underneath
     img = np.ascontiguousarray(img)
     mask = np.ascontiguousarray(mask)
 
     return img, mask
 
 
-# 同步resize
 def sync_resize(img, mask, resize_shape):
     new_img = cv2.resize(img, [resize_shape[1], resize_shape[0]])
     new_mask = cv2.resize(mask, [resize_shape[1], resize_shape[0]])
@@ -167,12 +166,11 @@ def sync_resize(img, mask, resize_shape):
     return new_img, new_mask
 
 
-# 手工特征
 def get_feature(img, feature_name='hog'):
     """
-    :param img: RGB图像
+    :param img: RGB graphic
     :param feature_name:
-    :return: 归一化特征
+    :return: Normalized features
     """
     img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     # img = data.camera()
@@ -186,7 +184,7 @@ def get_feature(img, feature_name='hog'):
     return out
 
 
-# 边缘信息
+# marginal information
 def gen_edge_mask(mask, kernel_size=5):
     kernel = morphology.disk(kernel_size)
     erosion_mask = morphology.erosion(mask, kernel)
@@ -195,7 +193,7 @@ def gen_edge_mask(mask, kernel_size=5):
     return edge_mask // 255
 
 
-# Jpeg压缩
+# Jpeg compress
 def jpeg_compression(img, qfs=None, p=0.5):
     if np.random.random() > p:
         return img
@@ -211,7 +209,7 @@ def jpeg_compression(img, qfs=None, p=0.5):
     return decimg[:, :, ::-1]
 
 
-# 中值模糊
+# Median ambiguity
 def median_blur(img, mask, param=5):
     if np.random.random() > 0.5:
         if param is None:
@@ -222,7 +220,7 @@ def median_blur(img, mask, param=5):
         return img, mask
 
 
-# 高斯模糊
+# Gaussian Blur
 def gaussian_blur(img, mask, p=1.0, param=None):
     if np.random.random() < p:
         if param is None:
@@ -261,8 +259,8 @@ def tamper_crop(img=None, mask=None, crop_shape=[224, 224]):
     return tamper_y_max - tamper_y_min, tamper_x_max - tamper_x_min
 
 
-# -----------------------------------自监督数据增强------------------------------- #
-# 拼接
+# -----------------------------------Self-supervised data enhancement------------------------------- #
+# concatenation
 def splicing(orig_img, orig_mask, tamper_img, tamper_mask, seamless_p=0.2, choice_box_v2=False, self_random=False):
     if len(np.unique(tamper_mask)) == 1:
         return orig_img, orig_mask
@@ -316,7 +314,7 @@ def splicing(orig_img, orig_mask, tamper_img, tamper_mask, seamless_p=0.2, choic
     change_mask = tamper_full_mask | orig_mask
     result_img = orig_img - cv2.bitwise_and(orig_img, orig_img, mask=tamper_full_mask) + tamper_full_img
 
-    if random.random() < seamless_p:  # 一定的概率泊松融合
+    if random.random() < seamless_p:  # Poisson fusion with certain probability
         try:
             orig_index = np.where(tamper_full_mask > 0)
             if orig_index[0].size == 0 or orig_index[1].size == 0:
@@ -332,18 +330,18 @@ def splicing(orig_img, orig_mask, tamper_img, tamper_mask, seamless_p=0.2, choic
                     orig_y_max - orig_y_min) > 10:
                 result_img = cv2.seamlessClone(result_img, orig_img, tamper_full_mask * 255, center, cv2.NORMAL_CLONE)
         except:
-            # 可能会出现的bug:cv2.error: OpenCV(4.1.2) /io/opencv/modules/core/src/matrix_wrap.cpp:1659: error: (-215:Assertion failed) !fixedSize() in function 'release
+            # potetial bugs:cv2.error: OpenCV(4.1.2) /io/opencv/modules/core/src/matrix_wrap.cpp:1659: error: (-215:Assertion failed) !fixedSize() in function 'release
             pass
 
     return result_img, change_mask
 
 
-# 基于文本框的拼接
+# Text box based concatenation
 def splicing_by_textbox(orig_img, orig_mask, tamper_img, tamper_mask, tamper_boxes):
     if len(np.unique(tamper_mask)) == 1 or len(tamper_boxes) == 0:
         return orig_img, orig_mask
 
-    box = tamper_boxes[np.random.choice(len(tamper_boxes), 1)[0]]  # 随机选一个文字区域pr
+    box = tamper_boxes[np.random.choice(len(tamper_boxes), 1)[0]]  # Select a text field pr at random
     tamper_y_min, tamper_y_max, tamper_x_min, tamper_x_max = box[1], box[1] + box[3], box[0], box[0] + box[2]
 
     tamper_img_item = tamper_img[tamper_y_min:tamper_y_max, tamper_x_min:tamper_x_max, :]
@@ -373,7 +371,6 @@ def splicing_by_textbox(orig_img, orig_mask, tamper_img, tamper_mask, tamper_box
     return orig_img, orig_mask
 
 
-# 随机形状的copy-move
 def random_copy_move(img, mask, p=0.5):
     """
     a. Randomly crop-and-paste image region(s) of different shapes (circle, triangle, rectangle and arbitrary boundaries).
@@ -442,9 +439,9 @@ def random_copy_move(img, mask, p=0.5):
         point_2 = [start_x_1, start_y_1 + t_h]
         point_3 = [start_x_1 + t_w, start_y_1 + t_h]
 
-        points = np.array([point_1, point_2, point_3], np.int32)  # 多边形的顶点坐标
-        # cv2.polylines(canvas, [points], True, (255, 255, 255), -1)  # 画任意多边形
-        cv2.fillPoly(canvas, [points], (255, 255, 255))  # 画任意多边形
+        points = np.array([point_1, point_2, point_3], np.int32)  
+        # cv2.polylines(canvas, [points], True, (255, 255, 255), -1)  
+        cv2.fillPoly(canvas, [points], (255, 255, 255))  
         crop_mask = canvas // 255
         crop_mask = crop_mask[start_y_1:start_y_1 + t_h, start_x_1:start_x_1 + t_w, :]
 
@@ -471,7 +468,6 @@ def random_copy_move(img, mask, p=0.5):
     return img, mask
 
 
-# 复制粘贴
 def copy_move_by_mask(tamper_img, tamper_mask, p=1.0, choice_box_v2=False, self_random=False):
     if random.random() > p or len(np.unique(tamper_mask)) == 1:
         return tamper_img, tamper_mask
@@ -494,7 +490,7 @@ def copy_move_by_mask(tamper_img, tamper_mask, p=1.0, choice_box_v2=False, self_
     if h * w == 0 or (h * w) / (orig_h * orig_w) > 0.2 or orig_h - h <= 0 or orig_w - w <= 0:
         return tamper_img, tamper_mask
     rand_y_start, rand_x_start = np.random.randint(0, orig_h - h), np.random.randint(0, orig_w - w)
-    # 篡改位置复制一份
+    # backup the manipulation area
     if random.random() > 0.5:
         tamper_img_item = tamper_img[tamper_y_min:tamper_y_max, tamper_x_min:tamper_x_max, :]
         tamper_item_mask = tamper_mask[tamper_y_min:tamper_y_max, tamper_x_min:tamper_x_max]
@@ -503,7 +499,7 @@ def copy_move_by_mask(tamper_img, tamper_mask, p=1.0, choice_box_v2=False, self_
             num = random.randint(1, 2)
             index = random.sample(method, num)
             for i in index:
-                if i == 0:  # 使用随机crop
+                if i == 0:  # use random crop
                     crop_h = np.random.randint(0, tamper_y_max - tamper_y_min)
                     crop_w = np.random.randint(0, tamper_x_max - tamper_x_min)
                     tamper_full_mask = np.zeros(tamper_mask.shape, dtype=np.uint8)
@@ -519,7 +515,7 @@ def copy_move_by_mask(tamper_img, tamper_mask, p=1.0, choice_box_v2=False, self_
                     change_mask = tamper_full_mask | tamper_mask
                     result_img = tamper_img - cv2.bitwise_and(tamper_img, tamper_img,
                                                               mask=tamper_full_mask) + tamper_full_img
-                if i == 1:  # 使用随机resize
+                if i == 1:  # use random resize
                     scale = 0.5 + np.random.random() / 2
                     if h > 2 and w > 2:
                         h = int(scale * h)
@@ -537,7 +533,7 @@ def copy_move_by_mask(tamper_img, tamper_mask, p=1.0, choice_box_v2=False, self_
                     change_mask = tamper_full_mask | tamper_mask
                     result_img = tamper_img - cv2.bitwise_and(tamper_img, tamper_img,
                                                               mask=tamper_full_mask) + tamper_full_img
-        ########################原有的#################
+        ########################old#################
         # if is_crop:
         #     h = np.random.randint(32, tamper_y_max - tamper_y_min)
         #     w = np.random.randint(32, tamper_x_max - tamper_x_min)
@@ -594,12 +590,12 @@ def copy_move_by_mask(tamper_img, tamper_mask, p=1.0, choice_box_v2=False, self_
         return tamper_img, tamper_mask
 
 
-# 基于文本框的复制粘贴
+
 def copy_move_by_textbox(tamper_img, tamper_mask, boxes, p=1.0):
     if random.random() > p or len(np.unique(tamper_mask)) == 1 or len(boxes) == 0:
         return tamper_img, tamper_mask
 
-    box = boxes[np.random.choice(len(boxes), 1)[0]]  # 随机选一个文字区域pr
+    box = boxes[np.random.choice(len(boxes), 1)[0]]  
     tamper_y_min, tamper_y_max, tamper_x_min, tamper_x_max = box[1], box[1] + box[3], box[0], box[0] + box[2]
 
     h, w = tamper_y_max - tamper_y_min, tamper_x_max - tamper_x_min
@@ -609,7 +605,7 @@ def copy_move_by_textbox(tamper_img, tamper_mask, boxes, p=1.0):
     rand_y_start, rand_x_start = np.random.randint(0, orig_h - h), np.random.randint(0, orig_w - w)
     image_new = tamper_img.copy()
     mask_new = np.zeros(tamper_mask.shape[:2], dtype='uint8')
-    # 篡改位置复制一份
+    
     if random.random() > 0.5:
         image_new[rand_y_start:rand_y_start + h, rand_x_start:rand_x_start + w, :] = \
             tamper_img[tamper_y_min:tamper_y_max, tamper_x_min:tamper_x_max, :]
@@ -619,12 +615,12 @@ def copy_move_by_textbox(tamper_img, tamper_mask, boxes, p=1.0):
             tamper_img[rand_y_start:rand_y_start + h, rand_x_start:rand_x_start + w, :]
         mask_new[tamper_y_min:tamper_y_max, tamper_x_min:tamper_x_max] = 1
 
-    mask_new = np.where(mask_new == 1, mask_new, tamper_mask)  # 新的mask
+    mask_new = np.where(mask_new == 1, mask_new, tamper_mask)  
 
     return image_new, mask_new
 
 
-# 修复
+# recovery
 def inpainting(img, mask, p=0.2):
     if np.random.random() > p:
         return img
@@ -633,7 +629,7 @@ def inpainting(img, mask, p=0.2):
     return result
 
 
-# 修复: 先对图像resize到一个小的尺寸inpainting,然后再放大回去，增加速度
+# Fix: First resize the image to a small size inpainting, then zoom back in to increase speed
 def inpainting_v2(img, mask, p=1.0, in_size=64):
     if np.random.random() > p:
         return img
@@ -647,129 +643,24 @@ def inpainting_v2(img, mask, p=1.0, in_size=64):
     return result
 
 
-# 基于文本框的数据增强
+# 
 def inpainting_by_textbox(img, mask, boxes, p=1.0, in_size=64):
     if np.random.random() > p or len(boxes) == 0:
         return img, mask
 
-    box = boxes[np.random.choice(len(boxes), 1)[0]]  # 随机选一个文字区域pr
+    box = boxes[np.random.choice(len(boxes), 1)[0]]  
     tamper_y_min, tamper_y_max, tamper_x_min, tamper_x_max = box[1], box[1] + box[3], box[0], box[0] + box[2]
 
     mask_new = np.zeros(mask.shape[:2], dtype='uint8')
     mask_new[tamper_y_min:tamper_y_max, tamper_x_min:tamper_x_max] = 1
     img_new = inpainting_v2(img, mask_new, p=1.0, in_size=in_size)
 
-    mask_new = np.where(mask_new == 1, mask_new, mask)  # 新的mask
+    mask_new = np.where(mask_new == 1, mask_new, mask)  
 
     return img_new, mask_new
 
 
-# 随机插入文字，随机文字（包括人名，公司名，地址，电话和日期），随机颜色，随机大小，随机字体和随机位置
-def random_insert_text(image, return_bbox=False, return_mask=False, show_loc=False, color=None):
-    """
-    在图像上添加中文字符
-    :param image:  图像, BGR 图像
-    :param return_bbox: 返回插入文字所在的位置， bbox=[x, y, w, h]
-    :param show_loc: 显示插入文字的位置，用矩形框起来
-    :return:
-    """
 
-    def random_gen_text():
-        # 随机生成文字， 参考博客 https://blog.csdn.net/weixin_43566535/article/details/107339159
-        # csdn[标题：Python中第三方库-Faker；作者：南枝向暖北枝寒MA]
-        fake = Faker("zh_CN")
-        # 生成句子
-        # article = fake.text(max_nb_chars=15)  # 生成一篇文章,数字代表文章最大长度，一般小于这个数
-        # article1 = re.findall('[\u4e00-\u9fa5]{0,}', article)
-        # article = ''.join(article1)
-        # print(f'article:{article}', fake.name(), fake.company(), fake.address()[:-7], fake.phone_number(), fake.date())
-        text_per_wight = 1  # 占位：中文1，英文0.5
-        index = random.randint(0, 4)
-        if index == 0:
-            text = fake.name()
-        elif index == 1:
-            text = fake.company()
-        elif index == 2:
-            text = fake.address()[:-7]
-        elif index == 3:
-            text = fake.phone_number()
-        else:
-            text = fake.date()
-        # texts = [fake.name(), fake.company(), fake.address()[:-7], fake.phone_number(), fake.date()]
-        # text = random.choice(texts)
-
-        return text
-
-    # 生成随机参数
-    text = random_gen_text()  # 随机生成文字， gbk编码
-    if color is None:
-        color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))  # 随机选择颜色
-    else:
-        color = color  # 直插入指定的颜色
-    h, w, c = image.shape
-    font_size = random.choice([5 * i for i in range(2, 15)])  # 10, 15, ..., 65, 70
-    font_size = min([font_size, h // 2, w // len(text)])  # 随机选择字体大小
-    # text_w, text_h = font_size*len(text), font_size
-    bytes_len = len(text.encode('gbk'))  # 统计占位长度，中文和字母数字占位不一样
-    text_w, text_h = int(font_size * 0.5 * bytes_len), font_size
-    loc = (random.randint(0, w - text_w), random.randint(0, h - text_h))  # 随机选择位置
-    # 生成插入文字的图像
-    new_image = put_chinese_on_img(image, text, loc, color, font_size)
-    # print(text, color, font_size, loc, bytes_len)
-    # 框住文字
-    x1, y1, x2, y2 = loc[0], loc[1], loc[0] + text_w, loc[1] + text_h
-    if show_loc:
-        print(text, color, font_size, loc, bytes_len)
-        cv2.rectangle(new_image, (x1, y1), (x2, y2), (0, 255, 255), 2)
-    if return_bbox and return_mask:
-        bbox = [x1, y1, loc[0] + text_w, text_h]
-        mask = new_image - image
-        mask = mask[:, :, 0] + mask[:, :, 1] + mask[:, :, 2]
-        mask[mask > 1] = 1
-
-        return new_image, mask, bbox
-    elif return_bbox:
-        bbox = [x1, y1, loc[0] + text_w, text_h]
-        return new_image, bbox
-    elif return_mask:
-        mask = new_image - image
-        mask = mask[:, :, 0] + mask[:, :, 1] + mask[:, :, 2]
-        mask[mask > 1] = 1
-
-        return new_image, mask
-
-    return new_image
-
-
-# 插入中文到图像中
-def put_chinese_on_img(img, text, loc, color=(255, 0, 0), font_size=40, font_file=None):
-    """
-    在图像上添加中文字符
-    :param img:  图像， RGB
-    :param text: 文本
-    :param loc: 位置
-    :param color:  颜色
-    :param font_size: 字体大小
-    :param font_file: 字体文件
-    :return:
-    """
-    pilimg = Image.fromarray(img)
-
-    # PIL图片上打印汉字
-    draw = ImageDraw.Draw(pilimg)  # 图片上打印
-    if font_file is None:
-        current_work_dir = os.path.dirname(__file__)  # 当前文件所在的目录
-        # 随机选择字体
-        font_files = os.listdir(os.path.join(current_work_dir, 'fonts'))
-        font_files = [os.path.join(current_work_dir, 'fonts', font_file) for font_file in font_files]
-        font_file = random.choice(font_files)
-    font = ImageFont.truetype(font_file, font_size, encoding="utf-8")  # 参数1：字体文件路径，参数2：字体大小
-    draw.text(loc, text, color, font=font)  # 参数1：打印坐标，参数2：文本，参数3：字体颜色，参数4：字体
-
-    # PIL图片转cv2 图片
-    cv2charimg = np.array(pilimg)
-
-    return cv2charimg
 
 
 if __name__ == '__main__':

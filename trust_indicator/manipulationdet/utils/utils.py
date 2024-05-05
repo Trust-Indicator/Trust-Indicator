@@ -16,7 +16,7 @@ class Test_time_agumentation(object):
         """
         clockwise rotation 90 180 270
         """
-        img90 = img.rot90(-1, [2, 3])  # 1 逆时针； -1 顺时针
+        img90 = img.rot90(-1, [2, 3])  # 1 anticlockwise； -1 clockwise
         img180 = img.rot90(-1, [2, 3]).rot90(-1, [2, 3])
         img270 = img.rot90(1, [2, 3])
         return [img90, img180, img270]
@@ -25,7 +25,7 @@ class Test_time_agumentation(object):
         """
         anticlockwise rotation 90 180 270
         """
-        img90 = img90.rot90(1, [2, 3])  # 1 逆时针； -1 顺时针
+        img90 = img90.rot90(1, [2, 3])  # 1 anticlockwise； -1 clockwise
         img180 = img180.rot90(1, [2, 3]).rot90(1, [2, 3])
         img270 = img270.rot90(-1, [2, 3])
         return img90, img180, img270
@@ -132,8 +132,7 @@ def cal_auc(outputs, gt):
             trans_gt[0] = (trans_gt[0] + 1) % 2
             trans_output[0] = 1 - trans_output[0]
             roc_auc = roc_auc_score(trans_gt, trans_output)
-            # roc_auc = 0
-            # pass  ##或者其它定义，例如roc_auc=0
+            
         auc += roc_auc
     auc = auc / batch_size
 
