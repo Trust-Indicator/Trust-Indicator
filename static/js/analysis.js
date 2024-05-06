@@ -44,9 +44,9 @@ function countdown() {
 var interval = setInterval(countdown, 1000);
 
 
-let score_original = 0;
-let score_aigc = 90;
-let score_manipulation = 10;
+let score_original = 90;
+let score_aigc = 10;
+let score_manipulation = 0;
 
 let scoreNormalized_original = score_original;
 let scoreNormalized_aigc = score_aigc;
