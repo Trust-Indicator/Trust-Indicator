@@ -23,9 +23,9 @@ The project takes inspiration from Dr Sabrina’s ambition to create a reliable 
 3. Database: 
 - database.py: This script manages database connections and operations, using SQLAlchemy, which is a Python SQL toolkit.
 4. Credibility Signals:
-The design and explanation of Credibility Signals can be found [here]([docs/Credibility Signals](https://github.com/Trust-Indicator/Trust-Indicator/tree/main/docs/Credibility%20Signals)).
+The design and explanation of Credibility Signals can be found [here](https://github.com/Trust-Indicator/Trust-Indicator/tree/main/docs/Credibility%20Signals).
 5. EXIF:
-The Metadata Extractor Guide can be found [here]([pre_work/Metadata Extractor Explanation/Manual.md](https://github.com/Trust-Indicator/Trust-Indicator/blob/main/pre_work/Metadata%20Extractor%20Explanation/Manual.md)).
+The Metadata Extractor Guide can be found [here](https://github.com/Trust-Indicator/Trust-Indicator/blob/main/pre_work/Metadata%20Extractor%20Explanation/Manual.md).
 6. PS Detector: 
 - `trust_indicator/PS_Detector`: A tamper detection and localisation model based on Convnext-Upernet is constructed by using the pure convolutional neural network model Convnext as the backbone network and extracting multi-scale features in images with the help of the unified perceptual parsing network Upernet. On this basis, this study further applies the self-supervised data enhancement method to amplify the tampering traces in the image and improves the accuracy of tampering image detection and localisation by using an image classification loss function independent of the tampering detection and localisation task.
 8. AIGC Detector:
@@ -110,7 +110,7 @@ screen -S trust_indicator
 Navigate to the directory where you uploaded your project code.
 Run the project using Python 3.12:
 ```
-python3.12 app.py
+python app.py
 ```
 This command starts the Flask application defined in app.py.
 #### Additional Notes
