@@ -1,0 +1,11 @@
+torch>=1.7
+torchvision
+pyyaml
+huggingface_hub
+jinja2
+mkdocs
+model-index==0.1.10
+wandb
+mkdocs-material
+mdx_truly_sane_lists
+mkdocs-awesome-pages-plugin
