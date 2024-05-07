@@ -19,7 +19,7 @@ This document outlines the future work planned for our project. As we continue t
 ### Feature 5: Enhance User Experience
 - **Description**: Redesign the user interface and improve navigation to create a more intuitive and engaging user experience. This includes streamlining workflows, enhancing visual elements, and improving responsiveness.
 - **Dependencies**: UX/UI design tools and professional services. And user testing and feedback to guide design improvements.
-### Feature 5: Performance Optimization
+### Feature 6: Performance Optimization
 - **Description**: Optimize the website's performance to handle higher traffic and more data-intensive operations. This involves refining back-end operations, enhancing server capabilities, and optimizing database queries. 
 - **Dependencies**: Code refactoring and optimization services.
 
