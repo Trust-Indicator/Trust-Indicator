@@ -21,7 +21,7 @@ This document outlines the future work planned for our project. As we continue t
 - **Dependencies**: UX/UI design tools and professional services. And user testing and feedback to guide design improvements.
 ### Feature 6: Performance Optimization
 - **Description**: Optimize the website's performance to handle higher traffic and more data-intensive operations. This involves refining back-end operations, enhancing server capabilities, and optimizing database queries. 
-- **Dependencies**: Code refactoring and optimization services.
+- **Dependencies**: Code refactoring and optimization services. The algorithms' performance for detecting AI-generated and manipulated images can be optimized to reduce CPU and memory overhead, decrease dependency on GPUs, and lower operational costs.
 
 ## Template
 Please follow the template provided in [Future Work Template.md](./Future%20Work%20Template.md) for future works to maintain consistency.
