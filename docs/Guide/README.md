@@ -1,9 +1,9 @@
-# Guide
+# Installation and Deployment Guide
 ## Table of Contents
 1. [Project Overview](#Overview)
 2. [Prerequisites](#Prerequisites)
 3. [Installation Guide](#installation-guide)
-4. [Deploy Guide](#deploy-guide)
+4. [Deployment Guide](#deploy-guide)
 5. [Contact Information](#contact-information)
 
 ## Overview
@@ -75,7 +75,7 @@ During this process, you can check if the installation was successful.
 
 **Step 4:** Double check if all packages are installed, then press `run` in app.py and click the development server link like "http://127.0.0.1:5000", which shows in the terminal if you are successfully running app.py
 
-## Deploy Guide
+## Deployment Guide
 Follow these steps to set up and run the Trust Indicator project on an Ubuntu 22.04 system:
 #### Prerequisites
 Ensure you have administrative access to an Ubuntu 22.04 server.

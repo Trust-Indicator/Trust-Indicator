@@ -1,13 +1,11 @@
 # DECISION LOG 
 ## Decision Details 
-- Date: [2024/3/7]
-- Decision Maker: [All members]
+- Date: 7th, March
+- Decision Maker: All members
   
 ## Background 
 Our project's main focus is the extraction and analysis of metadata from photographs. This process requires a reliable and flexible web framework to handle photo uploads, metadata extraction, and user interactions.
 ## Decision Options 
-
-[List the different options or alternatives that were considered when making the decision.] 
 
 - Use Flask for the project
 
