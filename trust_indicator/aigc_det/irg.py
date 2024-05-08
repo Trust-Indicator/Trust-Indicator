@@ -39,10 +39,6 @@ class IRG(nn.Module):
   irg_tran_t = self.euclidean_dist_fms(fm_t1, fm_t2, squared=True)
   loss_irg_tran = F.mse_loss(irg_tran_s, irg_tran_t)
 
-  # print(self.w_irg_vert * loss_irg_vert)
-  # print(self.w_irg_edge * loss_irg_edge)
-  # print(self.w_irg_tran * loss_irg_tran)
-  # print()
 
   loss = (self.w_irg_vert * loss_irg_vert +
     self.w_irg_edge * loss_irg_edge +

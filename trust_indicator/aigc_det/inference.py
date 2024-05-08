@@ -23,7 +23,7 @@ _logger = logging.getLogger('inference')
 parser = argparse.ArgumentParser(description='PyTorch ImageNet Inference')
 parser.add_argument('--image-path', metavar='',
                     help='path to image')
-parser.add_argument('--model', '-m', metavar='MODEL', default='resnet50',
+parser.add_argument('--model', '-m', metavar='MODEL', default='resnet18',
                     help='model architecture (default: resnet18)')
 parser.add_argument('-j', '--workers', default=2, type=int, metavar='N',
                     help='number of data loading workers (default: 2)')
@@ -41,7 +41,7 @@ parser.add_argument('--num-classes', type=int, default=2,
                     help='Number classes in dataset')
 parser.add_argument('--log-freq', default=10, type=int,
                     metavar='N', help='batch logging frequency (default: 10)')
-parser.add_argument('--checkpoint', default='./trust_indicator/aigc_det/weight/model_best.pth.tar', type=str, metavar='PATH',
+parser.add_argument('--checkpoint', default='./trust_indicator/aigc_det/weight/resnet18_distll.pth.tar', type=str, metavar='PATH',
                     help='path to latest checkpoint (default: none)')
 parser.add_argument('--pretrained', dest='pretrained', action='store_true',
                     help='use pre-trained model')
