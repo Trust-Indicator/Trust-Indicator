@@ -24,11 +24,9 @@ parser = argparse.ArgumentParser(description='PyTorch ImageNet Inference')
 parser.add_argument('--image-path', metavar='',
                     help='path to image')
 parser.add_argument('--model', '-m', metavar='MODEL', default='resnet50',
-                    help='model architecture (default: resnet50)')
+                    help='model architecture (default: resnet18)')
 parser.add_argument('-j', '--workers', default=2, type=int, metavar='N',
                     help='number of data loading workers (default: 2)')
-parser.add_argument('-b', '--batch-size', default=256, type=int,
-                    metavar='N', help='mini-batch size (default: 256)')
 parser.add_argument('--img-size', default=None, type=int,
                     metavar='N', help='Input image dimension')
 parser.add_argument('--input-size', default=None, nargs=3, type=int,
@@ -52,8 +50,7 @@ parser.add_argument('--num-gpu', type=int, default=1,
 parser.add_argument('--no-test-pool', dest='no_test_pool', action='store_true',
                     help='disable test time pool')
 
-
-
+    
 def main():
     setup_default_logging()
     args = parser.parse_args()
@@ -74,13 +71,14 @@ def main():
     config = resolve_data_config({}, model=model)
     
     # Load and transform the image
-    image = Image.open(args.image_path).convert('RGB')
+    image = Image.open(args.image_path)
+    image_rgb = image.convert('RGB')
     transform = transforms.Compose([
         transforms.Resize(config['input_size'][1:]),
         transforms.ToTensor(),
         transforms.Normalize(mean=config['mean'], std=config['std'])
     ])
-    input_tensor = transform(image).unsqueeze(0)  # Create a mini-batch as expected by the model
+    input_tensor = transform(image_rgb).unsqueeze(0)  # Create a mini-batch as expected by the model
 
     # Use GPU if available
     # device = torch.device('cuda' if args.num_gpu > 0 and torch.cuda.is_available() else 'cpu')
@@ -93,14 +91,17 @@ def main():
 
     with torch.no_grad():
         # Forward pass: compute predicted outputs by passing inputs to the model
-        output = model(input_tensor)
+        _, _, _, _, _, output = model(input_tensor)
 
         probabilities = torch.nn.functional.softmax(output, dim=1)
 
     # Output the probabilities
     probabilities = probabilities.cpu().numpy().flatten()
+    
     _logger.info(f'ai: {probabilities[0]*100:.2f}%, nature: {probabilities[1]*100:.2f}%')
 
 
 if __name__ == '__main__':
+   
     main()
+   

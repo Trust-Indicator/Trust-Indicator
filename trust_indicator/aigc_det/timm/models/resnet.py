@@ -713,12 +713,14 @@ class ResNet(nn.Module):
 
         if self.grad_checkpointing and not torch.jit.is_scripting():
             x = checkpoint_seq([self.layer1, self.layer2, self.layer3, self.layer4], x, flatten=True)
+            l1_out, l2_out, l3_out, l4_out = x
         else:
-            x = self.layer1(x)
-            x = self.layer2(x)
-            x = self.layer3(x)
-            x = self.layer4(x)
-        return x
+            l1_out = self.layer1(x)
+            l2_out = self.layer2(l1_out)
+            l3_out = self.layer3(l2_out)
+            l4_out = self.layer4(l3_out)
+            fea = l4_out.view(l4_out.size(0), -1)
+        return fea, l1_out, l2_out, l3_out, l4_out
 
     def forward_head(self, x, pre_logits: bool = False):
         x = self.global_pool(x)
@@ -727,9 +729,9 @@ class ResNet(nn.Module):
         return x if pre_logits else self.fc(x)
 
     def forward(self, x):
-        x = self.forward_features(x)
-        x = self.forward_head(x)
-        return x
+        fea, l1_out, l2_out, l3_out, l4_out = self.forward_features(x)
+        x = self.forward_head(l4_out)
+        return fea, l1_out, l2_out, l3_out, l4_out, x
 
 
 def _create_resnet(variant, pretrained=False, **kwargs):

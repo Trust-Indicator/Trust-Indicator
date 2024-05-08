@@ -256,7 +256,7 @@ def validate(args):
 
             # compute output
             with amp_autocast():
-                output = model(input)
+                fea, l1_out, l2_out, l3_out, l4_out, output = model(input)
 
             if valid_labels is not None:
                 output = output[:, valid_labels]
@@ -264,7 +264,6 @@ def validate(args):
 
             if real_labels is not None:
                 real_labels.add_result(output)
-
             # measure accuracy and record loss
             acc1, acc5 = accuracy(output.detach(), target, topk=(1, 5))
             losses.update(loss.item(), input.size(0))
@@ -381,6 +380,7 @@ def main():
         else:
             results = validate(args)
     # output results in JSON to stdout w/ delimiter for runner script
+    print(f'{results}')
     print(f'--result\n{json.dumps(results, indent=4)}')
 
 
