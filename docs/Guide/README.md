@@ -29,7 +29,8 @@ The Metadata Extractor Guide can be found [here](https://github.com/Trust-Indica
 6. PS Detector: 
 - `trust_indicator/PS_Detector`: A tamper detection and localisation model based on Convnext-Upernet is constructed by using the pure convolutional neural network model Convnext as the backbone network and extracting multi-scale features in images with the help of the unified perceptual parsing network Upernet. On this basis, this study further applies the self-supervised data enhancement method to amplify the tampering traces in the image and improves the accuracy of tampering image detection and localisation by using an image classification loss function independent of the tampering detection and localisation task.
 8. AIGC Detector:
-- The codebase includes scripts for training, validation, and inference on single objects, as well as model weight files. The training dataset is sourced from the GenImage sdv1.5 dataset, which can be accessed at the following link: https://pan.baidu.com/s/1i0OFqYN5i6oFAxeK6bIwRQ#list/path=%2F (Access code: ztf1). 
+- The codebase includes scripts for training, validation, and inference on single objects, as well as model weight files. The training dataset is sourced from the GenImage sdv1.5 dataset, which can be accessed at the following link: https://pan.baidu.com/s/1i0OFqYN5i6oFAxeK6bIwRQ#list/path=%2F (Access code: ztf1).
+- Download the pre-trained model weight at the following link: https://drive.google.com/drive/folders/1Nl0ltcNa-QuG-DtOP3B7F-hOaIWXRvEZ?usp=sharing, then put the pth file in the folder ../trust_indicator/aigc_det/weight.
 
 ## Prerequisites
 Before you begin, ensure your system meets the following requirements:
