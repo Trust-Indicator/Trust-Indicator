@@ -1,5 +1,3 @@
-#240426coding
-
 import os
 
 os.environ['TORCH_HOME'] = '/data2/hulh/pretrain'
@@ -287,4 +285,3 @@ class UperNet(nn.Module):
             self.backbone.eval()
             for params in self.backbone.parameters():
                 params.requires_grad = False
-
